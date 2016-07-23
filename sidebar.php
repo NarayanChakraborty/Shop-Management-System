@@ -35,10 +35,8 @@
         <li class="treeview">
           <a href="#">
             <i class="fa fa-files-o"></i>
-            <span>Layout Options</span>
-            <span class="pull-right-container">
-              <span class="label label-primary pull-right">4</span>
-            </span>
+            <span>Product Options</span>
+           
           </a>
           <ul class="treeview-menu">
             <li><a href="add_product.php"><i class="fa fa-circle-o"></i>Add Product</a></li>
@@ -47,14 +45,25 @@
           </ul>
         </li>
         <li>
-          <a href="pages/widgets.html">
+          <a href="">
             <i class="fa fa-th"></i> <span>Widgets</span>
-            <span class="pull-right-container">
-              <small class="label pull-right bg-green">new</small>
-            </span>
           </a>
         </li>
-       
+        <li>
+          <a href="">
+            <i class="fa fa-th"></i> <span>Widgets</span>
+          </a>
+        </li>
+		        <li>
+          <a href="">
+            <i class="fa fa-th"></i> <span>Biodata</span>
+          </a>
+        </li>
+		        <li>
+          <a href="">
+            <i class="fa fa-th"></i> <span>Widgets</span>
+          </a>
+        </li>
 
 
       </ul>

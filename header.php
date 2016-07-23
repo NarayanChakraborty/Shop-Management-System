@@ -21,6 +21,11 @@
   <link rel="stylesheet" href="plugins/iCheck/flat/blue.css">
   <!-- Morris chart -->
   <link rel="stylesheet" href="plugins/morris/morris.css">
+
+<!----CKEditor Start---->
+<script type="text/javascript" src="plugins/ckeditor/ckeditor.js"></script>
+<!---//CKEditor End----->
+
   <!-- jvectormap -->
   <link rel="stylesheet" href="plugins/jvectormap/jquery-jvectormap-1.2.2.css">
   <!-- Date Picker -->
