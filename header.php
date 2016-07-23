@@ -21,20 +21,18 @@
   <link rel="stylesheet" href="plugins/iCheck/flat/blue.css">
   <!-- Morris chart -->
   <link rel="stylesheet" href="plugins/morris/morris.css">
-
-<!----CKEditor Start---->
-<script type="text/javascript" src="plugins/ckeditor/ckeditor.js"></script>
-<!---//CKEditor End----->
-
   <!-- jvectormap -->
   <link rel="stylesheet" href="plugins/jvectormap/jquery-jvectormap-1.2.2.css">
   <!-- Date Picker -->
   <link rel="stylesheet" href="plugins/datepicker/datepicker3.css">
+
   <!-- Daterange picker -->
   <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker.css">
   <!-- bootstrap wysihtml5 - text editor -->
   <link rel="stylesheet" href="plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
-  <link rel="stylesheet" href="bootstrap/css/mystyle.css">
+    <!---CkEditor--->
+
+  <script type="text/javascript" src="plugins/ckeditor/ckeditor.js"></script>
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -63,39 +61,35 @@
 
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
-   
-            
-           
+          <!-- Messages: style can be found in dropdown.less-->
+  
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="dist/img/narayan.jpg" class="user-image" alt="User Image">
-              <span class="hidden-xs">Developer</span>
+              <img src="dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+              <span class="hidden-xs">Alexander Pierce</span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
               <li class="user-header">
-                <img src="dist/img/narayan.jpg" class="img-circle" alt="User Image">
+                <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
 
                 <p>
-                  Sree Narayan Chakraborty - Web Developer
+                  Alexander Pierce - Web Developer
                   <small>Member since Nov. 2012</small>
                 </p>
               </li>
               <!-- Menu Body -->
               <li class="user-body">
                 <div class="row">
-                  <div class="col-xs-12 text-center">
-                    <a href="#">Hello !! Have A Good Day</a>
-                  </div>
-                 
+                  
                 </div>
                 <!-- /.row -->
               </li>
               <!-- Menu Footer-->
               <li class="user-footer">
                 <div class="pull-left">
-                  <a href="#" class="btn btn-default btn-flat">Change Password</a>
+                  <a href="#" class="btn btn-default btn-flat">Profile</a>
                 </div>
                 <div class="pull-right">
                   <a href="#" class="btn btn-default btn-flat">Sign out</a>
@@ -103,7 +97,8 @@
               </li>
             </ul>
           </li>
-          
+          <!-- Control Sidebar Toggle Button -->
+
         </ul>
       </div>
     </nav>

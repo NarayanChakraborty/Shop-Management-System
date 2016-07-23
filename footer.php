@@ -1,14 +1,16 @@
- 
-   
-    <footer class="main-footer">
+  </div>
+  <!-- /.content-wrapper -->
+  <footer class="main-footer">
     <div class="pull-right hidden-xs">
       <b>Version</b> 2.3.5
     </div>
     <strong>Copyright &copy; 2014-2016 <a href="http://almsaeedstudio.com">Almsaeed Studio</a>.</strong> All rights
     reserved.
   </footer>
+
+  <!-- Control Sidebar -->
  
- <!-- Add the sidebar's background. This div must be placed
+  <!-- Add the sidebar's background. This div must be placed
        immediately after the control sidebar -->
   <div class="control-sidebar-bg"></div>
 </div>
@@ -51,9 +53,5 @@
 <script src="dist/js/pages/dashboard.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="dist/js/demo.js"></script>
-
-
-
-
 </body>
 </html>

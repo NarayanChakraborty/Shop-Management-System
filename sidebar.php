@@ -1,5 +1,3 @@
-
-  <!-- Left side column. contains the logo and sidebar -->
   <aside class="main-sidebar">
     <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">
@@ -28,50 +26,45 @@
       <ul class="sidebar-menu">
         <li class="header">MAIN NAVIGATION</li>
         <li class="active treeview">
-		<li class="active">
-		<a href="index.php" ><i class="fa fa-dashboard"></i> Dashboard</a></li>
-
+          <a href="index.php">
+            <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+            
+          </a>
+          
         </li>
         <li class="treeview">
           <a href="#">
             <i class="fa fa-files-o"></i>
-            <span>Product Options</span>
-           
+            <span>Products</span>
+            <span class="pull-right-container">
+              <span class="label label-primary pull-right">4</span>
+            </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="add_product.php"><i class="fa fa-circle-o"></i>Add Product</a></li>
-            <li><a href="view_product.php"><i class="fa fa-circle-o"></i> View Product</a></li>
-            <li><a href="manage_category.php"><i class="fa fa-circle-o"></i> Manage Category</a></li>
+            <li><a href="add_product.php"><i class="fa fa-circle-o"></i>Add Post</a></li>
+            <li><a href="view_product.php"><i class="fa fa-circle-o"></i> View Post</a></li>
+            <li><a href="manage_category.php"><i class="fa fa-circle-o"></i> Manage Post</a></li>
+            
           </ul>
         </li>
         <li>
-          <a href="">
+          <a href="pages/widgets.html">
             <i class="fa fa-th"></i> <span>Widgets</span>
+            <span class="pull-right-container">
+              <small class="label pull-right bg-green">new</small>
+            </span>
           </a>
         </li>
-        <li>
-          <a href="">
-            <i class="fa fa-th"></i> <span>Widgets</span>
-          </a>
-        </li>
-		        <li>
-          <a href="">
-            <i class="fa fa-th"></i> <span>Biodata</span>
-          </a>
-        </li>
-		        <li>
-          <a href="">
-            <i class="fa fa-th"></i> <span>Widgets</span>
-          </a>
-        </li>
-
-
+        
+        
+       
+       
+        
       </ul>
     </section>
     <!-- /.sidebar -->
   </aside>
-
-  <!-- Content Wrapper. Contains page content -->
+    <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
