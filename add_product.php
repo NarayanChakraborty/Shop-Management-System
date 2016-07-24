@@ -208,9 +208,18 @@ if(isset($_POST['form1']))
                                                       <div class="col-lg-8">
                                                       
 													  <select class="form-control" name="p_shop" reuired>
-														<option value="1">Khalek One</option>
-														<option value="2">Khalek Two</option>
-														<option value="3">Store House</option>
+													  
+				<?php
+                      $statement2 = $db->prepare("SELECT * FROM tbl_shop");
+                      $statement2->execute();
+                      $result2 = $statement2->fetchAll(PDO::FETCH_ASSOC);
+                      foreach ($result2 as $row2) {
+                     ?>
+                      
+                      <option value="<?php echo $row2['shop_id'];?>"><?php echo $row2['shop_name'];?></option>
+                      <?php
+                      }
+                      ?>
 													  </select>
 
                                                       </div>
@@ -229,7 +238,7 @@ if(isset($_POST['form1']))
                                                  <br>
 
                                                   <div class="form-group">
-                                                      <div class="col-lg-offset-8 col-lg-2">
+                                                      <div class="col-lg-offset-10 col-lg-2">
                                                           <button type="submit" name="form1" class="btn btn-primary">Save</button>
                                                       </div>
                                                   </div>

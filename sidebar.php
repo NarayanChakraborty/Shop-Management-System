@@ -41,10 +41,9 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="add_product.php"><i class="fa fa-circle-o"></i>Add Post</a></li>
-            <li><a href="view_product.php"><i class="fa fa-circle-o"></i> View Post</a></li>
-            <li><a href="manage_category.php"><i class="fa fa-circle-o"></i> Manage Post</a></li>
-            
+            <li><a href="add_product.php"><i class="fa fa-circle-o"></i>Add Products</a></li>
+            <li><a href="view_product.php"><i class="fa fa-circle-o"></i> View Products</a></li>
+            <li><a href="manage_category.php"><i class="fa fa-circle-o"></i> Manage Products</a></li>  
           </ul>
         </li>
         <li>

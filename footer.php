@@ -1,3 +1,4 @@
+
   </div>
   <!-- /.content-wrapper -->
   <footer class="main-footer">
@@ -24,6 +25,46 @@
 <script>
   $.widget.bridge('uibutton', $.ui.button);
 </script>
+
+<!-- DataTables -->
+<script src="plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
+<!-- SlimScroll -->
+<script src="plugins/slimScroll/jquery.slimscroll.min.js"></script>
+<!-- FastClick -->
+<script src="plugins/fastclick/fastclick.js"></script>
+<!-- AdminLTE App -->
+<script src="dist/js/app.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="dist/js/demo.js"></script>
+<!-- page script -->
+<script>
+  $(function () {
+    $("#example1").DataTable();
+    $('#example2').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": false,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false
+    });
+  });
+</script>
+
+<!------FancyBox --------------------->
+    <script type="text/javascript" src="plugins/fancyapp/source/jquery.fancybox.js?v=2.1.5"></script>
+    <link rel="stylesheet" type="text/css" href="plugins/fancyapp/source/jquery.fancybox.css?v=2.1.5" media="screen" />
+  
+      <script type="text/javascript">
+        $(document).ready(function() {
+
+          $('.fancybox').fancybox();
+          });
+      </script>
+	
+<!------FancyBox --------------------->
+
 <!-- Bootstrap 3.3.6 -->
 <script src="bootstrap/js/bootstrap.min.js"></script>
 <!-- Morris.js charts -->
