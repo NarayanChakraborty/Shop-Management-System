@@ -121,7 +121,7 @@
 						</td>
 					                    <td><center>
                     <div class="btn-group">
-                     <a href="#inline<?php echo $row['p_id'];?>" class="fancybox"title="View product"> <button type="button" class="btn btn-info"><span class="glyphicon glyphicon-eye-open"></span></button></a>
+                      <a class="btn btn-primary fancybox" href="#inline<?php echo $row['p_id'];?>"title="View image"><i class="glyphicon glyphicon-eye-open"></i></a>
 
 					 
 					 <div id="inline<?php echo $row['p_id'];?>"style="display:none;width:700px;margin:10px 30px">
@@ -170,9 +170,39 @@
 														  
 														</div>
 						 </div>
-                      <a href="edit_product.php?ID=<?php echo $row['p_id']; ?>" title="Edit product"><button type="button" class="btn btn-info"><span class="glyphicon glyphicon-pencil"></span></button></a>
-                      <a href="" title="Delete product"><button type="button" class="btn btn-info"><span class="glyphicon glyphicon-remove"></span></button></a>
-                    </div></center>
+                      <a class="btn btn-success" title="Edit this Product" href="edit_product.php?ID=<?php echo $row['p_id']; ?>"><i class="glyphicon glyphicon-pencil"></i>
+													  
+													  </a>
+                       <a class="btn btn-danger"  title="Delete This product" data-toggle="modal" data-target="#productModal<?php echo $row['p_id'];?>"><i class="glyphicon glyphicon-remove"></i>
+													   </a>
+													  
+																		  
+											<!-- Modal -->
+													<div id="productModal<?php echo $row['p_id'];?>" class="modal fade " role="dialog">
+													  <div class="modal-dialog">
+
+														<!-- Modal content-->
+														<div class="modal-content">
+														  <div class="modal-header">
+															<button type="button" class="close" data-dismiss="modal">&times;</button>
+															<h4 class="modal-title">DELETE Confirmation</h4>
+														  </div>
+														  <div class="modal-body">
+															<h4>Are You Confirm To Delete This Element?</h4>
+														  </div>
+														  <div class="modal-footer">
+															<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+															<a class="btn btn-danger btn-ok" href="delete_product.php?id=<?php echo $row['p_id']; ?>" >Confirm</a>
+														  </div>
+														</div>
+
+													  </div>
+													</div>
+												
+					
+					
+					
+					</div></center>
                   </td>
                 </tr>
 				
