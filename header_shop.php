@@ -3,14 +3,24 @@
         <div class="col-lg-4 col-xs-6">
           <!-- small box -->
           <div class="small-box bg-aqua">
+		 
             <div class="inner">
-              <h3>150</h3>
+              <h3> <?php 
+		  require_once('config.php'); 
+		  $statement=$db->prepare("select * from tbl_products where p_shop=?");
+		  $statement->execute(array(1));
+		 $result = $statement->rowCount();
+		 echo $result;
+              ?>        
+		  </h3>
 
               <p>Khalek One</p>
             </div>
-            <div class="icon">
-              <i class="ion ion-bag"></i>
+			
+            <div class="icon" style="padding:10px">
+              <i class="glyphicon glyphicon-shopping-cart"></i>
             </div>
+			 
             <a href="view_product_shop.php?id=1" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
@@ -19,12 +29,19 @@
           <!-- small box -->
           <div class="small-box bg-green">
             <div class="inner">
-              <h3>53<sup style="font-size: 20px">%</sup></h3>
+                <h3> <?php 
+		  require_once('config.php'); 
+		  $statement=$db->prepare("select * from tbl_products where p_shop=?");
+		  $statement->execute(array(2));
+		 $result = $statement->rowCount();
+		 echo $result;
+              ?>        
+		  </h3>
 
               <p>Khalek Two</p>
             </div>
-            <div class="icon">
-              <i class="ion ion-stats-bars"></i>
+           <div class="icon" style="padding:10px">
+              <i class="glyphicon glyphicon-shopping-cart"></i>
             </div>
             <a href="view_product_shop.php?id=2" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
@@ -34,12 +51,19 @@
           <!-- small box -->
           <div class="small-box bg-yellow">
             <div class="inner">
-              <h3>44</h3>
+                <h3> <?php 
+		  require_once('config.php'); 
+		  $statement=$db->prepare("select * from tbl_products where p_shop=?");
+		  $statement->execute(array(3));
+		 $result = $statement->rowCount();
+		 echo $result;
+              ?>        
+		  </h3>
 
               <p>Store House</p>
             </div>
-            <div class="icon">
-              <i class="ion ion-person-add"></i>
+            <div class="icon" style="padding:10px">
+              <i class="glyphicon glyphicon-lock"></i>
             </div>
             <a href="view_product_shop.php?id=3" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>

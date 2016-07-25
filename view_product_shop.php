@@ -22,7 +22,9 @@ else
         <section class="col-lg-12 connectedSortable">
           <!-- Custom tabs (Charts with tabs)-->
 
-		                <div style="padding:10px;margin-bottom:20px">
+		               <section class="panel">                                          
+                                          <div class="panel-body bio-graph-info">
+		             
 		  
 		                      
 				                   <form method="POST" >
@@ -39,7 +41,9 @@ else
 											<input class="btn btn-info" style="float:right;" type="submit" value="Select"/>
                                         </div>
                                   </form>
+								
 								  </div>
+								  </section>
 
 			  <!--------- page start-->
 			  <?php include_once("config.php");?>

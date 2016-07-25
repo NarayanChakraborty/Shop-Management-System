@@ -1,3 +1,15 @@
+<?php
+if(!isset($_REQUEST['ID']))
+{
+	header('location:view_product.php');
+}
+else
+{
+	$id=$_REQUEST['ID'];
+}
+?>
+
+
 <?php include_once('header.php'); ?>
 <?php include_once('sidebar.php'); ?>
 <?php require_once('config.php'); ?>
@@ -79,8 +91,8 @@ if(isset($_POST['form1']))
 		   
 		   
 		   //pdo to insert all above informations.. to tbl_post
-		   	       $statement1=$db->prepare("insert into tbl_products(p_model,p_category,p_price,p_amount,p_details,p_shop,p_date) values(?,?,?,?,?,?,?)");
-		   $statement1->execute(array($_POST['p_model'],$_POST['p_category'],$_POST['p_price'],$_POST['p_amount'],$_POST['p_details'],$_POST['p_shop'],$_POST['p_date']));
+		   	       $statement1=$db->prepare("update tbl_products set p_model=?,p_category=?,p_price=?,p_amount=?,p_details=?,p_shop=?,p_date=?   where p_id=?");
+		   $statement1->execute(array($_POST['p_model'],$_POST['p_category'],$_POST['p_price'],$_POST['p_amount'],$_POST['p_details'],$_POST['p_shop'],$_POST['p_date'],$id));
 		   
 		   $success_message1="Post is inserted succesfully";
 	
@@ -105,7 +117,7 @@ if(isset($_POST['form1']))
           <div id="edit-profile" class="tab-pane">
                                     <section class="panel">                                          
                                           <div class="panel-body bio-graph-info">
-                                             <center> <h2>Add Product</h2></center>
+                                             <center> <h2>Update Product</h2></center>
 											 							  
 										<?php	
 					 if(isset($error_message1)){
@@ -131,11 +143,27 @@ if(isset($_POST['form1']))
                       ?>	  
 									 
 											 <hr>
+											 
+											 
+											 
+										<?php	
+						$statement=$db->prepare("select * from tbl_products where p_id=?");
+						$statement->execute(array($id));
+						$result=$statement->fetchAll(PDO::FETCH_ASSOC);
+						foreach($result as $row)
+						{?>	 
+											 
+											 
+											 
+											 
+											 
+											 
+											 
                                               <form class="form-horizontal" role="form" data-toggle="validator" method="post"enctype="multipart/form-data">                                                  
                                                   <div class="form-group">
                                                       <label class="col-lg-2 control-label">Product Model</label>
                                                       <div class="col-lg-8">
-                                                          <input type="text" class="form-control" name="p_model" id="f-name" placeholder=" " required>
+                                                          <input type="text" class="form-control" value="<?php echo $row['p_model']; ?>" name="p_model" id="f-name" placeholder=" " required>
                                                       </div>
                                                   </div><hr>
 												  <!--
@@ -153,15 +181,20 @@ if(isset($_POST['form1']))
                 <select class="form-control select2" name="p_category" style="width: 100%;" required>
                									     
                       <?php
-                      $statement = $db->prepare("SELECT * FROM tbl_category");
-                      $statement->execute();
-                      $result = $statement->fetchAll(PDO::FETCH_ASSOC);
-                      foreach ($result as $row) {
-                        ?>
-                      
-                      <option value="<?php echo $row['cat_id'];?>"><?php echo $row['cat_name'];?></option>
-                      <?php
+                      $statement1 = $db->prepare("SELECT * FROM tbl_category");
+                      $statement1->execute();
+                      $result1 = $statement1->fetchAll(PDO::FETCH_ASSOC);
+                      foreach ($result1 as $row1) {
+                           if($row1['cat_id']==$row['p_category']){
+						
+						?><option value="<?php echo $row1['cat_id'];?>" selected><?php echo $row1['cat_name'];?></option><?php
                       }
+					 else
+					 {
+						 ?><option value="<?php echo $row1['cat_id'];?>"><?php echo $row1['cat_name'];?></option><?php	
+					 }
+				 }
+				 
                       ?>
                 </select>
                                                          
@@ -170,20 +203,20 @@ if(isset($_POST['form1']))
 												  <div class="form-group">
                                                       <label class="col-lg-2 control-label">Product Price</label>
                                                       <div class="col-lg-8">
-                                                          <input type="number" min=0 name="p_price" class="form-control" id="l-name" placeholder=" " required>
+                                                          <input type="number" min=0 value="<?php echo $row['p_price']; ?>" name="p_price" class="form-control" id="l-name" placeholder=" " required>
                                                       </div>
                                                   </div><hr>
                                                   <div class="form-group">
                                                       <label class="col-lg-2 control-label">Product Amount</label>
                                                       <div class="col-lg-8">
-                                                          <input type="number" min=0 name="p_amount" class="form-control" id="l-name" placeholder=" " required>
+                                                          <input type="number" min=0 name="p_amount" value="<?php echo $row['p_amount']; ?>" class="form-control" id="l-name" placeholder=" " required>
                                                       </div>
                                                   </div>
 												  <hr>                                                 
                                                   <div class="form-group">
                                                       <label class="col-lg-2 control-label">Details of Product</label>
                                                       <div class="col-lg-8">
-                                                         <textarea name="p_details" cols="60 rows="10"></textarea>
+                                                         <textarea name="p_details" cols="60 rows="10"><?php echo $row['p_details']; ?></textarea>
 				<script type="text/javascript">
 				if ( typeof CKEDITOR == 'undefined' )
 				{
@@ -214,11 +247,16 @@ if(isset($_POST['form1']))
                       $statement2->execute();
                       $result2 = $statement2->fetchAll(PDO::FETCH_ASSOC);
                       foreach ($result2 as $row2) {
-                     ?>
-                      
-                      <option value="<?php echo $row2['shop_id'];?>"><?php echo $row2['shop_name'];?></option>
-                      <?php
+                           if($row2['shop_id']==$row['p_shop']){
+						
+						?><option value="<?php echo $row2['shop_id'];?>" selected><?php echo $row2['shop_name'];?></option><?php
                       }
+					 else
+					 {
+						 ?><option value="<?php echo $row2['shop_id'];?>"><?php echo $row2['shop_name'];?></option><?php	
+					 }
+				 }
+				 
                       ?>
 													  </select>
 
@@ -231,7 +269,7 @@ if(isset($_POST['form1']))
                   <div class="input-group-addon">
                     <i class="fa fa-calendar"></i>
                   </div>
-                  <input type="date" name="p_date" class="form-control" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask>
+                  <input type="date" name="p_date" value="<?php echo $row['p_date']; ?>" class="form-control"  data-mask>
                 </div>
                                                       </div>
                                                   </div><hr>
@@ -239,10 +277,14 @@ if(isset($_POST['form1']))
 
                                                   <div class="form-group">
                                                       <div class="col-lg-offset-10 col-lg-2">
-                                                          <button type="submit" name="form1" class="btn btn-primary">Save</button>
+                                                          <button type="submit" name="form1" class="btn btn-primary">Update</button>
                                                       </div>
                                                   </div>
                                               </form>
+											  <?php
+											  
+						}
+						?>
                                           </div>
                                       </section>
                                   </div>

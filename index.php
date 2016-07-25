@@ -25,8 +25,7 @@
 
     </section>
     <!-- /.content -->
-  </div>
-  <!-- /.content-wrapper -->
+
   
 
   <!-- /.control-sidebar -->

@@ -9,8 +9,9 @@
         <!-- Left col -->
         <section class="col-lg-12 connectedSortable">
           <!-- Custom tabs (Charts with tabs)-->
-
-		                <div style="padding:10px;margin-bottom:20px">
+                     <section class="panel">                                          
+                                          <div class="panel-body bio-graph-info">
+		             
 		  
 		                      
 				                   <form method="POST" >
@@ -27,7 +28,9 @@
 											<input class="btn btn-info" style="float:right;" type="submit" value="Select"/>
                                         </div>
                                   </form>
+								
 								  </div>
+								  </section>
 
 			  <!--------- page start-->
 			  <?php include_once("config.php");?>
@@ -64,8 +67,8 @@
 			  ?></h3>
             </div>
             <!-- /.box-header -->
-            <div class="box-body">
-              <table id="example1" class="table table-bordered table-striped">
+            <div class="box-body ">
+              <table id="example1" class="table table-bordered table-striped col-lg-12 col-xs-6">
                 <thead>
                 <tr>
                   <th>Product Model</th>
@@ -167,7 +170,7 @@
 														  
 														</div>
 						 </div>
-                      <a href="" title="Edit product"><button type="button" class="btn btn-info"><span class="glyphicon glyphicon-pencil"></span></button></a>
+                      <a href="edit_product.php?ID=<?php echo $row['p_id']; ?>" title="Edit product"><button type="button" class="btn btn-info"><span class="glyphicon glyphicon-pencil"></span></button></a>
                       <a href="" title="Delete product"><button type="button" class="btn btn-info"><span class="glyphicon glyphicon-remove"></span></button></a>
                     </div></center>
                   </td>
@@ -212,4 +215,6 @@
   
 
   <!-- /.control-sidebar -->
+  
+  
  <?php include_once('footer.php'); ?>

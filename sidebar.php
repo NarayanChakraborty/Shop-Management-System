@@ -27,14 +27,16 @@
         <li class="header">MAIN NAVIGATION</li>
         <li class="active treeview">
           <a href="index.php">
-            <i class="fa fa-dashboard"></i> <span>Dashboard</span>
-            
+            <i class="glyphicon glyphicon-home"></i> <span>Dashboard</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
           </a>
           
         </li>
         <li class="treeview">
           <a href="#">
-            <i class="fa fa-files-o"></i>
+            <i class="glyphicon glyphicon-object-align-bottom"></i>
             <span>Products</span>
             <span class="pull-right-container">
               <span class="label label-primary pull-right">4</span>
@@ -46,17 +48,7 @@
             <li><a href="manage_category.php"><i class="fa fa-circle-o"></i> Manage Products</a></li>  
           </ul>
         </li>
-        <li>
-          <a href="pages/widgets.html">
-            <i class="fa fa-th"></i> <span>Widgets</span>
-            <span class="pull-right-container">
-              <small class="label pull-right bg-green">new</small>
-            </span>
-          </a>
-        </li>
-        
-        
-       
+
        
         
       </ul>
