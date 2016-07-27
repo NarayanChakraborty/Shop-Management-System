@@ -29,8 +29,8 @@ else
 		                      
 				                   <form method="POST" >
                                         <div class="form-group">
-                                            <h3>Select Products For :</h3>
-                                            <select class="form-control" name="product">
+                                            <h4>Select Products For :</h4>
+                                            <select class="form-control " name="product">
 											   <option  value="All">From The Begining</option>
                                                 <option value="7">Last Week</option>
                                                 <option value="30">Last Month</option>
@@ -61,20 +61,20 @@ else
 			  
 			<div class="box">
             <div class="box-header">
-              <h3 class="box-title">List of Products  For Last <?php 
+              <h3 class="box-title">Product List (Last  <?php 
 
                  if($value==7)
 				 {
-					 echo "  Week";
+					 echo "  Week)";
 				 }else if($value==30)
 				 {
-					 echo "  Month";
+					 echo "  Month)";
 				 }else  if($value==180)
 				 {
-					 echo "  6 Months";
+					 echo "  6 Months)";
 				 } else if($value==365)
 				 {
-					 echo "  Last Year";
+					 echo "  Last Year)";
 				 }
 
 			  ?></h3>
@@ -89,6 +89,7 @@ else
                   <th>Product Price</th>
                   <th>Product Amount</th>
                   <th>Shop Name</th>
+				  <th>Sell</th>
 				  <th>Action</th>
 				  
                 </tr>
@@ -134,9 +135,10 @@ else
 					 
 					 
 					 </td>
+					 <td><a class="btn btn-primary" href=" " title="Sell Product"><i class="glyphicon glyphicon-usd"></i></a></td>
 					                    <td><center>
-                    <div class="btn-group">
-                     <a href="#inline<?php echo $row['p_id'];?>" class="fancybox"title="View product"> <button type="button" class="btn btn-info"><span class="glyphicon glyphicon-eye-open"></span></button></a>
+                     <div class="btn-group">
+                      <a class="btn btn-primary fancybox" href="#inline<?php echo $row['p_id'];?>"title="View image"><i class="glyphicon glyphicon-eye-open"></i></a>
 
 					 
 					 <div id="inline<?php echo $row['p_id'];?>"style="display:none;width:700px;margin:10px 30px">
@@ -162,7 +164,8 @@ else
 													</h4>
 													<h4> 
 													<label>Product Shop :&nbsp;&nbsp;</label>
-																				 <?php
+													
+													 <?php
                       $statement2 = $db->prepare("SELECT * FROM tbl_shop where shop_id=?");
                       $statement2->execute(array($row['p_shop']));
                       $result2 = $statement2->fetchAll(PDO::FETCH_ASSOC);
@@ -184,9 +187,39 @@ else
 														  
 														</div>
 						 </div>
-                      <a href="" title="Edit product"><button type="button" class="btn btn-info"><span class="glyphicon glyphicon-pencil"></span></button></a>
-                      <a href="" title="Delete product"><button type="button" class="btn btn-info"><span class="glyphicon glyphicon-remove"></span></button></a>
-                    </div></center>
+                      <a class="btn btn-success" title="Edit this Product" href="edit_product.php?ID=<?php echo $row['p_id']; ?>"><i class="glyphicon glyphicon-pencil"></i>
+													  
+													  </a>
+                       <a class="btn btn-danger"  title="Delete This product" data-toggle="modal" data-target="#productModal<?php echo $row['p_id'];?>"><i class="glyphicon glyphicon-remove"></i>
+													   </a>
+													  
+																		  
+											<!-- Modal -->
+													<div id="productModal<?php echo $row['p_id'];?>" class="modal fade " role="dialog">
+													  <div class="modal-dialog">
+
+														<!-- Modal content-->
+														<div class="modal-content">
+														  <div class="modal-header">
+															<button type="button" class="close" data-dismiss="modal">&times;</button>
+															<h4 class="modal-title">DELETE Confirmation</h4>
+														  </div>
+														  <div class="modal-body">
+															<h4>Are You Confirm To Delete This Element?</h4>
+														  </div>
+														  <div class="modal-footer">
+															<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+															<a class="btn btn-danger btn-ok" href="delete_product.php?id=<?php echo $row['p_id']; ?>" >Confirm</a>
+														  </div>
+														</div>
+
+													  </div>
+													</div>
+												
+					
+					
+					
+					</div></center>
                   </td>
                 </tr>
 				

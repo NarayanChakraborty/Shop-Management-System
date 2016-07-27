@@ -76,6 +76,7 @@
                   <th>Product Price</th>
                   <th>Product Amount</th>
                   <th>Shop Name</th>
+				  <th>Sell</th>
 				  <th>Action</th>
 				  
                 </tr>
@@ -119,6 +120,7 @@
 					  }
 						?>
 						</td>
+						<td><a class="btn btn-primary" href="sell_product.php?id=<?php echo $row['p_id']; ?>" title="Sell Product"><i class="glyphicon glyphicon-usd"></i></a></td>
 					                    <td><center>
                     <div class="btn-group">
                       <a class="btn btn-primary fancybox" href="#inline<?php echo $row['p_id'];?>"title="View image"><i class="glyphicon glyphicon-eye-open"></i></a>

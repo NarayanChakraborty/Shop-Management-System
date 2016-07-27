@@ -48,6 +48,14 @@
             <li><a href="manage_category.php"><i class="fa fa-circle-o"></i> Manage Products</a></li>  
           </ul>
         </li>
+		<li class="active treeview">
+          <a href="index.php">
+            <i class="glyphicon glyphicon-user"></i> <span>Labour Biodata</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+        </li>
 
        
         
