@@ -7,10 +7,10 @@
             <div class="inner">
               <h3> <?php 
 		  require_once('config.php'); 
-		  $statement=$db->prepare("select * from tbl_products where p_shop=?");
+		  $statement=$db->prepare("select sum(p_amount) as total from tbl_products where p_shop=?");
 		  $statement->execute(array(1));
-		 $result = $statement->rowCount();
-		 echo $result;
+		 $result = $statement->fetch(PDO::FETCH_ASSOC);
+		 echo $result['total'];
               ?>        
 		  </h3>
 
@@ -29,12 +29,12 @@
           <!-- small box -->
           <div class="small-box bg-green">
             <div class="inner">
-                <h3> <?php 
+            <h3> <?php 
 		  require_once('config.php'); 
-		  $statement=$db->prepare("select * from tbl_products where p_shop=?");
+		  $statement=$db->prepare("select sum(p_amount) as total from tbl_products where p_shop=?");
 		  $statement->execute(array(2));
-		 $result = $statement->rowCount();
-		 echo $result;
+		 $result = $statement->fetch(PDO::FETCH_ASSOC);
+		 echo $result['total'];
               ?>        
 		  </h3>
 
@@ -51,12 +51,12 @@
           <!-- small box -->
           <div class="small-box bg-yellow">
             <div class="inner">
-                <h3> <?php 
+             <h3> <?php 
 		  require_once('config.php'); 
-		  $statement=$db->prepare("select * from tbl_products where p_shop=?");
+		  $statement=$db->prepare("select sum(p_amount) as total from tbl_products where p_shop=?");
 		  $statement->execute(array(3));
-		 $result = $statement->rowCount();
-		 echo $result;
+		 $result = $statement->fetch(PDO::FETCH_ASSOC);
+		 echo $result['total'];
               ?>        
 		  </h3>
 

@@ -46,29 +46,33 @@
 			  
 			  ?>
 			  
-			<div class="box">
-            <div class="box-header">
-              <h3 class="box-title">List of Products  For Last <?php 
+			<div class="panel panel-default">
+                        <div class="panel-heading">List of Products   <?php 
 
                  if($value==7)
 				 {
-					 echo "  Week";
+					 echo " For Last Week";
 				 }else if($value==30)
 				 {
-					 echo "  Month";
+					 echo " For Last Month";
 				 }else  if($value==180)
 				 {
-					 echo "  6 Months";
+					 echo " For Last 6 Months";
 				 } else if($value==365)
 				 {
-					 echo "  Last Year";
+					 echo " For Last Last Year";
+				 }
+				 else
+				 {
+					 echo "From The Begining";
 				 }
 
-			  ?></h3>
+			  ?>
             </div>
             <!-- /.box-header -->
-            <div class="box-body ">
-              <table id="example1" class="table table-bordered table-striped col-lg-12 col-xs-6">
+            <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped table-bordered table-hover" id="dataTables-example" >
                 <thead>
                 <tr>
                   <th>Product Model</th>
@@ -81,7 +85,7 @@
 				  
                 </tr>
                 </thead>
-                <tbody>
+                <tbody style="text-align:center">
                  <?php
 										 if($value!="All")
 										 {
@@ -223,7 +227,7 @@
       </div>
 		  
 		  
-		  
+	</div>	  
 		  
 		  
 		  

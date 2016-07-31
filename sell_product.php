@@ -165,7 +165,7 @@ if(isset($_POST['form1']))
                                                       <div class="col-lg-8">
                                                           <?php echo $row['p_model']; ?>
                                                       </div>
-                                                  </div><hr>
+                                                  </div>
 												  <!--
 												    <div class="form-group">
                                                       <label class="col-lg-2 control-label">Product Image</label>
@@ -193,14 +193,14 @@ if(isset($_POST['form1']))
                 
                                                          
                                                       </div>
-                                                  </div><hr> 
+                                                  </div>
 												   <div class="form-group">
                                                       <label class="col-lg-2 control-label">Details of Product</label>
                                                       <div class="col-lg-8">
                                                          <?php echo $row['p_details']; ?>
 				
                                                       </div>
-                                                  </div><hr>
+                                                  </div>
 												  <div class="form-group">
                                                       <label class="col-lg-2 control-label">Product Price</label>
                                                       <div class="col-lg-8">
@@ -210,17 +210,44 @@ if(isset($_POST['form1']))
                                                   <div class="form-group">
                                                       <label class="col-lg-2 control-label">Product Amount</label>
                                                       <div class="col-lg-8">
-                                                          <input type="number" min=0 name="p_amount" value="<?php echo $row['p_amount']; ?>" class="form-control" id="l-name" placeholder=" " required>
+                                                          <input type="number" min=1 max=<?php echo $row['p_amount']; ?>  name="p_amount" value="<?php echo $row['p_amount']; ?>" class="form-control" id="one" placeholder=" " required>
                                                       </div>
                                                   </div>
 												  <hr>    
+											
 												  <div class="form-group">
                                                       <label class="col-lg-2 control-label">Discount(%)</label>
                                                       <div class="col-lg-8">
-                                                          <input type="number" min=0 name="p_amount" value="" class="form-control" id="l-name" placeholder=" Give Only Percentage Value" required>
+                                                          <input type="number" min=0 name="p_discount" value="" class="form-control" id="two" placeholder=" Give Only Percentage Value" required>
                                                       </div>
                                                   </div>
-												  <hr>                                                 
+												  <script>
+												 $('#two').keyup(function(){
+													 
+													 
+													 var valueone;
+													 var valuetwo;
+												
+													 valueone=parseFloat($('#one').val());
+													 valuetwo=parseFloat($('#two').val());
+													
+													 var result=valueone+valuetwo;
+													 $('#total').val(result.toFiexed(2));
+													 
+												 });
+												 
+												 
+												 
+												 </script>
+                                              <hr>
+												  <div class="form-group">
+                                                      <label class="col-lg-2 control-label">Total</label>
+                                                      <div class="col-lg-8">
+                                                          <input type="number" min=0 name="p_total" value="" class="form-control" id="total" placeholder=" " required>
+                                                      </div>
+                                                  </div>
+												  <hr> 
+												  
                                                 
                                                  
 												  
