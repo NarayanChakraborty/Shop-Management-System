@@ -19,18 +19,17 @@ else
       <!-- Main row -->
       <div class="row">
         <!-- Left col -->
-        <section class="col-lg-12 connectedSortable">
+         <section class="col-lg-12 connectedSortable">
           <!-- Custom tabs (Charts with tabs)-->
-
-		               <section class="panel">                                          
+                     <section class="panel">                                          
                                           <div class="panel-body bio-graph-info">
 		             
 		  
 		                      
 				                   <form method="POST" >
                                         <div class="form-group">
-                                            <h4>Select Products For :</h4>
-                                            <select class="form-control " name="product">
+                                            <h3>Select Products For :</h3>
+                                            <select class="form-control" name="product">
 											   <option  value="All">From The Begining</option>
                                                 <option value="7">Last Week</option>
                                                 <option value="30">Last Month</option>
@@ -59,29 +58,33 @@ else
 			  
 			  ?>
 			  
-			<div class="box">
-            <div class="box-header">
-              <h3 class="box-title">Product List (Last  <?php 
+			<div class="panel panel-default">
+                        <div class="panel-heading">List of Products   <?php 
 
                  if($value==7)
 				 {
-					 echo "  Week)";
+					 echo " For Last Week";
 				 }else if($value==30)
 				 {
-					 echo "  Month)";
+					 echo " For Last Month";
 				 }else  if($value==180)
 				 {
-					 echo "  6 Months)";
+					 echo " For Last 6 Months";
 				 } else if($value==365)
 				 {
-					 echo "  Last Year)";
+					 echo " For Last Last Year";
+				 }
+				 else
+				 {
+					 echo "From The Begining";
 				 }
 
-			  ?></h3>
+			  ?>
             </div>
             <!-- /.box-header -->
-            <div class="box-body">
-              <table id="example1" class="table table-bordered table-striped">
+            <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped table-bordered table-hover" id="dataTables-example" >
                 <thead>
                 <tr>
                   <th>Product Model</th>
@@ -94,7 +97,7 @@ else
 				  
                 </tr>
                 </thead>
-                <tbody>
+                <tbody style="text-align:center">
                  <?php
 										 if($value!="All")
 										 {
@@ -135,7 +138,7 @@ else
 					 
 					 
 					 </td>
-					 <td><a class="btn btn-primary" href=" " title="Sell Product"><i class="glyphicon glyphicon-usd"></i></a></td>
+<td><a class="btn btn-primary" href="sell_product.php?id=<?php echo $row['p_id']; ?>" title="Sell Product"><i class="glyphicon glyphicon-usd"></i></a></td>
 					                    <td><center>
                      <div class="btn-group">
                       <a class="btn btn-primary fancybox" href="#inline<?php echo $row['p_id'];?>"title="View image"><i class="glyphicon glyphicon-eye-open"></i></a>
@@ -237,7 +240,7 @@ else
         <!-- /.col -->
       </div>
 		  
-
+</div>
 		  
 
         </section>

@@ -49,44 +49,7 @@ if(isset($_POST['form1']))
 			throw new Exception("Tag Name can not be empty");
 		}
  	    
-		//IMAGE MANAGE
-		/*
-		if(getimagesize($_FILES['p_image']['tmp_name'])==FALSE)
-		 {
-		   throw new Exception("<div class='error'>Please select an image</div>"); //access only image
-		 }
-		 if($_FILES['post_image']['size']>1000000){
-		 throw new Exception("<div class='error'>Sorry,your file is too large</div>"); //image file must be<1MB
-		 }
-		
-		
-	    //To generate id(next auto increment value from tbl_post)
-		$statement=$db->prepare("show table status like 'tbl_post' ");
-		$statement->execute();
-		$result=$statement->fetchAll();
-		foreach($result as $row)
-		$new_id=$row[10];
-		   
-		//access image process one;   
-	    $up_filename=$_FILES['post_image']['name'];   //file_name
-		$file_basename=substr($up_filename,0,strripos($up_filename,'.'));//orginal image name
-		$file_ext=substr($up_filename,strripos($up_filename,'.')); //extension
-		$f1=$new_id.$file_ext;  //Rename filename;
 
-	    
-		//only allow png ,jpg,jpeg,gif
-		if(($file_ext!='.png')&&($file_ext!='.jpg')&&($file_ext!='.jpeg')&&($file_ext!='.gif')&&($file_ext!='.PNG')&&($file_ext!='.JPG')&&($file_ext!='.JPEG')&&($file_ext!='.GIF'))
-		{
-			throw new Exception("only jpg,jpeg,png and gif format are allowed");
-		}
-	     
-	     
-        //upload image to a folder
-        move_uploaded_file($_FILES['post_image']['tmp_name'],"uploads/".$f1);		
-		
-		
-		*/
-	
       
 		   
 		   
@@ -159,7 +122,7 @@ if(isset($_POST['form1']))
 											 
 											 
 											 
-                                              <form class="form-horizontal" role="form" data-toggle="validator" method="post"enctype="multipart/form-data">                                                  
+                                              <form class="form-horizontal" role="form" data-toggle="validator" method="post"enctype="multipart/form-data" name="form2">                                                  
                                                   <div class="form-group">
                                                       <label class="col-lg-2 control-label">Product Model</label>
                                                       <div class="col-lg-8">
@@ -210,7 +173,7 @@ if(isset($_POST['form1']))
                                                   <div class="form-group">
                                                       <label class="col-lg-2 control-label">Product Amount</label>
                                                       <div class="col-lg-8">
-                                                          <input type="number" min=1 max=<?php echo $row['p_amount']; ?>  name="p_amount" value="<?php echo $row['p_amount']; ?>" class="form-control" id="one" placeholder=" " required>
+                                                          <input type="number" min=1 max=<?php echo $row['p_amount']; ?> onkeyup="findTotal()" name="p_amount" value="<?php echo $row['p_amount']; ?>" class="form-control" id="one" placeholder=" " required>
                                                       </div>
                                                   </div>
 												  <hr>    
@@ -218,40 +181,107 @@ if(isset($_POST['form1']))
 												  <div class="form-group">
                                                       <label class="col-lg-2 control-label">Discount(%)</label>
                                                       <div class="col-lg-8">
-                                                          <input type="number" min=0 name="p_discount" value="" class="form-control" id="two" placeholder=" Give Only Percentage Value" required>
+                                                          <input type="number" min=0 name="p_discount" value="" onkeyup="findTotal()" class="form-control" id="two" placeholder=" Give Only Percentage Value of per product" required>
                                                       </div>
                                                   </div>
-												  <script>
-												 $('#two').keyup(function(){
-													 
-													 
-													 var valueone;
-													 var valuetwo;
-												
-													 valueone=parseFloat($('#one').val());
-													 valuetwo=parseFloat($('#two').val());
-													
-													 var result=valueone+valuetwo;
-													 $('#total').val(result.toFiexed(2));
-													 
-												 });
+											
 												 
-												 
-												 
-												 </script>
+								
                                               <hr>
+											  <div class="form-group">
+                                                      <label class="col-lg-2 control-label">Less($)</label>
+                                                      <div class="col-lg-8">
+                                                          <input type="number" min=0 name="p_less" value="" onkeyup="findTotal()" class="form-control" id="three" placeholder="Special Offer (Just Amount)" required>
+                                                      </div>
+                                                  </div>
+											
+												 
+								
+                                              <hr>
+											    <div class="form-group">
+                                                      <label class="col-lg-2 control-label">Installment(+)</label>
+                                                      <div class="col-lg-8">
+                                                          <input type="number" min=0 name="p_installment" value="" onkeyup="findTotal()" class="form-control" id="four" placeholder="Add Amount For Installment " required>
+                                                      </div>
+                                                  </div>
+											
+												 
+								
+                                              <hr>
+											    
 												  <div class="form-group">
                                                       <label class="col-lg-2 control-label">Total</label>
                                                       <div class="col-lg-8">
-                                                          <input type="number" min=0 name="p_total" value="" class="form-control" id="total" placeholder=" " required>
+                                                          <input type="number" disabled min=0 name="p_total" value="" class="form-control" id="total" placeholder=" " required>
                                                       </div>
                                                   </div>
 												  <hr> 
+												    <div class="form-group">
+                                                      <label class="col-lg-2 control-label">Payment</label>
+                                                      <div class="col-lg-8">
+                                                          <input type="number" min=0 name="p_payment" value="" onkeyup="findTotal()" class="form-control" id="five" placeholder="Payment Amount " required>
+                                                      </div>
+                                                  </div>
+											
+												 
+								
+                                              <hr>
 												  
-                                                
+                                                	 <script type="text/javascript">
+												function findTotal(){
+													var arr = document.form2.p_amount.value;
+													var arr1 =  document.form2.p_discount.value;	
+													var arr2 =  document.form2.p_less.value;
+													var arr3 =  document.form2.p_installment.value;
+													if(arr2==" ")
+													{
+														arr2=0;
+													}
+													if(arr3==" ")
+													{
+														arr3=0;
+													}
+													var tot=0;
+													tot=parseInt(arr)*(<?php echo $row['p_price']; ?> -<?php echo $row['p_price']; ?>*((parseInt(arr1)/100)));
+													tot=tot-arr2;
+													tot=+tot + +arr3; 
+													document.getElementById('total').value = tot;
+													document.getElementById('five').value = tot;
+												}
+
+													</script>
+												
                                                  
 												  
                                                  <br>
+												
+												 <center> <h2>Customer Details</h2></center>
+												 <div class="form-group">
+                                                      <label class="col-lg-2 control-label">Customer Name</label>
+                                                      <div class="col-lg-8">
+                                                          <input type="text" min=0 name="" class="form-control" id="" placeholder=" " required>
+                                                      </div>
+                                                  </div><hr>
+												  <div class="form-group">
+                                                      <label class="col-lg-2 control-label">Mobile No</label>
+                                                      <div class="col-lg-8">
+                                                           <input type="number" data-toggle="validator" data-length="11" min=0  name="" class="form-control" id="" placeholder=" " required>
+                                                      </div>
+                                                  </div><hr>
+												  <div class="form-group">
+                                                      <label class="col-lg-2 control-label">National Id No</label>
+                                                      <div class="col-lg-8">
+                                                          <input type="number" min=0 name="" class="form-control" id="" placeholder=" " required>
+                                                      </div>
+                                                  </div><hr>
+												  <div class="form-group">
+                                                      <label class="col-lg-2 control-label">Address</label>
+                                                      <div class="col-lg-8 col-md-4">
+                                                         <textarea name="p_details"  cols="92" rows=""></textarea>
+														 </div>
+														 </div>
+												 <br>
+												
 
                                                   <div class="form-group">
                                                       <div class="col-lg-offset-10 col-lg-2">

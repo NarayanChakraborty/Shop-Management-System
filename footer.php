@@ -72,5 +72,8 @@
 <script src="dist/js/pages/dashboard.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="dist/js/demo.js"></script>
+	<!--validator js-->
+	<script src="dist/js/validator.min.js"></script>
+	<!--//validator js-->
 </body>
 </html>
