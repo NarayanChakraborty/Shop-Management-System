@@ -39,13 +39,26 @@
             <i class="glyphicon glyphicon-object-align-bottom"></i>
             <span>Products</span>
             <span class="pull-right-container">
-              <span class="label label-primary pull-right">4</span>
+              <span class="label label-primary pull-right">3</span>
             </span>
           </a>
           <ul class="treeview-menu">
             <li><a href="add_product.php"><i class="fa fa-circle-o"></i>Add Products</a></li>
             <li><a href="view_product.php"><i class="fa fa-circle-o"></i> View Products</a></li>
             <li><a href="manage_category.php"><i class="fa fa-circle-o"></i> Manage Products</a></li>  
+          </ul>
+        </li>
+	 <li class="treeview">
+          <a href="#">
+            <i class="glyphicon glyphicon-object-align-bottom"></i>
+            <span>Customer Information</span>
+            <span class="pull-right-container">
+              <span class="label label-primary pull-right">4</span>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="add_product.php"><i class="fa fa-circle-o"></i>All Customers</a></li>
+            <li><a href="view_product.php"><i class="fa fa-circle-o"></i>Due Accounting</a></li>
           </ul>
         </li>
 		<li class="active treeview">

@@ -20,44 +20,18 @@ else
 if(isset($_POST['form1']))
 {
 	try{  
-		if(empty($_POST['p_model']))
-		{
-			throw new Exception("Product Model can not be empty");
-		}
-		if(empty($_POST['p_price']))
-		{
-			throw new Exception("Title can not be empty");
-		}
-	    if(empty($_POST['p_amount']))
-		{
-			throw new Exception("Category can not be empty");
-		}
-		if(empty($_POST['p_category']))
-		{
-			throw new Exception("Tag Name can not be empty");
-		}
-		if(empty($_POST['p_details']))
-		{
-			throw new Exception("Tag Name can not be empty");
-		}
-		if(empty($_POST['p_date']))
-		{
-			throw new Exception("Tag Name can not be empty");
-		}
-		if(empty($_POST['p_shop']))
-		{
-			throw new Exception("Tag Name can not be empty");
-		}
+
  	    
 
       
-		   
+		   $c_date=date('Y-m-d');
+		   $c_due=$_POST['c_total']-$_POST['p_payment'];
 		   
 		   //pdo to insert all above informations.. to tbl_post
-		   	       $statement1=$db->prepare("update tbl_products set p_model=?,p_category=?,p_price=?,p_amount=?,p_details=?,p_shop=?,p_date=?   where p_id=?");
-		   $statement1->execute(array($_POST['p_model'],$_POST['p_category'],$_POST['p_price'],$_POST['p_amount'],$_POST['p_details'],$_POST['p_shop'],$_POST['p_date'],$id));
+		   	       $statement1=$db->prepare("insert into tbl_customers(p_id,c_total,c_due,c_name,c_mobile,c_nid,c_address,c_date) values(?,?,?,?,?,?,?,?)");
+		   $statement1->execute(array($_POST['hidden_id'],$_POST['c_total'],$c_due,$_POST['c_name'],$_POST['c_mobile'],$_POST['c_nid'],$_POST['c_address'],$c_date));
 		   
-		   $success_message1="Post is inserted succesfully";
+		   $success_message1="Customer Information is inserted succesfully";
 	
 	
 	}
@@ -191,7 +165,7 @@ if(isset($_POST['form1']))
 											  <div class="form-group">
                                                       <label class="col-lg-2 control-label">Less($)</label>
                                                       <div class="col-lg-8">
-                                                          <input type="number" min=0 name="p_less" value="" onkeyup="findTotal()" class="form-control" id="three" placeholder="Special Offer (Just Amount)" required>
+                                                          <input type="number" min=0 name="p_less" value="" onkeyup="findTotal()" class="form-control" id="three" placeholder="Special Offer (Just Amount)" >
                                                       </div>
                                                   </div>
 											
@@ -199,9 +173,9 @@ if(isset($_POST['form1']))
 								
                                               <hr>
 											    <div class="form-group">
-                                                      <label class="col-lg-2 control-label">Installment(+)</label>
+                                                      <label class="col-lg-2 control-label">Installment Amount(+)</label>
                                                       <div class="col-lg-8">
-                                                          <input type="number" min=0 name="p_installment" value="" onkeyup="findTotal()" class="form-control" id="four" placeholder="Add Amount For Installment " required>
+                                                          <input type="number" min=0 name="p_installment" value="" onkeyup="findTotal()" class="form-control" id="four" placeholder="Add Amount For Installment ">
                                                       </div>
                                                   </div>
 											
@@ -212,12 +186,13 @@ if(isset($_POST['form1']))
 												  <div class="form-group">
                                                       <label class="col-lg-2 control-label">Total</label>
                                                       <div class="col-lg-8">
-                                                          <input type="number" disabled min=0 name="p_total" value="" class="form-control" id="total" placeholder=" " required>
+                                                          <input type="number"  min=0 name="c_total" value="" class="form-control" id="total" placeholder=" " >
+														 
                                                       </div>
                                                   </div>
 												  <hr> 
 												    <div class="form-group">
-                                                      <label class="col-lg-2 control-label">Payment</label>
+                                                      <label class="col-lg-2 control-label">Payment(-)</label>
                                                       <div class="col-lg-8">
                                                           <input type="number" min=0 name="p_payment" value="" onkeyup="findTotal()" class="form-control" id="five" placeholder="Payment Amount " required>
                                                       </div>
@@ -246,7 +221,8 @@ if(isset($_POST['form1']))
 													tot=tot-arr2;
 													tot=+tot + +arr3; 
 													document.getElementById('total').value = tot;
-													document.getElementById('five').value = tot;
+											
+													
 												}
 
 													</script>
@@ -259,25 +235,25 @@ if(isset($_POST['form1']))
 												 <div class="form-group">
                                                       <label class="col-lg-2 control-label">Customer Name</label>
                                                       <div class="col-lg-8">
-                                                          <input type="text" min=0 name="" class="form-control" id="" placeholder=" " required>
+                                                          <input type="text" min=0 name="c_name" class="form-control" id="" placeholder=" " required>
                                                       </div>
                                                   </div><hr>
 												  <div class="form-group">
                                                       <label class="col-lg-2 control-label">Mobile No</label>
                                                       <div class="col-lg-8">
-                                                           <input type="number" data-toggle="validator" data-length="11" min=0  name="" class="form-control" id="" placeholder=" " required>
+                                                           <input type="number" data-toggle="validator" data-length="11" min=0  name="c_mobile" class="form-control" id="" placeholder=" " required>
                                                       </div>
                                                   </div><hr>
 												  <div class="form-group">
                                                       <label class="col-lg-2 control-label">National Id No</label>
                                                       <div class="col-lg-8">
-                                                          <input type="number" min=0 name="" class="form-control" id="" placeholder=" " required>
+                                                          <input type="number" min=0 name="c_nid" class="form-control" id="" placeholder=" " required>
                                                       </div>
                                                   </div><hr>
 												  <div class="form-group">
                                                       <label class="col-lg-2 control-label">Address</label>
                                                       <div class="col-lg-8 col-md-4">
-                                                         <textarea name="p_details"  cols="92" rows=""></textarea>
+                                                         <textarea name="c_address"  cols="92" rows=""></textarea>
 														 </div>
 														 </div>
 												 <br>
@@ -285,6 +261,7 @@ if(isset($_POST['form1']))
 
                                                   <div class="form-group">
                                                       <div class="col-lg-offset-10 col-lg-2">
+													  <input type="hidden" name="hidden_id" value="<?php echo $row['p_id'];?>">
                                                           <button type="submit" name="form1" class="btn btn-primary">Calculate</button>
                                                       </div>
                                                   </div>
