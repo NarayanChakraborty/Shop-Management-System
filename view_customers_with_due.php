@@ -159,13 +159,13 @@ if(isset($_POST['form_payment']))
                  <?php
 										 if($value!="All")
 										 {
-										  $statement =$db->prepare("SELECT * FROM tbl_customers where c_date>DATE_SUB(CURDATE(), INTERVAL ? DAY)");
-										  $statement->execute(array($value));
+										  $statement =$db->prepare("SELECT * FROM tbl_customers where c_date>DATE_SUB(CURDATE(), INTERVAL ? DAY) where c_due!=?");
+										  $statement->execute(array($value,0));
 										 }
 										 else
 										 {
-											 $statement =$db->prepare("SELECT * FROM tbl_customers");
-										    $statement->execute(array());
+											 $statement =$db->prepare("SELECT * FROM tbl_customers where c_due!=?");
+										    $statement->execute(array(0));
 										 }
 										  $result = $statement->fetchAll(PDO::FETCH_ASSOC);
 										  foreach ($result as $row) {
@@ -192,7 +192,7 @@ if(isset($_POST['form_payment']))
 											?>
 				   
 					  <td><?php echo $row['p_amount']; ?> </td>
-					 <td> <?php echo $row['c_total'];?></td>	
+					 <td> <?php echo $row['c_total'];?></td><center>	
 					
 					 <td> <?php echo $row['c_due'];?>
 					 <a class="btn " data-toggle="modal" href="#myModal<?php echo $row['c_id'];?>" title="Payment"><i class="glyphicon glyphicon-minus-sign"></i></a>
@@ -204,12 +204,12 @@ if(isset($_POST['form_payment']))
 									  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 									  <h4 class="modal-title">Payment Section</h4>
 									</div>
-									<div class="modal-body">
+									<div class="modal-body" style="text-align:none">
 									 <h4>Total Cost  : <?php echo $row['c_total']; ?> </h4>
 									 <h4>Due Amount   :<?php echo $row['c_due']; ?> </h4>
 									  <h4>Payment Amount :</h4>
 									  <form method="post" action="view_customers.php" enctype="multipart/form-data">
-										<input type="number" value="<?php echo $row['c_due'];?>"class="form-control" name="payment_amount" required><br>
+										<input type="number" value="<?php echo $row['c_due'];?>"class="form-control" name="payment_amount" required><br><br>
 										<button data-dismiss="modal" class="btn btn-default" type="button">Close</button>
 										<input type="hidden" name="hidden_id_for_edit_payment" value="<?php echo $row['c_id'];?>">
 										<input type="hidden" name="hidden_id_for_due" value="<?php echo $row['c_due'];?>">
@@ -224,11 +224,11 @@ if(isset($_POST['form_payment']))
 					 
 					 
 					 </td>	 
-					 <td> <?php echo $row['c_mobile'];?></td> 
-					 <td> <?php echo $row['c_address'];?></td>
+					 <center><td> <?php echo $row['c_mobile'];?></td> 
+					 <td> <?php echo $row['c_address'];?></td></center>
 					 
 						
-					                    <td><center>
+					                    <td>
                      <div class="btn-group">
                       <a class="btn btn-primary fancybox" href="#inline<?php echo $row['c_id'];?>"title="View image"><i class="glyphicon glyphicon-eye-open"></i></a>
 

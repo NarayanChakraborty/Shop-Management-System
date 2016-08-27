@@ -57,8 +57,8 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="add_product.php"><i class="fa fa-circle-o"></i>All Customers</a></li>
-            <li><a href="view_product.php"><i class="fa fa-circle-o"></i>Due Accounting</a></li>
+            <li><a href="view_customers.php"><i class="fa fa-circle-o"></i>All Customers</a></li>
+            <li><a href="view_customers_with_due.php"><i class="fa fa-circle-o"></i>Due Accounting</a></li>
           </ul>
         </li>
 		<li class="active treeview">
