@@ -28,8 +28,8 @@ if(isset($_POST['form1']))
 		   $c_due=$_POST['c_total']-$_POST['p_payment'];
 		   
 		   //pdo to insert all above informations.. to tbl_post
-		   	       $statement1=$db->prepare("insert into tbl_customers(p_id,c_total,c_due,c_name,c_mobile,c_nid,c_address,c_date) values(?,?,?,?,?,?,?,?)");
-		   $statement1->execute(array($_POST['hidden_id'],$_POST['c_total'],$c_due,$_POST['c_name'],$_POST['c_mobile'],$_POST['c_nid'],$_POST['c_address'],$c_date));
+		   	       $statement1=$db->prepare("insert into tbl_customers(p_id,p_amount,c_total,c_due,c_name,c_mobile,c_nid,c_address,c_date) values(?,?,?,?,?,?,?,?,?)");
+		   $statement1->execute(array($_POST['hidden_id'],$_POST['p_amount'],$_POST['c_total'],$c_due,$_POST['c_name'],$_POST['c_mobile'],$_POST['c_nid'],$_POST['c_address'],$c_date));
 		   
 		   $success_message1="Customer Information is inserted succesfully";
 	
