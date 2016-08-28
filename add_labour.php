@@ -164,7 +164,7 @@ if(isset($_POST['submit'])){
 												    <div class="form-group">
                                                       <label class="col-lg-2 control-label">Contact No</label>
 													  <div class="col-lg-8" >
-													  <input type="number" data-toggle="validator" data-minlength="11" class="form-control" name="n_contact_no" placeholder="Contact Number" required>
+													  <input type="number" data-toggle="validator" data-minlength="11" class="form-control" name="l_contact_no" placeholder="Contact Number" required>
 									<span class="help-block with-errors">Please Enter Your 11 Digit Mobile Number</span>
                                                     </div>
                                                   </div><hr> 
@@ -174,7 +174,7 @@ if(isset($_POST['submit'])){
 												  <div class="form-group">
                                                       <label class="col-lg-2 control-label">Labourer Image</label>
                                                       <div class="col-lg-8">
-                                                          <input type="file" id="exampleInputFile" name="n_image"> 
+                                                          <input type="file" id="exampleInputFile" name="l_image"> 
 								   <p class="help-block">Input Labourer Image.</p>
                                                       </div>
                                                   </div><hr>
@@ -185,7 +185,7 @@ if(isset($_POST['submit'])){
                                                   <div class="form-group">
                                                       <label class="col-lg-2 control-label">Labourer Type</label>
                                                       <div class="col-lg-8">
-                                                          <select class="form-control m-bot15" name="n_type" required>
+                                                          <select class="form-control m-bot15" name="l_type" required>
 									  <option value="Permanent">Permanent</option>
 									  <option value="Trainee">Temporary</option>
 									</select>
@@ -199,7 +199,7 @@ if(isset($_POST['submit'])){
                                                       <label class="col-lg-2 control-label">Enter National ID</label>
                                                       <div class="col-lg-8">
                                                          <input type="" min="0" data-toggle="validator" data-minlength="17" class="form-control " 
-									  name="n_nid" id="inputPassword" placeholder="NID Number" required>
+									  name="l_nid" id="inputPassword" placeholder="NID Number" required>
 									  <span class="help-block with-errors">Please Enter Your 17 Digit NID Number</span>
                                                       </div>
                                                   </div><hr>
@@ -210,7 +210,7 @@ if(isset($_POST['submit'])){
                                                 <div class="form-group">
                                                       <label class="col-lg-2 control-label">Address</label>
                                                       <div class="col-lg-8 col-md-4">
-                                                         <textarea name="c_address"  cols="92" rows=""></textarea>
+                                                         <textarea name="l_address"  cols="92" rows=""></textarea>
 														 </div>
 														 </div><hr>
 												  
@@ -220,13 +220,13 @@ if(isset($_POST['submit'])){
 									  <div class="col-lg-8">
 										<div class="radio">
 											<label>
-											  <input type="radio" name="n_sex" value="female" required>
+											  <input type="radio" name="l_sex" value="female" required>
 											  Female
 											</label>
 										</div>
 										<div class="radio">
 											<label>
-											<input type="radio" name="n_sex" value="male" required>
+											<input type="radio" name="l_sex" value="male" required>
 											Male
 											</label>
 										</div>
@@ -241,7 +241,7 @@ if(isset($_POST['submit'])){
                   <div class="input-group-addon">
                     <i class="fa fa-calendar"></i>
                   </div>
-                  <input type="date" name="p_date" class="form-control" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask>
+                  <input type="date" name="l_date" class="form-control" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask>
                 </div>
                                                       </div>
                                                   </div><hr>
@@ -249,7 +249,7 @@ if(isset($_POST['submit'])){
 
                                                   <div class="form-group">
                                                       <div class="col-lg-offset-10 col-lg-2">
-                                                          <button type="submit" name="form1" class="btn btn-primary">Save</button>
+                                                          <button type="submit" name="l_form" class="btn btn-primary">Save</button>
                                                       </div>
                                                   </div>
                                               </form>
