@@ -123,15 +123,15 @@
 																  
 														</div>
 						 </div>
-                      <a class="btn btn-success" title="Edit this Product" href="edit_labourer.php?ID=<?php echo $row['l_id']; ?>"><i class="glyphicon glyphicon-pencil"></i>
+                      <a class="btn btn-success" title="Edit this Labourer" href="edit_labourer.php?ID=<?php echo $row['l_id']; ?>"><i class="glyphicon glyphicon-pencil"></i>
 													  
 													  </a>
-                       <a class="btn btn-danger"  title="Delete This product" data-toggle="modal" data-target="#productModal<?php echo $row['p_id'];?>"><i class="glyphicon glyphicon-remove"></i>
+                       <a class="btn btn-danger"  title="Delete This Labourer" data-toggle="modal" data-target="#productModal<?php echo $row['l_id'];?>"><i class="glyphicon glyphicon-remove"></i>
 													   </a>
 													  
 																		  
 											<!-- Modal -->
-													<div id="productModal<?php echo $row['p_id'];?>" class="modal fade " role="dialog">
+													<div id="productModal<?php echo $row['l_id'];?>" class="modal fade " role="dialog">
 													  <div class="modal-dialog">
 
 														<!-- Modal content-->
@@ -145,7 +145,7 @@
 														  </div>
 														  <div class="modal-footer">
 															<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-															<a class="btn btn-danger btn-ok" href="delete_product.php?id=<?php echo $row['p_id']; ?>" >Confirm</a>
+															<a class="btn btn-danger btn-ok" href="delete_labourer.php?id=<?php echo $row['l_id']; ?>" >Confirm</a>
 														  </div>
 														</div>
 
