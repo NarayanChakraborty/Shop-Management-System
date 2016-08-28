@@ -81,7 +81,7 @@
           </a>
           <ul class="treeview-menu">
             <li><a href="add_labour.php"><i class="fa fa-circle-o"></i>Add Labourer</a></li>
-            <li><a href="view_customers_with_due.php"><i class="fa fa-circle-o"></i>All Labourers</a></li>
+            <li><a href="view_labourer.php"><i class="fa fa-circle-o"></i>All Labourers</a></li>
           </ul>
         </li>
 

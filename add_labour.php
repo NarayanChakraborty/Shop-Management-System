@@ -4,104 +4,61 @@
 
          <?php
 
-if(isset($_POST['submit'])){
+if(isset($_POST['l_form'])){
   try {
    
 			
 					/*---------------------------------Image Upload for doctor's Image ------------------------------*/
 	
-	if(getimagesize($_FILES['n_image']['tmp_name'])==FALSE)
+	if(getimagesize($_FILES['l_image']['tmp_name'])==FALSE)
 		 {
 		   throw new Exception("Please select an image"); //access only image
 		 }
-		 if($_FILES['n_image']['size']>2000000){
+		 if($_FILES['l_image']['size']>2000000){
 		 throw new Exception("Sorry,your file is too large"); //image file must be<2MB
 		 }
 		
-		
 	    //To generate id(next auto increment value from tbl_post)
-		$statement=$db->prepare("show table status like 'nurse_details' ");
+		$statement=$db->prepare("show table status like 'tbl_labourer' ");
 		$statement->execute();
 		$result=$statement->fetchAll();
 		foreach($result as $row)
 		$new_id=$row[10];
 		   
 		//access image process one;   
-	    $up_filename=$_FILES['n_image']['name'];   //file_name
+	    $up_filename=$_FILES['l_image']['name'];   //file_name
 		$file_basename=substr($up_filename,0,strripos($up_filename,'.'));//orginal image name
 		$file_ext=substr($up_filename,strripos($up_filename,'.')); //extension
 		$f1=$new_id.$file_ext;  //Rename filename;
 
 	    
 		//only allow png ,jpg,jpeg,gif
-		if(($file_ext!='.png')&&($file_ext!='.jpg')&&($file_ext!='.jpeg')&&($file_ext!='.gif'))
+		if(($file_ext!='.png')&&($file_ext!='.jpg')&&($file_ext!='.jpeg')&&($file_ext!='.gif')&&($file_ext!='.PNG')&&($file_ext!='.JPG')&&($file_ext!='.JPEG')&&($file_ext!='.GIF'))
 		{
 			throw new Exception("only jpg,jpeg,png and gif format are allowed");
 		}
 	     
         //upload image to a folder
-        move_uploaded_file($_FILES['n_image']['tmp_name'],"images/nurses_image/".$f1);		
+        move_uploaded_file($_FILES['l_image']['tmp_name'],"images/labourer/".$f1);		
 	
 	
-//=========================Image upload=============================//	
+		
 			
 			
 			
 			
-			
-			/*---------------------------------Image Upload for doctor's nid ------------------------------*/
-	
-	if(getimagesize($_FILES['n_nid_image']['tmp_name'])==FALSE)
-		 {
-		   throw new Exception("Please select an image"); //access only image
-		 }
-		 if($_FILES['n_nid_image']['size']>2000000){
-		 throw new Exception("Sorry,your file is too large"); //image file must be<2MB
-		 }
 		
 		
-	    //To generate id(next auto increment value from tbl_post)
-		$statement=$db->prepare("show table status like 'nurse_details' ");
-		$statement->execute();
-		$result=$statement->fetchAll();
-		foreach($result as $row)
-		$new_id=$row[10];
+		$statement1=$db->prepare("insert into tbl_labourer(l_name,l_contact_no,l_image,l_type,l_nid,l_address,l_sex,l_joining_date) values(?,?,?,?,?,?,?,?)");
+		   $statement1->execute(array($_POST['l_name'],$_POST['l_contact_no'],$f1,$_POST['l_type'],$_POST['l_nid'],$_POST['l_address'],$_POST['l_sex'],$_POST['l_joining_date']));
 		   
-		//access image process one;   
-	    $up_filename=$_FILES['n_nid_image']['name'];   //file_name
-		$file_basename=substr($up_filename,0,strripos($up_filename,'.'));//orginal image name
-		$file_ext=substr($up_filename,strripos($up_filename,'.')); //extension
-		$f2=$new_id.$file_ext;  //Rename filename;
-
-	    
-		//only allow png ,jpg,jpeg,gif
-		if(($file_ext!='.png')&&($file_ext!='.jpg')&&($file_ext!='.jpeg')&&($file_ext!='.gif'))
-		{
-			throw new Exception("only jpg,jpeg,png and gif format are allowed");
-		}
-	     
-        //upload image to a folder
-        move_uploaded_file($_FILES['n_nid_image']['tmp_name'],"images/nurses_nid/".$f2);		
-	
-	
-//=========================Image upload=============================//
-
-		
-		
-		$statement1=$db->prepare("insert into employee_details(e_name,e_contact_no,e_email_id,e_image,e_nid,e_nid_image,e_sex) values(?,?,?,?,?,?,?)");
-		   $statement1->execute(array($_POST['n_name'],$_POST['n_contact_no'],$_POST['n_email'],$f1,$_POST['n_nid'],$f2,$_POST['n_sex']));
-		   
-           $last_id = $db->lastInsertId();
-		   
-		   $statement2=$db->prepare("insert into nurse_details(employee_id,nurse_type) values(?,?)");
-		   $statement2->execute(array($last_id,$_POST['n_type']));
+          
 		   
 		   
-		   
-		   $success_message="Nurse details is inserted succesfully";
+		   $success_message1="New Labourer' Information is inserted succesfully";
 		
   }catch (Exception $e) {
-    $error_message = $e->getMessage();
+    $error_message1 = $e->getMessage();
   }
 		
 }
@@ -241,7 +198,7 @@ if(isset($_POST['submit'])){
                   <div class="input-group-addon">
                     <i class="fa fa-calendar"></i>
                   </div>
-                  <input type="date" name="l_date" class="form-control" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask>
+                  <input type="date" name="l_joining_date" class="form-control" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask required>
                 </div>
                                                       </div>
                                                   </div><hr>
