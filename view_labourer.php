@@ -123,7 +123,7 @@
 																  
 														</div>
 						 </div>
-                      <a class="btn btn-success" title="Edit this Product" href="edit_product.php?ID=<?php echo $row['p_id']; ?>"><i class="glyphicon glyphicon-pencil"></i>
+                      <a class="btn btn-success" title="Edit this Product" href="edit_labourer.php?ID=<?php echo $row['l_id']; ?>"><i class="glyphicon glyphicon-pencil"></i>
 													  
 													  </a>
                        <a class="btn btn-danger"  title="Delete This product" data-toggle="modal" data-target="#productModal<?php echo $row['p_id'];?>"><i class="glyphicon glyphicon-remove"></i>
