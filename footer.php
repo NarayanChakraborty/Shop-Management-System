@@ -4,8 +4,10 @@
     <div class="pull-right hidden-xs">
       <b>Version</b> 2.3.5
     </div>
-    <strong>Copyright &copy; 2014-2016 <a href="http://almsaeedstudio.com">Almsaeed Studio</a>.</strong> All rights
-    reserved.
+    <strong>&copy; <?php 
+  $fromYear = 2015; 
+  $thisYear = (int)date('Y'); 
+  echo $fromYear . (($fromYear != $thisYear) ? '-' . $thisYear : '');?>, SN Chakraborty
   </footer>
 
  

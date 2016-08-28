@@ -1,6 +1,6 @@
 <?php include_once('header.php'); ?>
 <?php include_once('sidebar.php'); ?>
-  <?php include_once("config.php");?>
+ <?php include_once("config.php");?>
 
 
 
@@ -19,9 +19,10 @@ if(isset($_POST['form_payment']))
 			{
 				throw new Exception('This Customer Has No Due'); 
 			}
+			$date= $c_date=date('Y-m-d');
 			$due=$_POST['hidden_id_for_due']-$_POST['payment_amount'];
-			$statement1=$db->prepare('update tbl_customers set c_due=? where c_id=?');
-			$statement1->execute(array($due,$_POST['hidden_id_for_edit_payment']));
+			$statement1=$db->prepare('update tbl_customers set c_due=?,c_last_payment=?,payment_date=? where c_id=?');
+			$statement1->execute(array($due,$_POST['payment_amount'],$date,$_POST['hidden_id_for_edit_payment']));
 						
 			
 			$success_message2='Payment Amount Successfully Updated';
@@ -213,6 +214,7 @@ if(isset($_POST['form_payment']))
 										<button data-dismiss="modal" class="btn btn-default" type="button">Close</button>
 										<input type="hidden" name="hidden_id_for_edit_payment" value="<?php echo $row['c_id'];?>">
 										<input type="hidden" name="hidden_id_for_due" value="<?php echo $row['c_due'];?>">
+										<input type="hidden" name="hidden_id_for_total" value="<?php echo $row['c_total'];?>">
 										<input type="submit" value="Update" class="btn btn-success" name="form_payment">
 									  </form>
 									</div>         

@@ -50,10 +50,10 @@
         </li>
 	 <li class="treeview">
           <a href="#">
-            <i class="glyphicon glyphicon-object-align-bottom"></i>
+            <i class="glyphicon glyphicon-shopping-cart"></i>
             <span>Customer Information</span>
             <span class="pull-right-container">
-              <span class="label label-primary pull-right">4</span>
+              <span class="label label-primary pull-right">2</span>
             </span>
           </a>
           <ul class="treeview-menu">
@@ -61,13 +61,28 @@
             <li><a href="view_customers_with_due.php"><i class="fa fa-circle-o"></i>Due Accounting</a></li>
           </ul>
         </li>
-		<li class="active treeview">
-          <a href="index.php">
-            <i class="glyphicon glyphicon-user"></i> <span>Labour Biodata</span>
+		
+			 <li class=" treeview">
+          <a href="accounting.php">
+            <i class="glyphicon glyphicon-usd"></i> <span>Accounting Information</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
+          
+        </li>
+	<li class="treeview">
+          <a href="#">
+            <i class="glyphicon glyphicon-user"></i>
+            <span>Labourers Information</span>
+            <span class="pull-right-container">
+              <span class="label label-primary pull-right">2</span>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="add_labour.php"><i class="fa fa-circle-o"></i>Add Labourer</a></li>
+            <li><a href="view_customers_with_due.php"><i class="fa fa-circle-o"></i>All Labourers</a></li>
+          </ul>
         </li>
 
        
