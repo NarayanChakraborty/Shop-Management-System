@@ -1,3 +1,14 @@
+<?php
+ob_start();
+session_start();
+if($_SESSION['name']!='snchousebd')
+{
+header('location: login.php');
+}
+
+?>
+
+
   <aside class="main-sidebar">
     <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">
