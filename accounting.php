@@ -1,3 +1,16 @@
+<?php
+ob_start();
+session_start();
+if($_SESSION['name']!='snchousebd')
+{
+header('location: login.php');
+}
+
+?>
+
+
+
+
 <?php include_once('header.php'); ?>
 <?php include_once('sidebar.php'); ?>
 <?php require_once('config.php'); 

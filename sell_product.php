@@ -1,4 +1,17 @@
 <?php
+ob_start();
+session_start();
+if($_SESSION['name']!='snchousebd')
+{
+header('location: login.php');
+}
+
+?>
+
+
+
+
+<?php
 if(!isset($_REQUEST['id']))
 {
 	header('location:view_product.php');

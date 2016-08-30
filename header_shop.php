@@ -1,3 +1,15 @@
+<?php
+ob_start();
+session_start();
+if($_SESSION['name']!='snchousebd')
+{
+header('location: login.php');
+}
+
+?>
+
+
+
       <!-- Small boxes (Stat box) -->
       <div class="row">
         <div class="col-lg-4 col-xs-6">
