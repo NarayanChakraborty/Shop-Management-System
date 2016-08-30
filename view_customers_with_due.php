@@ -10,10 +10,9 @@ header('location: login.php');
 
 
 
-
 <?php include_once('header.php'); ?>
 <?php include_once('sidebar.php'); ?>
-  <?php include_once("config.php");?>
+ <?php include_once("config.php");?>
 
 
 
@@ -32,9 +31,10 @@ if(isset($_POST['form_payment']))
 			{
 				throw new Exception('This Customer Has No Due'); 
 			}
+			$date= $c_date=date('Y-m-d');
 			$due=$_POST['hidden_id_for_due']-$_POST['payment_amount'];
-			$statement1=$db->prepare('update tbl_customers set c_due=? where c_id=?');
-			$statement1->execute(array($due,$_POST['hidden_id_for_edit_payment']));
+			$statement1=$db->prepare('update tbl_customers set c_due=?,c_last_payment=?,payment_date=? where c_id=?');
+			$statement1->execute(array($due,$_POST['payment_amount'],$date,$_POST['hidden_id_for_edit_payment']));
 						
 			
 			$success_message2='Payment Amount Successfully Updated';
@@ -48,7 +48,42 @@ if(isset($_POST['form_payment']))
 
 ?>
 
+<?php 
 
+if(isset($_POST['form_customer']))
+	{
+		try{
+			if(empty($_POST['c_name']))
+			{
+				throw new Exception('Customer Name Can not be Empty');
+			}
+			if(empty($_POST['c_mobile']))
+			{
+				throw new Exception('Customer Mobile No Can not be Empty');
+			}
+			if(empty($_POST['c_nid']))
+			{
+				throw new Exception('Customer National Id Can not be Empty');
+			}
+			if(empty($_POST['c_address']))
+			{
+				throw new Exception('Customer Address Can not be Empty');
+			}
+
+			$statement1=$db->prepare('update tbl_customers set c_name=?,c_mobile=?,c_nid=?,c_address=? where c_id=?');
+			$statement1->execute(array($_POST['c_name'],$_POST['c_mobile'],$_POST['c_nid'],$_POST['c_address'],$_POST['hidden_id_for_edit_customer']));
+						
+			
+			$success_message1='Customer Information Successfully Updated';
+		}
+		catch(Exception $e)
+		{
+		    $error_message1=$e->getMessage();	
+		}
+	}
+
+
+?>
 
 
 
@@ -144,6 +179,27 @@ if(isset($_POST['form_payment']))
                        </div>
                        <?php
                         }
+                      ?> <?php
+                      if(isset($error_message1)){
+                        ?>
+                        <div class="alert alert-block alert-danger fade in">
+                          <button data-dismiss="alert" class="close close-sm" type="button">
+                          <i class="icon-remove"> X</i>
+                          </button>
+                          <strong>Opps!&nbsp; </strong><?php echo $error_message1;?>
+                       </div>
+                        <?php
+                      }
+                      if (isset($success_message1)) {
+                       ?>
+                       <div class="alert alert-success fade in">
+                          <button data-dismiss="alert" class="close close-sm" type="button">
+                            <i class="icon-remove">X</i>
+                          </button>
+                          <strong>Well done!&nbsp; </strong><?php echo $success_message1;?>
+                       </div>
+                       <?php
+                        }
                       ?> 
 			  
 			  
@@ -172,12 +228,12 @@ if(isset($_POST['form_payment']))
                  <?php
 										 if($value!="All")
 										 {
-										  $statement =$db->prepare("SELECT * FROM tbl_customers where c_date>DATE_SUB(CURDATE(), INTERVAL ? DAY) where c_due!=?");
+										  $statement =$db->prepare("SELECT * FROM tbl_customers where c_date>DATE_SUB(CURDATE(), INTERVAL ? DAY) where c_due!=? ");
 										  $statement->execute(array($value,0));
 										 }
 										 else
 										 {
-											 $statement =$db->prepare("SELECT * FROM tbl_customers where c_due!=?");
+											 $statement =$db->prepare("SELECT * FROM tbl_customers where c_due!= ?");
 										    $statement->execute(array(0));
 										 }
 										  $result = $statement->fetchAll(PDO::FETCH_ASSOC);
@@ -205,9 +261,12 @@ if(isset($_POST['form_payment']))
 											?>
 				   
 					  <td><?php echo $row['p_amount']; ?> </td>
-					 <td> <?php echo $row['c_total'];?></td><center>	
+					 <td> <?php echo $row['c_total'];?></td>	
 					
 					 <td> <?php echo $row['c_due'];?>
+					 
+					 
+					  <!----------------Edit Payment Information------------------------->
 					 <a class="btn " data-toggle="modal" href="#myModal<?php echo $row['c_id'];?>" title="Payment"><i class="glyphicon glyphicon-minus-sign"></i></a>
 					 <!-- Modal -->
 							  <div class="modal fade" id="myModal<?php echo $row['c_id'];?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -217,15 +276,16 @@ if(isset($_POST['form_payment']))
 									  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 									  <h4 class="modal-title">Payment Section</h4>
 									</div>
-									<div class="modal-body" style="text-align:none">
+									<div class="modal-body">
 									 <h4>Total Cost  : <?php echo $row['c_total']; ?> </h4>
 									 <h4>Due Amount   :<?php echo $row['c_due']; ?> </h4>
 									  <h4>Payment Amount :</h4>
 									  <form method="post" action="view_customers.php" enctype="multipart/form-data">
-										<input type="number" value="<?php echo $row['c_due'];?>"class="form-control" name="payment_amount" required><br><br>
+										<input type="number" value="<?php echo $row['c_due'];?>"class="form-control" name="payment_amount" required><br>
 										<button data-dismiss="modal" class="btn btn-default" type="button">Close</button>
 										<input type="hidden" name="hidden_id_for_edit_payment" value="<?php echo $row['c_id'];?>">
 										<input type="hidden" name="hidden_id_for_due" value="<?php echo $row['c_due'];?>">
+										<input type="hidden" name="hidden_id_for_total" value="<?php echo $row['c_total'];?>">
 										<input type="submit" value="Update" class="btn btn-success" name="form_payment">
 									  </form>
 									</div>         
@@ -234,14 +294,14 @@ if(isset($_POST['form_payment']))
 							  </div>
 							  <!-- modal -->
 					 
-					 
+					  <!----------------Edit Payment Information------------------------->
 					 
 					 </td>	 
-					 <center><td> <?php echo $row['c_mobile'];?></td> 
-					 <td> <?php echo $row['c_address'];?></td></center>
+					 <td> <?php echo $row['c_mobile'];?></td> 
+					 <td> <?php echo $row['c_address'];?></td>
 					 
 						
-					                    <td>
+					                    <td><center>
                      <div class="btn-group">
                       <a class="btn btn-primary fancybox" href="#inline<?php echo $row['c_id'];?>"title="View image"><i class="glyphicon glyphicon-eye-open"></i></a>
 
@@ -325,10 +385,42 @@ if(isset($_POST['form_payment']))
 																  
 														</div>
 						 </div>
-                      <a class="btn btn-success" title="Edit this Product" href="edit_product.php?ID=<?php echo $row['p_id']; ?>"><i class="glyphicon glyphicon-pencil"></i>
-													  
-													  </a>
-                        <a class="btn btn-danger"  title="Delete This product" data-toggle="modal" data-target="#productModal<?php echo $row['c_id'];?>"><i class="glyphicon glyphicon-remove"></i>
+						 
+						 <!----------------Edit Customer Information------------------------->
+                    <a class="btn btn-success" data-toggle="modal" href="#myModal2<?php echo $row['c_id'];?>" title="Edit Customer Information"><i class="glyphicon glyphicon-pencil"></i></a>
+												  
+												   <div class="modal fade" id="myModal2<?php echo $row['c_id'];?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+								<div class="modal-dialog">
+								  <div class="modal-content">
+									<div class="modal-header">
+									  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+									  <h4 class="modal-title">Edit Customer Information</h4>
+									</div>
+									<div class="modal-body">
+									
+									  <form method="post" action="view_customers.php" enctype="multipart/form-data">
+									    <label>Customer Name</label>
+										<input type="text" value="<?php echo $row['c_name'];?>"class="form-control" name="c_name" required><br>
+										 <label>Mobile No</label>
+										 <input type="text" value="<?php echo $row['c_mobile'];?>"class="form-control" name="c_mobile" required><br>
+										 <label>Customer NID</label>
+										 <input type="text" value="<?php echo $row['c_nid'];?>"class="form-control" name="c_nid" required><br>
+										 <label>Customer Address</label>
+										 <input type="text" value="<?php echo $row['c_address'];?>"class="form-control" name="c_address" required><br><br>
+										<button data-dismiss="modal" class="btn btn-default" type="button">Close</button>
+										<input type="hidden" name="hidden_id_for_edit_customer" value="<?php echo $row['c_id'];?>">
+										<input type="submit" value="Update" class="btn btn-success" name="form_customer">
+									  </form>
+									</div>         
+								  </div>
+								</div>
+							  </div>
+							  <!-- modal -->
+							  
+							  <!------------------------------------------------------------------>
+							  
+							  
+                       <a class="btn btn-danger"  title="Delete This product" data-toggle="modal" data-target="#productModal<?php echo $row['c_id'];?>"><i class="glyphicon glyphicon-remove"></i>
 													   </a>
 													  
 																		  

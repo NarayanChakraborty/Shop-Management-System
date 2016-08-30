@@ -48,7 +48,42 @@ if(isset($_POST['form_payment']))
 
 ?>
 
+<?php 
 
+if(isset($_POST['form_customer']))
+	{
+		try{
+			if(empty($_POST['c_name']))
+			{
+				throw new Exception('Customer Name Can not be Empty');
+			}
+			if(empty($_POST['c_mobile']))
+			{
+				throw new Exception('Customer Mobile No Can not be Empty');
+			}
+			if(empty($_POST['c_nid']))
+			{
+				throw new Exception('Customer National Id Can not be Empty');
+			}
+			if(empty($_POST['c_address']))
+			{
+				throw new Exception('Customer Address Can not be Empty');
+			}
+
+			$statement1=$db->prepare('update tbl_customers set c_name=?,c_mobile=?,c_nid=?,c_address=? where c_id=?');
+			$statement1->execute(array($_POST['c_name'],$_POST['c_mobile'],$_POST['c_nid'],$_POST['c_address'],$_POST['hidden_id_for_edit_customer']));
+						
+			
+			$success_message1='Customer Information Successfully Updated';
+		}
+		catch(Exception $e)
+		{
+		    $error_message1=$e->getMessage();	
+		}
+	}
+
+
+?>
 
 
 
@@ -144,6 +179,27 @@ if(isset($_POST['form_payment']))
                        </div>
                        <?php
                         }
+                      ?> <?php
+                      if(isset($error_message1)){
+                        ?>
+                        <div class="alert alert-block alert-danger fade in">
+                          <button data-dismiss="alert" class="close close-sm" type="button">
+                          <i class="icon-remove"> X</i>
+                          </button>
+                          <strong>Opps!&nbsp; </strong><?php echo $error_message1;?>
+                       </div>
+                        <?php
+                      }
+                      if (isset($success_message1)) {
+                       ?>
+                       <div class="alert alert-success fade in">
+                          <button data-dismiss="alert" class="close close-sm" type="button">
+                            <i class="icon-remove">X</i>
+                          </button>
+                          <strong>Well done!&nbsp; </strong><?php echo $success_message1;?>
+                       </div>
+                       <?php
+                        }
                       ?> 
 			  
 			  
@@ -208,6 +264,9 @@ if(isset($_POST['form_payment']))
 					 <td> <?php echo $row['c_total'];?></td>	
 					
 					 <td> <?php echo $row['c_due'];?>
+					 
+					 
+					  <!----------------Edit Payment Information------------------------->
 					 <a class="btn " data-toggle="modal" href="#myModal<?php echo $row['c_id'];?>" title="Payment"><i class="glyphicon glyphicon-minus-sign"></i></a>
 					 <!-- Modal -->
 							  <div class="modal fade" id="myModal<?php echo $row['c_id'];?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -235,7 +294,7 @@ if(isset($_POST['form_payment']))
 							  </div>
 							  <!-- modal -->
 					 
-					 
+					  <!----------------Edit Payment Information------------------------->
 					 
 					 </td>	 
 					 <td> <?php echo $row['c_mobile'];?></td> 
@@ -326,9 +385,41 @@ if(isset($_POST['form_payment']))
 																  
 														</div>
 						 </div>
-                      <a class="btn btn-success" title="Edit this Product" href="edit_product.php?ID=<?php echo $row['p_id']; ?>"><i class="glyphicon glyphicon-pencil"></i>
-													  
-													  </a>
+						 
+						 <!----------------Edit Customer Information------------------------->
+                    <a class="btn btn-success" data-toggle="modal" href="#myModal2<?php echo $row['c_id'];?>" title="Edit Customer Information"><i class="glyphicon glyphicon-pencil"></i></a>
+												  
+												   <div class="modal fade" id="myModal2<?php echo $row['c_id'];?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+								<div class="modal-dialog">
+								  <div class="modal-content">
+									<div class="modal-header">
+									  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+									  <h4 class="modal-title">Edit Customer Information</h4>
+									</div>
+									<div class="modal-body">
+									
+									  <form method="post" action="view_customers.php" enctype="multipart/form-data">
+									    <label>Customer Name</label>
+										<input type="text" value="<?php echo $row['c_name'];?>"class="form-control" name="c_name" required><br>
+										 <label>Mobile No</label>
+										 <input type="text" value="<?php echo $row['c_mobile'];?>"class="form-control" name="c_mobile" required><br>
+										 <label>Customer NID</label>
+										 <input type="text" value="<?php echo $row['c_nid'];?>"class="form-control" name="c_nid" required><br>
+										 <label>Customer Address</label>
+										 <input type="text" value="<?php echo $row['c_address'];?>"class="form-control" name="c_address" required><br><br>
+										<button data-dismiss="modal" class="btn btn-default" type="button">Close</button>
+										<input type="hidden" name="hidden_id_for_edit_customer" value="<?php echo $row['c_id'];?>">
+										<input type="submit" value="Update" class="btn btn-success" name="form_customer">
+									  </form>
+									</div>         
+								  </div>
+								</div>
+							  </div>
+							  <!-- modal -->
+							  
+							  <!------------------------------------------------------------------>
+							  
+							  
                        <a class="btn btn-danger"  title="Delete This product" data-toggle="modal" data-target="#productModal<?php echo $row['c_id'];?>"><i class="glyphicon glyphicon-remove"></i>
 													   </a>
 													  

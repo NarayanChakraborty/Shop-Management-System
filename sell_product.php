@@ -40,9 +40,12 @@ if(isset($_POST['form1']))
 		   $c_date=date('Y-m-d');
 		   $c_due=$_POST['c_total']-$_POST['p_payment'];
 		   
+		   
+		   
+		   $base_total=$_POST['hidden_id_base_price']*$_POST['p_amount'];
 		   //pdo to insert all above informations.. to tbl_post
-		   	       $statement1=$db->prepare("insert into tbl_customers(p_id,p_amount,c_total,c_payment,c_due,c_name,c_mobile,c_nid,c_address,c_date,payment_date) values(?,?,?,?,?,?,?,?,?,?,?)");
-		   $statement1->execute(array($_POST['hidden_id'],$_POST['p_amount'],$_POST['c_total'],$_POST['p_payment'],$c_due,$_POST['c_name'],$_POST['c_mobile'],$_POST['c_nid'],$_POST['c_address'],$c_date,$c_date));
+		   	       $statement1=$db->prepare("insert into tbl_customers(p_id,p_shop,p_amount,p_base_price,c_total,c_last_payment,c_due,c_name,c_mobile,c_nid,c_address,c_date,payment_date) values(?,?,?,?,?,?,?,?,?,?,?,?,?)");
+		   $statement1->execute(array($_POST['hidden_id'],$_POST['hidden_id_shop'],$_POST['p_amount'],$base_total,$_POST['c_total'],$_POST['p_payment'],$c_due,$_POST['c_name'],$_POST['c_mobile'],$_POST['c_nid'],$_POST['c_address'],$c_date,$c_date));
 		   
 		   $success_message1="Customer Information is inserted succesfully";
 	
@@ -152,7 +155,7 @@ if(isset($_POST['form1']))
                                                       </div>
                                                   </div>
 												  <div class="form-group">
-                                                      <label class="col-lg-2 control-label">Product Price</label>
+                                                      <label class="col-lg-2 control-label">Product Selling Price</label>
                                                       <div class="col-lg-8">
                                                           <?php echo $row['p_price']; ?>
                                                       </div>
@@ -275,6 +278,8 @@ if(isset($_POST['form1']))
                                                   <div class="form-group">
                                                       <div class="col-lg-offset-10 col-lg-2">
 													  <input type="hidden" name="hidden_id" value="<?php echo $row['p_id'];?>">
+													  <input type="hidden" name="hidden_id_base_price" value="<?php echo $row['p_base_price'];?>">
+													   <input type="hidden" name="hidden_id_shop" value="<?php echo $row['p_shop'];?>">
                                                           <button type="submit" name="form1" class="btn btn-primary">Calculate</button>
                                                       </div>
                                                   </div>

@@ -1,12 +1,4 @@
-<?php
-ob_start();
-session_start();
-if($_SESSION['name']!='snchousebd')
-{
-header('location: login.php');
-}
 
-?>
 
 
   <aside class="main-sidebar">
@@ -18,7 +10,7 @@ header('location: login.php');
           <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
-          <p>Alexander Pierce</p>
+          <p>SN Chakraborty</p>
           <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
         </div>
       </div>
@@ -56,7 +48,7 @@ header('location: login.php');
           <ul class="treeview-menu">
             <li><a href="add_product.php"><i class="fa fa-circle-o"></i>Add Products</a></li>
             <li><a href="view_product.php"><i class="fa fa-circle-o"></i> View Products</a></li>
-            <li><a href="manage_category.php"><i class="fa fa-circle-o"></i> Manage Products</a></li>  
+            <li><a href="manage_category.php"><i class="fa fa-circle-o"></i> Manage Catgory</a></li>  
           </ul>
         </li>
 	 <li class="treeview">
@@ -73,15 +65,22 @@ header('location: login.php');
           </ul>
         </li>
 		
-			 <li class=" treeview">
-          <a href="accounting.php">
-            <i class="glyphicon glyphicon-usd"></i> <span>Accounting Information</span>
+		
+			<li class="treeview">
+          <a href="#">
+            <i class="glyphicon glyphicon-user"></i>
+            <span>Accounting Information</span>
             <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
+              <span class="label label-primary pull-right">2</span>
             </span>
           </a>
-          
+          <ul class="treeview-menu">
+            <li><a href="accounting.php"><i class="fa fa-circle-o"></i>Daily Accounting</a></li>
+            <li><a href="accounting_by_product.php"><i class="fa fa-circle-o"></i>Accounting By Product</a></li>
+          </ul>
         </li>
+		
+		
 	<li class="treeview">
           <a href="#">
             <i class="glyphicon glyphicon-user"></i>

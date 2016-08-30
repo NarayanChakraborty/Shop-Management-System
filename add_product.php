@@ -24,29 +24,33 @@ if(isset($_POST['form1']))
 		{
 			throw new Exception("Product Model can not be empty");
 		}
-		if(empty($_POST['p_price']))
+		if(empty($_POST['p_sell_price']))
 		{
-			throw new Exception("Title can not be empty");
+			throw new Exception("Price can not be empty");
+		}	
+		if(empty($_POST['p_base_price']))
+		{
+			throw new Exception("Purchase Price can not be empty");
 		}
 	    if(empty($_POST['p_amount']))
 		{
-			throw new Exception("Category can not be empty");
+			throw new Exception("Amount can not be empty");
 		}
 		if(empty($_POST['p_category']))
 		{
-			throw new Exception("Tag Name can not be empty");
+			throw new Exception("Category Name can not be empty");
 		}
 		if(empty($_POST['p_details']))
 		{
-			throw new Exception("Tag Name can not be empty");
+			throw new Exception("Product Details can not be empty");
 		}
 		if(empty($_POST['p_date']))
 		{
-			throw new Exception("Tag Name can not be empty");
+			throw new Exception("Date can not be empty");
 		}
 		if(empty($_POST['p_shop']))
 		{
-			throw new Exception("Tag Name can not be empty");
+			throw new Exception("Shop Name can not be empty");
 		}
  	    
 		//IMAGE MANAGE
@@ -91,8 +95,8 @@ if(isset($_POST['form1']))
 		   
 		   
 		   //pdo to insert all above informations.. to tbl_post
-		   	       $statement1=$db->prepare("insert into tbl_products(p_model,p_category,p_price,p_amount,p_details,p_shop,p_date) values(?,?,?,?,?,?,?)");
-		   $statement1->execute(array($_POST['p_model'],$_POST['p_category'],$_POST['p_price'],$_POST['p_amount'],$_POST['p_details'],$_POST['p_shop'],$_POST['p_date']));
+		   	       $statement1=$db->prepare("insert into tbl_products(p_model,p_category,p_base_price,p_price,p_amount,p_details,p_shop,p_date) values(?,?,?,?,?,?,?,?)");
+		   $statement1->execute(array($_POST['p_model'],$_POST['p_category'],$_POST['p_base_price'],$_POST['p_sell_price'],$_POST['p_amount'],$_POST['p_details'],$_POST['p_shop'],$_POST['p_date']));
 		   
 		   $success_message1="Product is inserted succesfully";
 	
@@ -179,10 +183,16 @@ if(isset($_POST['form1']))
                                                          
                                                       </div>
                                                   </div><hr> 
-												  <div class="form-group">
-                                                      <label class="col-lg-2 control-label">Product Price</label>
+												    <div class="form-group">
+                                                      <label class="col-lg-2 control-label">Product purchase Price</label>
                                                       <div class="col-lg-8">
-                                                          <input type="number" min=0 name="p_price" class="form-control" id="l-name" placeholder=" " required>
+                                                          <input type="number" min=0 name="p_base_price" class="form-control" id="l-name" placeholder=" " required>
+                                                      </div>
+                                                  </div><hr>
+												  <div class="form-group">
+                                                      <label class="col-lg-2 control-label">Product selling Price</label>
+                                                      <div class="col-lg-8">
+                                                          <input type="number" min=0 name="p_sell_price" class="form-control" id="l-name" placeholder=" " required>
                                                       </div>
                                                   </div><hr>
                                                   <div class="form-group">

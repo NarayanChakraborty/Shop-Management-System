@@ -1,12 +1,3 @@
-<?php
-ob_start();
-session_start();
-if($_SESSION['name']!='snchousebd')
-{
-header('location: login.php');
-}
-
-?>
 
 
 
@@ -15,7 +6,7 @@ header('location: login.php');
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>AdminLTE 2 | Dashboard</title>
+  <title>KEE | Dashboard</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.6 -->
@@ -64,9 +55,9 @@ header('location: login.php');
     <!-- Logo -->
     <a href="index.php" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><b>A</b>LT</span>
+      <span class="logo-mini"><b>A</b>KEE</span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>Admin</b>LTE</span>
+      <span class="logo-lg"><i class="glyphicon glyphicon-th-list"></i>&nbsp; &nbsp; KEE</span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
@@ -82,17 +73,18 @@ header('location: login.php');
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
-              <span class="hidden-xs">Alexander Pierce</span>
+              <img src="images/apu.jpg" class="user-image" alt="User Image">
+              <span class="hidden-xs">SN Chakraborty</span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
               <li class="user-header">
-                <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                <img src="images/apu.jpg" class="img-circle" alt="User Image">
 
                 <p>
-                  Alexander Pierce - Web Developer
-                  <small>Member since Nov. 2012</small>
+                  SN Chakraborty - Web Developer
+                  <small>Noakhali Science & Technology University </small>
+				  <small>Contact:01713687237</small>
                 </p>
               </li>
               <!-- Menu Body -->
@@ -105,10 +97,10 @@ header('location: login.php');
               <!-- Menu Footer-->
               <li class="user-footer">
                 <div class="pull-left">
-                  <a href="#" class="btn btn-default btn-flat">Profile</a>
+                  <a href="#" class="btn btn-default btn-flat">change password</a>
                 </div>
                 <div class="pull-right">
-                  <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                  <a href="logout.php" class="btn btn-default btn-flat">Sign out</a>
                 </div>
               </li>
             </ul>
