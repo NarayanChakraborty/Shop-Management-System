@@ -315,12 +315,12 @@ if(isset($_POST['form_payment']))
                       <a class="btn btn-success" title="Edit this Product" href="edit_product.php?ID=<?php echo $row['p_id']; ?>"><i class="glyphicon glyphicon-pencil"></i>
 													  
 													  </a>
-                       <a class="btn btn-danger"  title="Delete This product" data-toggle="modal" data-target="#productModal<?php echo $row['p_id'];?>"><i class="glyphicon glyphicon-remove"></i>
+                        <a class="btn btn-danger"  title="Delete This product" data-toggle="modal" data-target="#productModal<?php echo $row['c_id'];?>"><i class="glyphicon glyphicon-remove"></i>
 													   </a>
 													  
 																		  
 											<!-- Modal -->
-													<div id="productModal<?php echo $row['p_id'];?>" class="modal fade " role="dialog">
+													<div id="productModal<?php echo $row['c_id'];?>" class="modal fade " role="dialog">
 													  <div class="modal-dialog">
 
 														<!-- Modal content-->
@@ -330,11 +330,11 @@ if(isset($_POST['form_payment']))
 															<h4 class="modal-title">DELETE Confirmation</h4>
 														  </div>
 														  <div class="modal-body">
-															<h4>Are You Confirm To Delete This Element?</h4>
+															<h4>Are You Confirm To Delete This Customer?</h4>
 														  </div>
 														  <div class="modal-footer">
 															<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-															<a class="btn btn-danger btn-ok" href="delete_product.php?id=<?php echo $row['p_id']; ?>" >Confirm</a>
+															<a class="btn btn-danger btn-ok" href="delete_customer.php?id=<?php echo $row['c_id']; ?>" >Confirm</a>
 														  </div>
 														</div>
 
