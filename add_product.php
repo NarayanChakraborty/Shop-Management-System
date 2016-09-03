@@ -95,8 +95,8 @@ if(isset($_POST['form1']))
 		   
 		   
 		   //pdo to insert all above informations.. to tbl_post
-		   	       $statement1=$db->prepare("insert into tbl_products(p_model,p_category,p_base_price,p_price,p_amount,p_details,p_shop,p_date) values(?,?,?,?,?,?,?,?)");
-		   $statement1->execute(array($_POST['p_model'],$_POST['p_category'],$_POST['p_base_price'],$_POST['p_sell_price'],$_POST['p_amount'],$_POST['p_details'],$_POST['p_shop'],$_POST['p_date']));
+		   	       $statement1=$db->prepare("insert into tbl_products(p_model,p_serial,p_category,p_base_price,p_price,p_amount,p_details,p_shop,p_date) values(?,?,?,?,?,?,?,?,?)");
+		   $statement1->execute(array($_POST['p_model'],$_POST['p_serial'],$_POST['p_category'],$_POST['p_base_price'],$_POST['p_sell_price'],$_POST['p_amount'],$_POST['p_details'],$_POST['p_shop'],$_POST['p_date']));
 		   
 		   $success_message1="Product is inserted succesfully";
 	
@@ -154,6 +154,12 @@ if(isset($_POST['form1']))
                                                           <input type="text" class="form-control" name="p_model" id="f-name" placeholder=" " required>
                                                       </div>
                                                   </div><hr>
+												  <div class="form-group">
+                                                      <label class="col-lg-2 control-label">Product Serial No</label>
+                                                      <div class="col-lg-8">
+                                                          <input type="text" class="form-control" name="p_serial" id="f-name" placeholder=" " >
+                                                      </div>
+                                                  </div><hr>
 												  <!--
 												    <div class="form-group">
                                                       <label class="col-lg-2 control-label">Product Image</label>
@@ -198,7 +204,7 @@ if(isset($_POST['form1']))
                                                   <div class="form-group">
                                                       <label class="col-lg-2 control-label">Product Amount</label>
                                                       <div class="col-lg-8">
-                                                          <input type="number" min=0 name="p_amount" class="form-control" id="l-name" placeholder=" " required>
+                                                          <input type="number" min=1 max=1 value="1" name="p_amount" class="form-control" id="l-name" placeholder=" " required>
                                                       </div>
                                                   </div>
 												  <hr>                                                 

@@ -31,11 +31,41 @@ if(isset($_POST['form_payment']))
 			{
 				throw new Exception('This Customer Has No Due'); 
 			}
-			$date= $c_date=date('Y-m-d');
+			
+		    $statement7=$db->prepare('select c_date from tbl_customer where  c_id=?');	
+			$statement7->execute(array($_POST['hidden_id_for_edit_payment']));
+			$result7=$statement7->fetch();
+			if($result7['c_date']==date('Y-m-d'))
+			{
+				throw new Exception('This Customer has been regitered today  .So He Could Not Pay Today');
+			}
+			
+			
+			
 			$due=$_POST['hidden_id_for_due']-$_POST['payment_amount'];
-			$statement1=$db->prepare('update tbl_customers set c_due=?,c_last_payment=?,payment_date=? where c_id=?');
-			$statement1->execute(array($due,$_POST['payment_amount'],$date,$_POST['hidden_id_for_edit_payment']));
-						
+			$statement6=$db->prepare('update tbl_customer set c_due=? where c_id=?');
+			$statement6->execute(array($due,$_POST['hidden_id_for_edit_payment']));
+			
+				
+				$statement=$db->prepare('select p_shop from tbl_sell,tbl_customer where c_id=? and tbl_sell.s_id=tbl_customer.s_id  ');
+			$statement->execute(array($_POST['hidden_id_for_edit_payment']));
+				$result=$statement->fetch();
+				
+					$statement1=$db->prepare('select * from tbl_accounting where a_date=? and p_shop=?');
+					$statement1->execute(array(date('Y-m-d'),$result['p_shop']));
+					$result1=$statement1->fetchColumn();
+				 if($result1>0)
+					{
+						$statement2=$db->prepare('select due_payment from tbl_accounting where a_date=? and p_shop=?');
+					$statement2->execute(array(date('Y-m-d'),$result['p_shop']));
+					$result2=$statement2->fetch();
+					
+
+					    $result3=$result2['due_payment']+$_POST['payment_amount'];
+						$statement3=$db->prepare('update tbl_accounting set due_payment=? where a_date=? and p_shop=?');
+			$statement3->execute(array($result3,date('Y-m-d'),$result['p_shop']));
+					}
+			
 			
 			$success_message2='Payment Amount Successfully Updated';
 		}
@@ -70,7 +100,7 @@ if(isset($_POST['form_customer']))
 				throw new Exception('Customer Address Can not be Empty');
 			}
 
-			$statement1=$db->prepare('update tbl_customers set c_name=?,c_mobile=?,c_nid=?,c_address=? where c_id=?');
+			$statement1=$db->prepare('update tbl_customer set c_name=?,c_mobile=?,c_nid=?,c_address=? where c_id=?');
 			$statement1->execute(array($_POST['c_name'],$_POST['c_mobile'],$_POST['c_nid'],$_POST['c_address'],$_POST['hidden_id_for_edit_customer']));
 						
 			
@@ -215,7 +245,9 @@ if(isset($_POST['form_customer']))
                 <thead>
                 <tr>
                   <th>Customer Name</th>
+				   <th>Product Category</th>
 				  <th>Product Model</th>
+				 
                   <th>Sold Amount</th>
                   <th>Total Cost </th>
 				  <th>Due Amount</th>
@@ -228,12 +260,12 @@ if(isset($_POST['form_customer']))
                  <?php
 										 if($value!="All")
 										 {
-										  $statement =$db->prepare("SELECT * FROM tbl_customers where c_date>DATE_SUB(CURDATE(), INTERVAL ? DAY)");
+										  $statement =$db->prepare("SELECT * FROM tbl_customer,tbl_sell where tbl_customer.s_id=tbl_sell.s_id and c_date>DATE_SUB(CURDATE(), INTERVAL ? DAY)");
 										  $statement->execute(array($value));
 										 }
 										 else
 										 {
-											 $statement =$db->prepare("SELECT * FROM tbl_customers");
+											 $statement =$db->prepare("SELECT * FROM tbl_customer,tbl_sell where tbl_customer.s_id=tbl_sell.s_id ");
 										    $statement->execute(array());
 										 }
 										  $result = $statement->fetchAll(PDO::FETCH_ASSOC);
@@ -249,7 +281,19 @@ if(isset($_POST['form_customer']))
 										  $statement1->execute(array($row['p_id']));
 										  $result1 = $statement1->fetchAll(PDO::FETCH_ASSOC);
 											foreach($result1 as $row1){	?>
-                  	 <td>
+                  	<td>
+					<?php 
+                                                    
+										  $statement2 = $db->prepare("SELECT cat_name FROM tbl_category where cat_id=?");
+										  $statement2->execute(array($row1['p_category']));
+										  $result2 = $statement2->fetch();
+												echo $result2['cat_name'];	
+											?>
+					
+					</td>
+
+
+					<td>
 				  
                             <?php echo $row1['p_model']; ?>		
 				  </td>	  

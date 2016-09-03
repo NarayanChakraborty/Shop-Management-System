@@ -88,6 +88,7 @@ header('location: login.php');
                 <thead>
                 <tr>
                   <th>Product Model</th>
+				  <th>Product Serial</th>
                   <th>Product Category</th>
                   <th>Product Price</th>
                   <th>Product Amount</th>
@@ -116,6 +117,7 @@ header('location: login.php');
                
                 <tr>
                    <td><?php echo $row['p_model']; ?></td>
+				   <td><?php echo $row['p_serial']; ?></td>
                   <td><?php 
                                                     
 										  $statement1 = $db->prepare("SELECT cat_name FROM tbl_category where cat_id=?");
@@ -136,7 +138,7 @@ header('location: login.php');
 					  }
 						?>
 						</td>
-						<td><a class="btn btn-primary" href="sell_product.php?id=<?php echo $row['p_id']; ?>" title="Sell Product"><i class="glyphicon glyphicon-usd"></i></a></td>
+						<td><a class="btn btn-primary" href="sell_product1.php?id=<?php echo $row['p_id']; ?>" title="Sell Product"><i class="glyphicon glyphicon-usd"></i></a></td>
 					                    <td><center>
                     <div class="btn-group">
                       <a class="btn btn-primary fancybox" href="#inline<?php echo $row['p_id'];?>"title="View image"><i class="glyphicon glyphicon-eye-open"></i></a>

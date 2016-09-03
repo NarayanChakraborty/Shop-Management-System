@@ -55,7 +55,7 @@
     <!-- Logo -->
     <a href="index.php" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><b>A</b>KEE</span>
+      <span class="logo-mini">KEE</span>
       <!-- logo for regular state and mobile devices -->
       <span class="logo-lg"><i class="glyphicon glyphicon-th-list"></i>&nbsp; &nbsp; KEE</span>
     </a>

@@ -7,7 +7,7 @@
       <!-- Sidebar user panel -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+          <img src="images/apu.jpg" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
           <p>SN Chakraborty</p>
@@ -61,7 +61,7 @@
           </a>
           <ul class="treeview-menu">
             <li><a href="view_customers.php"><i class="fa fa-circle-o"></i>All Customers</a></li>
-            <li><a href="view_customers_with_due.php"><i class="fa fa-circle-o"></i>Due Accounting</a></li>
+            <li><a href="view_customers_with_due1.php"><i class="fa fa-circle-o"></i>Due Accounting</a></li>
           </ul>
         </li>
 		
@@ -75,10 +75,27 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="accounting.php"><i class="fa fa-circle-o"></i>Daily Accounting</a></li>
+            <li><a href="accounting1.php"><i class="fa fa-circle-o"></i>Daily Accounting</a></li>
             <li><a href="accounting_by_product.php"><i class="fa fa-circle-o"></i>Accounting By Product</a></li>
           </ul>
         </li>
+		
+		
+					<li class="treeview">
+          <a href="#">
+            <i class="glyphicon glyphicon-user"></i>
+            <span>Dealer Information</span>
+            <span class="pull-right-container">
+              <span class="label label-primary pull-right">2</span>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="accounting1.php"><i class="fa fa-circle-o"></i>As A Customer</a></li>
+            <li><a href="accounting_by_product1.php"><i class="fa fa-circle-o"></i>As a Saler</a></li>
+          </ul>
+        </li>
+		
+		
 		
 		
 	<li class="treeview">

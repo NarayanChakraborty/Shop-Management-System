@@ -33,9 +33,29 @@ if(isset($_POST['form_payment']))
 			}
 			$date= $c_date=date('Y-m-d');
 			$due=$_POST['hidden_id_for_due']-$_POST['payment_amount'];
-			$statement1=$db->prepare('update tbl_customers set c_due=?,c_last_payment=?,payment_date=? where c_id=?');
-			$statement1->execute(array($due,$_POST['payment_amount'],$date,$_POST['hidden_id_for_edit_payment']));
-						
+			$statement1=$db->prepare('update tbl_customer set c_due=? where c_id=?');
+			$statement1->execute(array($due,$_POST['hidden_id_for_edit_payment']));
+			
+				
+					$statement1=$db->prepare('select * from tbl_accounting where a_date=?');
+					$statement1->execute(array($c_date));
+					$result1=$statement1->fetchColumn();
+					if($result1<=0){
+						$statement2=$db->prepare('insert  tbl_accounting  (due_payment,a_date) values(?,?)');
+			$statement2->execute(array($_POST['payment_amount'],$c_date));
+			
+					}
+					else
+					{
+						$statement2=$db->prepare('select due_payment from tbl_accounting where a_date=?');
+					$statement2->execute(array($c_date));
+					$result2=$statement2->fetch();
+					
+					    $result=$result2['due_payment']+$_POST['payment_amount'];
+						$statement2=$db->prepare('update tbl_accounting set due_payment=? where a_date=?');
+			$statement2->execute(array($result,$c_date));
+					}
+			
 			
 			$success_message2='Payment Amount Successfully Updated';
 		}
@@ -70,7 +90,7 @@ if(isset($_POST['form_customer']))
 				throw new Exception('Customer Address Can not be Empty');
 			}
 
-			$statement1=$db->prepare('update tbl_customers set c_name=?,c_mobile=?,c_nid=?,c_address=? where c_id=?');
+			$statement1=$db->prepare('update tbl_customer set c_name=?,c_mobile=?,c_nid=?,c_address=? where c_id=?');
 			$statement1->execute(array($_POST['c_name'],$_POST['c_mobile'],$_POST['c_nid'],$_POST['c_address'],$_POST['hidden_id_for_edit_customer']));
 						
 			
@@ -228,13 +248,13 @@ if(isset($_POST['form_customer']))
                  <?php
 										 if($value!="All")
 										 {
-										  $statement =$db->prepare("SELECT * FROM tbl_customers where c_date>DATE_SUB(CURDATE(), INTERVAL ? DAY) where c_due!=? ");
-										  $statement->execute(array($value,0));
+										  $statement =$db->prepare("SELECT * FROM tbl_customer,tbl_sell where tbl_customer.s_id=tbl_sell.s_id , c_date>DATE_SUB(CURDATE(), INTERVAL ? DAY) and c_due!=0 ");
+										  $statement->execute(array($value));
 										 }
 										 else
 										 {
-											 $statement =$db->prepare("SELECT * FROM tbl_customers where c_due!= ?");
-										    $statement->execute(array(0));
+											 $statement =$db->prepare("SELECT * FROM tbl_customer,tbl_sell where tbl_customer.s_id=tbl_sell.s_id and c_due!=0 ");
+										    $statement->execute(array());
 										 }
 										  $result = $statement->fetchAll(PDO::FETCH_ASSOC);
 										  foreach ($result as $row) {

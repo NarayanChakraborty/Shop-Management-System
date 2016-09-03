@@ -5,10 +5,10 @@
       <div class="row">
         <div class="col-lg-4 col-xs-6">
           <!-- small box -->
-          <div class="small-box bg-aqua">
+          <div class="small-box bg-aqua" >
 		 
-            <div class="inner">
-              <h3> <?php 
+            <div class="inner" style="min-height:100px">
+              <h3><?php 
 		  require_once('config.php'); 
 		  $statement=$db->prepare("select sum(p_amount) as total from tbl_products where p_shop=?");
 		  $statement->execute(array(1));
@@ -31,7 +31,7 @@
         <div class="col-lg-4 col-xs-6">
           <!-- small box -->
           <div class="small-box bg-green">
-            <div class="inner">
+            <div class="inner" style="min-height:100px" >
             <h3> <?php 
 		  require_once('config.php'); 
 		  $statement=$db->prepare("select sum(p_amount) as total from tbl_products where p_shop=?");
@@ -53,7 +53,7 @@
         <div class="col-lg-4 col-xs-6">
           <!-- small box -->
           <div class="small-box bg-yellow">
-            <div class="inner">
+            <div class="inner"style="min-height:100px" >
              <h3> <?php 
 		  require_once('config.php'); 
 		  $statement=$db->prepare("select sum(p_amount) as total from tbl_products where p_shop=?");

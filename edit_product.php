@@ -104,8 +104,8 @@ if(isset($_POST['form1']))
 		   
 		   
 		   //pdo to insert all above informations.. to tbl_post
-		   	       $statement1=$db->prepare("update tbl_products set p_model=?,p_category=?,p_base_price=?,p_price=?,p_amount=?,p_details=?,p_shop=?,p_date=?   where p_id=?");
-		   $statement1->execute(array($_POST['p_model'],$_POST['p_category'],$_$_POST['p_base_price'],$_POST['p_price'],$_POST['p_amount'],$_POST['p_details'],$_POST['p_shop'],$_POST['p_date'],$id));
+		   	       $statement1=$db->prepare("update tbl_products set p_model=?,p_serial=?,p_category=?,p_base_price=?,p_price=?,p_amount=?,p_details=?,p_shop=?,p_date=?   where p_id=?");
+		   $statement1->execute(array($_POST['p_model'],$_POST['p_serial'],$_POST['p_category'],$_POST['p_base_price'],$_POST['p_price'],$_POST['p_amount'],$_POST['p_details'],$_POST['p_shop'],$_POST['p_date'],$id));
 		   
 		   $success_message1="Post is inserted succesfully";
 	
@@ -177,6 +177,12 @@ if(isset($_POST['form1']))
                                                       <label class="col-lg-2 control-label">Product Model</label>
                                                       <div class="col-lg-8">
                                                           <input type="text" class="form-control" value="<?php echo $row['p_model']; ?>" name="p_model" id="f-name" placeholder=" " required>
+                                                      </div>
+                                                  </div><hr>
+												   <div class="form-group">
+                                                      <label class="col-lg-2 control-label">Product Serial No</label>
+                                                      <div class="col-lg-8">
+                                                          <input type="text" class="form-control" value=<?php echo $row['p_serial']; ?> name="p_serial" id="f-name" placeholder=" " >
                                                       </div>
                                                   </div><hr>
 												  <!--

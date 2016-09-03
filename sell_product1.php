@@ -42,10 +42,45 @@ if(isset($_POST['form1']))
 		   
 		   
 		   
-		   $base_total=$_POST['hidden_id_base_price']*$_POST['p_amount'];
+		   $amount=$_POST['p_amount'];
+		    $statement1 = $db->prepare("SELECT p_amount FROM tbl_products where p_id=?");
+			 $statement1->execute(array($_POST['hidden_id']));
+			 $result1=$statement1->fetch();
+			 if($result1['p_amount']<=0){
+				 
+			 throw  new Exception('This  product is stock out Now ');
+	 
+			 }
+				 
+				 
+				 
+				 
+				 $base_total=$_POST['hidden_id_base_price']*$_POST['p_amount'];
 		   //pdo to insert all above informations.. to tbl_post
-		   	       $statement1=$db->prepare("insert into tbl_customers(p_id,p_shop,p_amount,p_base_price,c_total,c_last_payment,c_due,c_name,c_mobile,c_nid,c_address,c_date,payment_date) values(?,?,?,?,?,?,?,?,?,?,?,?,?)");
-		   $statement1->execute(array($_POST['hidden_id'],$_POST['hidden_id_shop'],$_POST['p_amount'],$base_total,$_POST['c_total'],$_POST['p_payment'],$c_due,$_POST['c_name'],$_POST['c_mobile'],$_POST['c_nid'],$_POST['c_address'],$c_date,$c_date));
+		   
+		    if($base_total>$_POST['c_total'])
+			{
+				throw new Exception('You are going to make loss');
+			}
+			
+			
+			
+		   	       $statement2=$db->prepare("insert into tbl_sell(p_id,p_shop,p_amount,p_base_price,c_total,c_cash,c_date) values(?,?,?,?,?,?,?)");
+		   $statement2->execute(array($_POST['hidden_id'],$_POST['hidden_id_shop'],$_POST['p_amount'],$base_total,$_POST['c_total'],$_POST['p_payment'],$c_date));
+		   
+		   $last_id=$db->lastInsertId();
+		   
+		    $statement2=$db->prepare("insert into tbl_customer(s_id,c_name,c_due,c_mobile,c_nid,c_address,c_date) values(?,?,?,?,?,?,?)");
+		   $statement2->execute(array($last_id,$_POST['c_name'],$c_due,$_POST['c_mobile'],$_POST['c_nid'],$_POST['c_address'],$c_date));
+				 
+		
+		
+		        $amount1=$result1['p_amount']-$_POST['p_amount'];
+				
+			  $statement2=$db->prepare("update tbl_products set p_amount=? where p_id=?");
+			  
+		   $statement2->execute(array($amount1,$_POST['hidden_id']));
+		   
 		   
 		   $success_message1="Customer Information is inserted succesfully";
 	
@@ -153,6 +188,12 @@ if(isset($_POST['form1']))
                                                          <?php echo $row['p_details']; ?>
 				
                                                       </div>
+                                                  </div> 
+												  <div class="form-group">
+                                                      <label class="col-lg-2 control-label">Product base Price</label>
+                                                      <div class="col-lg-8">
+                                                          <?php echo $row['p_base_price']; ?>
+                                                      </div>
                                                   </div>
 												  <div class="form-group">
                                                       <label class="col-lg-2 control-label">Product Selling Price</label>
@@ -160,6 +201,7 @@ if(isset($_POST['form1']))
                                                           <?php echo $row['p_price']; ?>
                                                       </div>
                                                   </div><hr>
+												
                                                   <div class="form-group">
                                                       <label class="col-lg-2 control-label">Product Amount</label>
                                                       <div class="col-lg-8">
@@ -236,7 +278,8 @@ if(isset($_POST['form1']))
 													tot=parseInt(arr)*(<?php echo $row['p_price']; ?> -<?php echo $row['p_price']; ?>*((parseInt(arr1)/100)));
 													tot=tot-arr2;
 													tot=+tot + +arr3; 
-													document.getElementById('total').value = tot;
+													
+													document.getElementById('total').value = parseInt(tot);
 											
 													
 												}
@@ -263,7 +306,7 @@ if(isset($_POST['form1']))
 												  <div class="form-group">
                                                       <label class="col-lg-2 control-label">National Id No</label>
                                                       <div class="col-lg-8">
-                                                          <input type="number" min=0 name="c_nid" class="form-control" id="" placeholder=" " required>
+                                                          <input type="number" min=0 name="c_nid" class="form-control" id="" placeholder=" " >
                                                       </div>
                                                   </div><hr>
 												  <div class="form-group">
