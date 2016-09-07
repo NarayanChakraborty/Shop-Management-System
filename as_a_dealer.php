@@ -85,10 +85,10 @@ header('location: login.php');
 											?></td>
                      <td><?php echo $row['p_model']; ?></td>
 					 <td><?php echo $row['p_base_price']; ?>
-					 </td><td><input type="number" class="val1" value="<?php echo $row['p_price']; ?>" ></td>
+					 </td><td><input type="number" class="val1" value="<?php echo $row['p_price']; ?>" disabled ></td>
                       
                      <td><input type="number" min=0 max=<?php echo $row['p_amount']; ?>   value="" class="val2"  placeholder=" " required></div></td>
-                     <td>  <span class="multTotal">0.00</span></td>
+                     <td>     <input type="number"  min=0 name="c_total" value="" class="multTotal" id="total" placeholder=" " disabled ></td>
                   
 				  <script type="text/javascript">
 												$(document).ready(function () {
@@ -102,14 +102,13 @@ header('location: login.php');
                var $val1 = $('.val1', this).val();
                var $val2 = $('.val2', this).val();
                var $total = ($val1 * 1) * ($val2 * 1)
-               $('.multTotal',this).text($total);
-               
+               $('.multTotal',this).val($total);
+               mult += $total;
            });
-          
+           $(".grandTotal").val(mult);
        }
   });
-
-													</script>
+</script>
 												
 				  
 				  </tr>
@@ -125,8 +124,15 @@ header('location: login.php');
                
               </table>
 			  
-			  
+			  <br><br>
 			  <div class="form-group">
+               <label class="col-lg-offset-8 col-lg-2 control-label">Total Amount</label>
+			  <div class=" col-lg-2" >
+			   <input type="number"  min=0 name="total" value="" class="grandTotal" id="total" placeholder=" " disabled >
+			  </div>
+			  
+			  <br><br>
+			                          <div class="form-group">
                                                       <div class="col-lg-offset-10 col-lg-2">
 													  <input type="hidden" name="hidden_id" value="<?php echo $row['p_id'];?>">
 													  <input type="hidden" name="hidden_id_base_price" value="<?php echo $row['p_base_price'];?>">
