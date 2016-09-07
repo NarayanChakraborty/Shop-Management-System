@@ -12,7 +12,8 @@ $c_date=date('Y-m-d');
 <?php
 		  try
 		  {
-		  
+			  
+		      
 		         if(isset($_POST['form2']))
 				 {
 					$statement1=$db->prepare('select * from tbl_accounting where a_date=?');
@@ -25,26 +26,33 @@ $c_date=date('Y-m-d');
 						$result=$statement->fetchAll(PDO::FETCH_ASSOC);
 						foreach($result as $row)
 						{
-											$statement3 = $db->prepare("SELECT *  FROM tbl_accounting where a_date=? and p_shop=?");
+											$statement3 = $db->prepare("SELECT * FROM tbl_accounting where a_date=? and p_shop=?");
 										  $statement3->execute(array(date('Y-m-d'),$row['shop_id']));
 										  $result3 = $statement3->fetchAll(PDO::FETCH_ASSOC);
 										  foreach($result3 as $row3)
 										  {
-											  if($row['shop_id']==1){
-												   $cost_today=$_POST['todays_cost_one']+$row3['cost_today'];
-						$balance= $row3['balance_today']-$cost_today;
+											  if($row3['p_shop']==1){
+												   $cost_today_one=$_POST['todays_cost_one']+$row3['cost_today'];
+						
+						$statement2=$db->prepare("update tbl_accounting set cost_today=? where a_date=? and p_shop=? ");
+		             $statement2->execute(array($cost_today_one,date('Y-m-d'),1));
 											  } 
-											  if($row['shop_id']==2){
-												   $cost_today=$_POST['todays_cost_two']+$row3['cost_today'];
-						$balance= $row3['balance_today']-$cost_today;
+											  if($row3['p_shop']==2){
+												   $cost_today_two=$_POST['todays_cost_two']+$row3['cost_today'];
+						
+						$statement3=$db->prepare("update tbl_accounting set cost_today=? where a_date=? and p_shop=? ");
+		             $statement3->execute(array($cost_today_two,$c_date,2));
 											  } 
-											  if($row['shop_id']==3){
-												   $cost_today=$_POST['todays_cost_three']+$row3['cost_today'];
-						$balance= $row3['balance_today']-$cost_today;
+											  if($row3['p_shop']==3){
+												   $cost_today_three=$_POST['todays_cost_three']+$row3['cost_today'];
+						
+						 $statement4=$db->prepare("update tbl_accounting set cost_today=? where a_date=? and p_shop=? ");
+		             $statement4->execute(array($cost_today_three,$c_date,3));
 											  }
-											 
-					 $statement2=$db->prepare("update tbl_accounting set cost_today=?,balance_today=? where a_date=? and p_shop=? ");
-		             $statement2->execute(array($cost_today,$balance,$c_date,$row['shop_id']));
+										  }
+					 
+					 
+					
 							
 						}
 				
@@ -63,7 +71,7 @@ $c_date=date('Y-m-d');
 					}
 					 
 				 }
-		  }
+		 
 		  catch(Exception $e) {
     $error_message1 = $e->getMessage();
   
@@ -118,13 +126,13 @@ $c_date=date('Y-m-d');
 																	  if($row1['cash_total']==Null){ $row1['cash_total']=0;}
 																	   $due_total= $row1['sell_total']- $row1['cash_total'];
 																	   
-																	 	$statement5=$db->prepare('select due_payment from tbl_accounting where a_date=? and p_shop=?');
+																	 	$statement5=$db->prepare('select due_payment,cost_today from tbl_accounting where a_date=? and p_shop=?');
 											$statement5->execute(array(date('Y-m-d'),$row['shop_id']));
 											$result5=$statement5->fetch();  
 																	   
 																	   
 																	   
-																	   $balance=$row1['cash_total']+$result5['due_payment'];
+																	   $balance=$row1['cash_total']+$result5['due_payment']-$result5['cost_today'];
 																	$statement3 = $db->prepare("update tbl_accounting set base_today=?,sell_today=?,cash_today=?,due_today=?,balance_today=? where p_shop=? and a_date=? ");
 																  $statement3->execute(array($row1['base_total'],$row1['sell_total'],$row1['cash_total'],$due_total,$balance,$row['shop_id'],date('Y-m-d')));
 
@@ -359,11 +367,12 @@ $c_date=date('Y-m-d');
                 <thead>
                 <tr>
 				  <th>Shop Name</th>
+				  <th>Total Base price </th>
                   <th>Total Sell price </th> 
-				  <th>Total Base price </th> 
+				    <th>Total Income</th>
 				  <th>Total Cash amount</th>
 				  <th>Total Due Payment</th>
-                  <th>Total Income</th>
+                 
 				  <th>Total Cost</th>
                   <th>Total Balance</th>
 				  <th>Date</th>
@@ -396,14 +405,14 @@ $c_date=date('Y-m-d');
 				   $result4=$statement4->fetch(); ?>
 				   <td><?php echo $result4['shop_name']; ?></td>
 				
-				
+				 <td> <?php echo $row['base_today'];?></td> 
                    <td><?php echo $row['sell_today']; ?></td>
-				   
-					 <td> <?php echo $row['base_today'];?></td> 
+				           <?php $income=$row['sell_today']-$row['base_today']; ?>				 
+					 <td> <?php echo $income;?></td>
+					
 					 <td><?php echo $row['cash_today']; ?></td>
 					 <td> <?php echo $row['due_payment'];?></td>	
-                      <?php $income=$row['sell_today']-$row['base_today']; ?>				 
-					 <td> <?php echo $income;?></td>
+              
 					 <td> <?php echo $row['cost_today'];?></td>				
 					 <td> <?php echo $row['balance_today'];?></td>
 					 <td> <?php echo $row['a_date'];?></td>
@@ -452,11 +461,13 @@ $c_date=date('Y-m-d');
                 <thead>
                 <tr>
                   <th>Total</th>
+				  <th>Total Base price </th>
                   <th>Total Sell price </th> 
-				  <th>Total Base price </th> 
+				     <th>Total Income</th>
 				  <th>Total Cash amount</th>
 				  <th>Total Due Payment</th>
-                  <th>Total Income</th>
+				  <th>Total Due</th>
+                
 				  <th>Total Cost</th>
                   <th>Total Balance</th>
 				  <th>For</th>
@@ -487,13 +498,21 @@ $c_date=date('Y-m-d');
 				  
 				
 				   <td>    </td>
-                   <td><?php echo $row['sell_today']; ?></td>
 				   
-					 <td> <?php echo $row['base_today'];?></td> 
+				    <td> <?php echo $row['base_today'];?></td> 
+                   <td><?php echo $row['sell_today']; ?></td>
+				    <?php $income=$row['sell_today']-$row['base_today']; ?>				 
+					 <td> <?php echo $income;?></td>
+					
 					 <td><?php echo $row['cash_today']; ?></td>
 					 <td> <?php echo $row['due_payment'];?></td>	
-                      <?php $income=$row['sell_today']-$row['base_today']; ?>				 
-					 <td> <?php echo $income;?></td>
+					 
+					  <?php $due=$row['sell_today']-$row['cash_today']-$row['due_payment']; ?>	
+						<td> <?php echo $due;?></td>	
+					 
+                     		
+
+					 
 					 <td> <?php echo $row['cost_today'];?></td>				
 					 <td> <?php echo $row['balance_today'];?></td>
 					<td><?php echo $value."DAYS"; ?></td>

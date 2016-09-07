@@ -204,7 +204,7 @@ if(isset($_POST['form1']))
                                                   <div class="form-group">
                                                       <label class="col-lg-2 control-label">Product Amount</label>
                                                       <div class="col-lg-8">
-                                                          <input type="number" min=1 max=1 value="1" name="p_amount" class="form-control" id="l-name" placeholder=" " required>
+                                                          <input type="number" min=1 max= value="1" name="p_amount" class="form-control" id="l-name" placeholder=" " required>
                                                       </div>
                                                   </div>
 												  <hr>                                                 

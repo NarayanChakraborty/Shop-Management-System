@@ -260,7 +260,7 @@ if(isset($_POST['form_customer']))
                  <?php
 										 if($value!="All")
 										 {
-										  $statement =$db->prepare("SELECT * FROM tbl_customer,tbl_sell where tbl_customer.s_id=tbl_sell.s_id and c_date>DATE_SUB(CURDATE(), INTERVAL ? DAY)");
+										  $statement =$db->prepare("SELECT * FROM tbl_customer,tbl_sell where tbl_customer.s_id=tbl_sell.s_id and tbl_customer.c_date>DATE_SUB(CURDATE(), INTERVAL ? DAY)");
 										  $statement->execute(array($value));
 										 }
 										 else

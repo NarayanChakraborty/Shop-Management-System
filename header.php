@@ -30,6 +30,7 @@
   <link rel="stylesheet" href="plugins/datepicker/datepicker3.css"> 
   <!-- Date Picker -->
   <link rel="stylesheet" href="plugins/jQuery/jquery-2.2.3.min">
+    
   <!-- Daterange picker -->
   <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker.css">
   <!-- bootstrap wysihtml5 - text editor -->
@@ -47,6 +48,11 @@
   <![endif]-->
  <!-- TABLE STYLES-->
     <link href="assets/js/dataTables/dataTables.bootstrap.css" rel="stylesheet" />
+	
+	<script src="plugins/jQuery/jquery-2.2.3.min.js" type="text/javascript" ></script>
+	
+	
+
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">

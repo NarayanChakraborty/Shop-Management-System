@@ -81,15 +81,13 @@ include('config.php');
                       foreach ($result2 as $row2) {
                         ?>
 								<h4>Category :<?php echo $result['cat_name']; ?> </h4>
-			<h5>Initial Amount : <?php echo $initial_amount; ?> </h5>
+			<h5>Available Amount : <?php echo $initial_amount; ?> </h5>
 				<h5>Sold Amount : <?php echo $row2['sell_amount']; ?> </h5>
 			<h5>Sold Product Base Price : <?php echo $row2['base_price_sold']; ?> </h5>
 			<h5>Sold Product Sell Price : <?php echo $row2['sold_price']; ?> </h5>
-			<?php $income=$row2['base_price_sold']-$row2['sold_price'];?>
+			<?php $income=$row2['sold_price']-$row2['base_price_sold'];?>
 			<h5>Total Income : <?php echo $income; ?> </h5>
-            <h5>Total Cash : <?php echo $row2['cash_amoount']; ?> </h5>
-			<?php $due=$row2['base_price_sold']-$row2['cash_amoount']; ?>
-			<h5>Total Due: <?php echo $due; ?> </h5>
+            
 			
 						
 

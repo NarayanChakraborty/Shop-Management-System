@@ -90,8 +90,8 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="accounting1.php"><i class="fa fa-circle-o"></i>As A Customer</a></li>
-            <li><a href="accounting_by_product1.php"><i class="fa fa-circle-o"></i>As a Saler</a></li>
+            <li><a href="as_customer.php"><i class="fa fa-circle-o"></i>As A Customer</a></li>
+            <li><a href="as_a_dealer.php"><i class="fa fa-circle-o"></i>As a Saler</a></li>
           </ul>
         </li>
 		

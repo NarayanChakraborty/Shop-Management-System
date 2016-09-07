@@ -252,7 +252,7 @@ if(isset($_POST['form1']))
 												    <div class="form-group">
                                                       <label class="col-lg-2 control-label">Payment(-)</label>
                                                       <div class="col-lg-8">
-                                                          <input type="number" min=0 name="p_payment" value="" onkeyup="findTotal()" class="form-control" id="five" placeholder="Payment Amount " required>
+                                                          <input type="number" min=0 name="p_payment" value=""  class="form-control"  placeholder="Payment Amount " required>
                                                       </div>
                                                   </div>
 											

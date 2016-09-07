@@ -220,7 +220,13 @@ if(isset($_POST['form1']))
                                                       </div>
                                                   </div><hr> 
 												  <div class="form-group">
-                                                      <label class="col-lg-2 control-label">Product Price</label>
+                                                      <label class="col-lg-2 control-label">Product Base Price</label>
+                                                      <div class="col-lg-8">
+                                                          <input type="number" min=0 value="<?php echo $row['p_base_price']; ?>" name="p_base_price" class="form-control" id="l-name" placeholder=" " required>
+                                                      </div>
+                                                  </div><hr>
+												  <div class="form-group">
+                                                      <label class="col-lg-2 control-label">Product Selling Price</label>
                                                       <div class="col-lg-8">
                                                           <input type="number" min=0 value="<?php echo $row['p_price']; ?>" name="p_price" class="form-control" id="l-name" placeholder=" " required>
                                                       </div>
@@ -228,7 +234,7 @@ if(isset($_POST['form1']))
                                                   <div class="form-group">
                                                       <label class="col-lg-2 control-label">Product Amount</label>
                                                       <div class="col-lg-8">
-                                                          <input type="number" min=0 name="p_amount" value="<?php echo $row['p_amount']; ?>" class="form-control" id="l-name" placeholder=" " required>
+                                                          <input type="number" min=1 max= name="p_amount" value="<?php echo $row['p_amount']; ?>" class="form-control" id="l-name" placeholder=" " required>
                                                       </div>
                                                   </div>
 												  <hr>                                                 
