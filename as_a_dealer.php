@@ -10,7 +10,65 @@ header('location: login.php');
 <?php include_once('header.php'); ?>
 <?php include_once('sidebar.php'); ?>
 <?php require_once('config.php'); ?>
+<?php 
 
+if(isset($_POST['form3']))
+	{
+		try{
+			
+			if(empty($_POST['c_less']))
+			{
+				throw new Exception('Comission Can not be Empty');
+			}
+			if(empty($_POST['c_payment']))
+			{
+				throw new Exception('Payment Can not be Empty');
+			}
+			if(empty($_POST['c_name']))
+			{
+				throw new Exception('Customer Name Can not be Empty');
+			}
+			if(empty($_POST['c_mobile']))
+			{
+				throw new Exception('Customer Mobile No Can not be Empty');
+			}
+			if(empty($_POST['c_nid']))
+			{
+				throw new Exception('Customer National Id Can not be Empty');
+			}
+			if(empty($_POST['c_address']))
+			{
+				throw new Exception('Customer Address Can not be Empty');
+			}
+
+			
+		
+			
+			
+			$statement=$db("select * from tbl_dealer_two");
+			$statement->execute();
+			 $last_id=$statement->lastInsertId();
+				$statement=$db("select d_amount from tbl_dealer_two where d_id=?");
+			$statement->execute(array($last_id));
+			$result=$statement->fetch();
+			
+			$amount=$result['d_amount']-$_POST['c_less']; 
+			$due=$amount-$_POST['c_payment'];
+			
+			$statement1=$db->prepare('update tbl_customer set d_name=?,d_mobile=?,d_nid=?,d_address=?,d_cash=?,d_amount=?,d_due=? where d_id=?');
+			$statement1->execute(array($_POST['c_name'],$_POST['c_mobile'],$_POST['c_nid'],$_POST['c_address'],$_POST['c_payment'],$amount,$due,$last_id));
+						
+			
+			$success_message1='Customer Information Successfully Updated';
+		}
+		catch(Exception $e)
+		{
+		    $error_message1=$e->getMessage();	
+		}
+	}
+
+
+?>
 
 
 
@@ -154,9 +212,10 @@ header('location: login.php');
 			  <div class="form-group">
                <label class="col-lg-offset-8 col-lg-2 control-label">Total Amount</label>
 			  <div class=" col-lg-2" >
-			   <input type="number"  min=0 name="total1" value="" class="grandTotal" id="total" placeholder=" " disabled >
+			   <input type="number"  min=0  value="" class="grandTotal" name="total1" id="total" placeholder=" " disabled >
 			  </div>
 			  
+            </div>
 			  
 			  
 			  
@@ -173,7 +232,6 @@ header('location: login.php');
                                               </form>
 											  
 
-            </div>
             <!-- /.box-body -->
 			
 			
@@ -213,7 +271,24 @@ header('location: login.php');
 										   <center> <h2>Customer Details</h2></center>
 												
 												<form class="form-horizontal" role="form" data-toggle="validator" method="post"enctype="multipart/form-data" name="form2">                                       
-
+												 
+												 <div class="form-group">
+                                                      <label class="col-lg-2 control-label">Less($)</label>
+                                                      <div class="col-lg-8">
+                                                          <input type="number" min=0 name="c_less" value=""  class="form-control" id="" placeholder="Special Offer (Just Amount)" >
+                                                      </div>
+                                                 </div>
+												
+												 
+												 <div class="form-group">
+                                                      <label class="col-lg-2 control-label">Payment(-)</label>
+                                                      <div class="col-lg-8">
+                                                          <input type="number" min=0 name="c_payment" value=""  class="form-control"  placeholder="Payment Amount " required>
+                                                      </div>
+                                                  </div>
+												
+												
+												
 												<div class="form-group">
                                                       <label class="col-lg-2 control-label">Customer Name</label>
                                                       <div class="col-lg-8">
@@ -243,10 +318,8 @@ header('location: login.php');
 
                                                   <div class="form-group">
                                                       <div class="col-lg-offset-10 col-lg-2">
-													  <input type="hidden" name="hidden_id" value="<?php echo $row['p_id'];?>">
-													  <input type="hidden" name="hidden_id_base_price" value="<?php echo $row['p_base_price'];?>">
-													   <input type="hidden" name="hidden_id_shop" value="<?php echo $row['p_shop'];?>">
-                                                          <button type="submit" name="form1" class="btn btn-primary">Calculate</button>
+											
+                                                          <button type="submit" name="form3" class="btn btn-primary">Calculate</button>
                                                       </div>
                                                   </div>
                                               </form>
@@ -278,7 +351,7 @@ header('location: login.php');
 						<thead>
 						<tr>
 						
-				 
+				  <th>SL</th>
 				  <th>Product Model</th>
 				 
                   <th>Sold Amount</th>
@@ -305,7 +378,7 @@ if(isset($_POST['form1']))
 				throw new Exception('You have selected no product');
 			}
 	
-	
+	$total=0;
 	
 	
       $rowCount = count($_POST["products"]);
@@ -320,6 +393,10 @@ if(isset($_POST['form1']))
 						 ?>
 						 
 						 <tr>
+						 <td><center>
+						 <?php echo 
+						 $i+1; ?></center></td>
+						 
 						 
 						 <td><center>
 						 <?php echo 
@@ -335,11 +412,15 @@ if(isset($_POST['form1']))
 						 <?php 
 						
 						 echo
-						 $_POST['totals'][$i]; 
+						 $_POST['totals'][$i] ; 
+						 $total+=$_POST['totals'][$i];
+						
 						
 						 ?>
 						 </center>
 							</td>
+						 
+					
 						 
 						 
 						 </tr>
@@ -350,7 +431,17 @@ if(isset($_POST['form1']))
 		  
 		  
 	  }
-
+	  ?>
+	  
+	  <tr> <td></td><td></td><td><center>Total Amount:</center></td><td><center><?php echo $total; ?></center> </td></tr>
+	  
+	  	 <?php
+						$statement5=$db->prepare("insert into tbl_dealer_two(d_amount,c_date) values(?,?)");
+					$statement5->execute(array($total,date('Y-m-d')));
+						 
+						 ?>
+	  
+<?php
  $success_message1="Product is inserted succesfully";
     }
 		catch(Exception $e)
