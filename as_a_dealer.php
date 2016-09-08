@@ -7,11 +7,12 @@ header('location: login.php');
 }
 
 ?>
-
-
-
 <?php include_once('header.php'); ?>
 <?php include_once('sidebar.php'); ?>
+<?php require_once('config.php'); ?>
+
+
+
 
     <!-- Main content -->
     <section class="content">
@@ -24,25 +25,42 @@ header('location: login.php');
                     
 
 			  <!--------- page start-->
-			  <?php include_once("config.php");?>
-
+			  
 			  
 			<div class="panel panel-default">
-                        <div class="panel-heading">List of Products   <?php 
-
-           
-
-			  ?>
+                        <div class="panel-heading">List of Products  <?php	
+					 if(isset($error_message1)){
+                        ?>
+                        <div class="alert alert-block alert-danger fade in">
+                          <button data-dismiss="alert" class="close close-sm" type="button">
+                          <i class="icon-remove"> X</i>
+                          </button>
+                          <strong>Opps!&nbsp; </strong><?php echo $error_message1;?>
+                       </div>
+                        <?php
+                      }
+                      if (isset($success_message1)) {
+                       ?>
+                       <div class="alert alert-success fade in">
+                          <button data-dismiss="alert" class="close close-sm" type="button">
+                            <i class="icon-remove"> X</i>
+                          </button>
+                          <strong>Well done!&nbsp; </strong><?php echo $success_message1;?>
+                       </div>
+                       <?php
+                        }
+                      ?>	  
+								
             </div>
             <!-- /.box-header -->
             <div class="panel-body">
                             <div class="table-responsive">
 							
 							
-							
+						<form class="form-horizontal" role="form" data-toggle="validator" method="post"enctype="multipart/form-data" >	
 							  
                                 <table class="table table-striped table-bordered table-hover" id="dataTables-example" >
-								<form class="form-horizontal" role="form" data-toggle="validator" method="post"enctype="multipart/form-data" name="form3" >
+
                 <thead>
                 <tr>
 				  <th>Click</th>
@@ -62,7 +80,7 @@ header('location: login.php');
                 </thead>
 				
 				
-				<form class="form-horizontal" role="form" data-toggle="validator" method="post"enctype="multipart/form-data" name="form3" > 
+				
 				
                 <tbody style="text-align:center">
 				
@@ -74,7 +92,7 @@ header('location: login.php');
 										  foreach ($result as $row) {
                                           ?> 
 				
-                 <tr class="txtMult"><td><input type="checkbox" name="p_id"></td>
+                 <tr class="txtMult"><td><input type="checkbox" name="products[]" value="<?php echo $row["p_id"]; ?>"></td>
 				 
 				 <td><?php 
                                                     
@@ -87,8 +105,16 @@ header('location: login.php');
 					 <td><?php echo $row['p_base_price']; ?>
 					 </td><td><input type="number" class="val1" value="<?php echo $row['p_price']; ?>" disabled ></td>
                       
-                     <td><input type="number" min=0 max=<?php echo $row['p_amount']; ?>   value="" class="val2"  placeholder=" " required></div></td>
-                     <td>     <input type="number"  min=0 name="c_total" value="" class="multTotal" id="total" placeholder=" " disabled ></td>
+                     <td>
+					  <div class="form-group">
+					 <input type="number" min=0 max=<?php echo $row['p_amount']; ?>  name="amount[]" value="0" class="val2"  placeholder=" "  ><?php echo "(".$row['p_amount'].")"; ?>
+					 
+					 </td>
+                     <td>  
+					<div class="form-group">
+					 <input type="number"  min=0  value="" class="multTotal" name="totals[]"  id="total" placeholder=" " >
+					 </div>
+					 </td>
                   
 				  <script type="text/javascript">
 												$(document).ready(function () {
@@ -128,21 +154,31 @@ header('location: login.php');
 			  <div class="form-group">
                <label class="col-lg-offset-8 col-lg-2 control-label">Total Amount</label>
 			  <div class=" col-lg-2" >
-			   <input type="number"  min=0 name="total" value="" class="grandTotal" id="total" placeholder=" " disabled >
+			   <input type="number"  min=0 name="total1" value="" class="grandTotal" id="total" placeholder=" " disabled >
 			  </div>
+			  
+			  
+			  
+			  
+	
+			  
 			  
 			  <br><br>
 			                          <div class="form-group">
                                                       <div class="col-lg-offset-10 col-lg-2">
-													  <input type="hidden" name="hidden_id" value="<?php echo $row['p_id'];?>">
-													  <input type="hidden" name="hidden_id_base_price" value="<?php echo $row['p_base_price'];?>">
-													   <input type="hidden" name="hidden_id_shop" value="<?php echo $row['p_shop'];?>">
-                                                          <button type="submit" name="form1" class="btn btn-primary">Calculate</button>
+													 
+                                                          <button type="submit" name="form1" class="btn btn-primary">Save</button>
                                                       </div>
                                                   </div>
                                               </form>
+											  
+
             </div>
             <!-- /.box-body -->
+			
+			
+			
+			
           </div>
           <!-- /.box -->
         </div>
@@ -161,15 +197,184 @@ header('location: login.php');
 		  
 		  
 
-        </section>
-        
-     
-      </div>
       <!-- /.row (main row) -->
 
     </section>
     <!-- /.content -->
-  </div>
+	
+	
+	<div class="row">
+        <!-- Left col -->
+        <section class="col-lg-12 connectedSortable">
+          <!-- Custom tabs (Charts with tabs)-->
+			 <section class="panel">                                          
+                                          <div class="panel-body bio-graph-info">
+										  
+										   <center> <h2>Customer Details</h2></center>
+												
+												<form class="form-horizontal" role="form" data-toggle="validator" method="post"enctype="multipart/form-data" name="form2">                                       
+
+												<div class="form-group">
+                                                      <label class="col-lg-2 control-label">Customer Name</label>
+                                                      <div class="col-lg-8">
+                                                          <input type="text" min=0 name="c_name" class="form-control" id="" placeholder=" " required>
+                                                      </div>
+                                                  </div><hr>
+												  <div class="form-group">
+                                                      <label class="col-lg-2 control-label">Mobile No</label>
+                                                      <div class="col-lg-8">
+                                                           <input type="number" data-toggle="validator" data-length="11" min=0  name="c_mobile" class="form-control" id="" placeholder=" " required>
+                                                      </div>
+                                                  </div><hr>
+												  <div class="form-group">
+                                                      <label class="col-lg-2 control-label">National Id No</label>
+                                                      <div class="col-lg-8">
+                                                          <input type="number" min=0 name="c_nid" class="form-control" id="" placeholder=" " >
+                                                      </div>
+                                                  </div><hr>
+												  <div class="form-group">
+                                                      <label class="col-lg-2 control-label">Address</label>
+                                                      <div class="col-lg-8 col-md-4">
+                                                         <textarea name="c_address"  cols="92" rows=""></textarea>
+														 </div>
+														 </div>
+												 <br>
+												
+
+                                                  <div class="form-group">
+                                                      <div class="col-lg-offset-10 col-lg-2">
+													  <input type="hidden" name="hidden_id" value="<?php echo $row['p_id'];?>">
+													  <input type="hidden" name="hidden_id_base_price" value="<?php echo $row['p_base_price'];?>">
+													   <input type="hidden" name="hidden_id_shop" value="<?php echo $row['p_shop'];?>">
+                                                          <button type="submit" name="form1" class="btn btn-primary">Calculate</button>
+                                                      </div>
+                                                  </div>
+                                              </form>
+										  
+										  
+										  </div>
+										  
+										  </section>
+
+        </section>
+ 
+      </div>
+	
+	
+	
+	
+	<div class="row">
+        <!-- Left col -->
+        <section class="col-lg-12 connectedSortable">
+		
+					<div class="panel panel-default">
+                        <div class="panel-heading">
+						
+						<h5>Your Selected Products</h5>
+						
+						
+						</div>
+						 <table class="table table-striped table-bordered table-hover" id="dataTables-example" >
+						<thead>
+						<tr>
+						
+				 
+				  <th>Product Model</th>
+				 
+                  <th>Sold Amount</th>
+				  <th>Amount</th>
+                 
+						</tr>
+						
+						</thead>
+						<tbody>
+						
+						
+						         <?php
+if(isset($_POST['form1']))
+{
+	
+ 
+		
+		
+	
+	try{  
+	
+	if(empty($_POST['products']))
+			{
+				throw new Exception('You have selected no product');
+			}
+	
+	
+	
+	
+      $rowCount = count($_POST["products"]);
+	 
+      for($i=0;$i<$rowCount;$i++) {
+		  
+		  $statement2 = $db->prepare("SELECT * FROM tbl_products where p_id=?");
+                      $statement2->execute(array($_POST['products'][$i] ));
+                      $result2 = $statement2->fetchAll(PDO::FETCH_ASSOC);
+					  foreach($result2 as $row2)
+					  {
+						 ?>
+						 
+						 <tr>
+						 
+						 <td><center>
+						 <?php echo 
+						 $row2['p_model']; ?></center></td>
+						 
+						
+						 <td>
+						 <center>
+						 <?php echo
+						 $_POST['amount'][$i]; ?></center></td>
+						<td>
+						  <center>
+						 <?php 
+						
+						 echo
+						 $_POST['totals'][$i]; 
+						
+						 ?>
+						 </center>
+							</td>
+						 
+						 
+						 </tr>
+						 <?php
+						 
+					  }
+					  
+		  
+		  
+	  }
+
+ $success_message1="Product is inserted succesfully";
+    }
+		catch(Exception $e)
+	{
+		$error_message1=$e->getMessage();
+	}
+}
+
+?>
+</tbody>
+</table>
+						
+						</div>
+		
+		
+		
+
+
+
+        </section>
+    
+        <!-- right col -->
+      </div>
+  </section>
   <!-- /.content-wrapper -->
   
 
