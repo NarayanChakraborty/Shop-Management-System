@@ -90,7 +90,7 @@ header('location: login.php');
                   <th>Product Model</th>
 				  <th>Product Serial</th>
                   <th>Product Category</th>
-                  <th>Product Price</th>
+                  <th>Product Sell Price</th>
                   <th>Product Amount</th>
                   <th>Shop Name</th>
 				  <th>Sell</th>
@@ -144,7 +144,7 @@ header('location: login.php');
                       <a class="btn btn-primary fancybox" href="#inline<?php echo $row['p_id'];?>"title="View image"><i class="glyphicon glyphicon-eye-open"></i></a>
 
 					 
-					 <div id="inline<?php echo $row['p_id'];?>"style="display:none;width:700px;margin:10px 30px">
+					 <div id="inline<?php echo $row['p_id'];?>"style="display:none;width:800px;margin:10px 30px">
 														<h3 style= "border-bottom: 2px solid #295498; color:#0C86AC;margin-bottom:10px;" >Product Details</h3>
 														<div class="shopper-info">
 														  <h4> <label>Product MOdel :&nbsp;&nbsp;</label>
@@ -158,7 +158,11 @@ header('location: login.php');
 												echo $result1['cat_name'];	
 											?></h4>
 													<h4> 
-													<label>Product Price :&nbsp;&nbsp;</label>
+													<label>Product Base Price :&nbsp;&nbsp;</label>
+													<?php echo $row['p_base_price']; ?>
+													</h4>
+													<h4> 
+													<label>Product sell Price :&nbsp;&nbsp;</label>
 													<?php echo $row['p_price']; ?>
 													</h4>
 													<h4> 
@@ -179,7 +183,7 @@ header('location: login.php');
 						?>
 													</h4>
 													<h4> 
-													<label>Product Shop :&nbsp;&nbsp;</label>
+													<label>Product Details :&nbsp;&nbsp;</label>
 													<?php echo $row['p_details']; ?>
 													</h4>	
 													

@@ -20,7 +20,7 @@ header('location: login.php');
 
 <?php 
 
-if(isset($_POST['form_payment']))
+if(isset($_POST['form_payment1']))
 	{
 		try{
 			if(empty($_POST['payment_amount']))
@@ -35,15 +35,15 @@ if(isset($_POST['form_payment']))
 		    $statement7=$db->prepare('select d_date from tbl_dealer_two where  d_id=?');	
 			$statement7->execute(array($_POST['hidden_id_for_edit_payment']));
 			$result7=$statement7->fetch();
-			if($result7['c_date']==date('Y-m-d'))
+			/*if($result7['d_date']==date('Y-m-d'))
 			{
 				throw new Exception('This Dealer has been regitered today  .So He Could Not Pay Today');
 			}
 			
-			
+			*/
 			
 			$due=$_POST['hidden_id_for_due']-$_POST['payment_amount'];
-			$total_payment=$_POST['d_amount']-$_POST['payment_amount'];
+			$total_payment=$_POST['hidden_id_for_total']-$_POST['payment_amount'];
 			$statement6=$db->prepare('update tbl_dealer_two set d_due=?,d_cash=? where d_id=?');
 			$statement6->execute(array($due,$total_payment,$_POST['hidden_id_for_edit_payment']));
 			
@@ -261,7 +261,7 @@ if(isset($_POST['form_customer']))
 
 					<td>
 				  
-                            <?php echo $row1['d_amount']; ?>		
+                            <?php echo $row['d_amount']; ?>		
 				  </td>	  
 
 				
@@ -271,9 +271,9 @@ if(isset($_POST['form_customer']))
 					 
 					 
 					  <!----------------Edit Payment Information------------------------->
-					 <a class="btn " data-toggle="modal" href="#myModal<?php echo $row['d_id'];?>" title="Payment"><i class="glyphicon glyphicon-minus-sign"></i></a>
+					 <a class="btn " data-toggle="modal" href="#myModal1<?php echo $row['d_id'];?>" title="Payment"><i class="glyphicon glyphicon-minus-sign"></i></a>
 					 <!-- Modal -->
-							  <div class="modal fade" id="myModal<?php echo $row['d_id'];?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+							  <div class="modal fade" id="myModal1<?php echo $row['d_id'];?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 								<div class="modal-dialog">
 								  <div class="modal-content">
 									<div class="modal-header">
@@ -284,13 +284,13 @@ if(isset($_POST['form_customer']))
 									 <h4>Total Cost  : <?php echo $row['d_amount']; ?> </h4>
 									 <h4>Due Amount   :<?php echo $row['d_due']; ?> </h4>
 									  <h4>Payment Amount :</h4>
-									  <form method="post" action="view_customers.php" enctype="multipart/form-data">
+									  <form method="post" action="dealer_customers_with_due.php" enctype="multipart/form-data">
 										<input type="number" value="<?php echo $row['d_due'];?>"class="form-control" name="payment_amount" required><br>
 										<button data-dismiss="modal" class="btn btn-default" type="button">Close</button>
 										<input type="hidden" name="hidden_id_for_edit_payment" value="<?php echo $row['d_id'];?>">
 										<input type="hidden" name="hidden_id_for_due" value="<?php echo $row['d_due'];?>">
 										<input type="hidden" name="hidden_id_for_total" value="<?php echo $row['d_amount'];?>">
-										<input type="submit" value="Update" class="btn btn-success" name="form_payment">
+										<input type="submit" value="Update" class="btn btn-success" name="form_payment1">
 									  </form>
 									</div>         
 								  </div>

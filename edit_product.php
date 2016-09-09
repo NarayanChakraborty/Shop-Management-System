@@ -43,7 +43,7 @@ if(isset($_POST['form1']))
 		}
 	    if(empty($_POST['p_amount']))
 		{
-			throw new Exception("Category can not be empty");
+			throw new Exception("Amount can not be empty");
 		}
 		if(empty($_POST['p_category']))
 		{
@@ -107,7 +107,7 @@ if(isset($_POST['form1']))
 		   	       $statement1=$db->prepare("update tbl_products set p_model=?,p_serial=?,p_category=?,p_base_price=?,p_price=?,p_amount=?,p_details=?,p_shop=?,p_date=?   where p_id=?");
 		   $statement1->execute(array($_POST['p_model'],$_POST['p_serial'],$_POST['p_category'],$_POST['p_base_price'],$_POST['p_price'],$_POST['p_amount'],$_POST['p_details'],$_POST['p_shop'],$_POST['p_date'],$id));
 		   
-		   $success_message1="Post is inserted succesfully";
+		   $success_message1="product Information is inserted succesfully";
 	
 	
 	}
@@ -234,7 +234,7 @@ if(isset($_POST['form1']))
                                                   <div class="form-group">
                                                       <label class="col-lg-2 control-label">Product Amount</label>
                                                       <div class="col-lg-8">
-                                                          <input type="number" min=1 max= name="p_amount" value="<?php echo $row['p_amount']; ?>" class="form-control" id="l-name" placeholder=" " required>
+                                                          <input type="number" min=1   name="p_amount" value="<?php echo $row['p_amount']; ?>" class="form-control" id="l-name" placeholder=" " required>
                                                       </div>
                                                   </div>
 												  <hr>                                                 

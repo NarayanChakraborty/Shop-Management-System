@@ -393,8 +393,8 @@ if(isset($_POST['form_customer']))
 										
 											
 													<h4> 
-													<label>Price Per Product:&nbsp;&nbsp;</label>
-													<?php echo $row1['p_price']; ?>
+													<label>Base Price Per Product:&nbsp;&nbsp;</label>
+													<?php echo $row1['p_base_price']; ?>
 													</h4>
 													<h4> 
 													<label>Sold Amount:&nbsp;&nbsp;</label>

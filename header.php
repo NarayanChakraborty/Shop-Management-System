@@ -51,7 +51,17 @@
 	
 	<script src="plugins/jQuery/jquery-2.2.3.min.js" type="text/javascript" ></script>
 	
-	
+	<script>
+function printPageArea(areaID){
+    var printContent = document.getElementById(areaID);
+    var WinPrint = window.open('', '', 'width=900,height=600');
+    WinPrint.document.write(printContent.innerHTML);
+    WinPrint.document.close();
+    WinPrint.focus();
+    WinPrint.print();
+    WinPrint.close();
+}
+</script>
 
 </head>
 <body class="hold-transition skin-blue sidebar-mini">

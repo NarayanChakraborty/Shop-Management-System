@@ -81,7 +81,7 @@ if(isset($_POST['form1']))
 			  
 		   $statement2->execute(array($amount1,$_POST['hidden_id']));
 		   
-		   
+		   header('location: entry_slip.php');
 		   $success_message1="Customer Information is inserted succesfully";
 	
 	

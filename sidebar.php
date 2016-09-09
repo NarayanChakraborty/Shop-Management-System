@@ -92,7 +92,7 @@
           </a>
           <ul class="treeview-menu">
             <li><a href="as_customer.php"><i class="fa fa-circle-o"></i>Company Information</a></li>
-            <li><a href="as_a_dealer.php"><i class="fa fa-circle-o"></i>Retailer</a></li>
+            <li><a href="retailer.php"><i class="fa fa-circle-o"></i>Retailer</a></li>
           </ul>
         </li>
 		
@@ -102,14 +102,14 @@
 	<li class="treeview">
           <a href="#">
             <i class="glyphicon glyphicon-user"></i>
-            <span>Labourers Information</span>
+            <span>Employee Information</span>
             <span class="pull-right-container">
               <span class="label label-primary pull-right">2</span>
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="add_labour.php"><i class="fa fa-circle-o"></i>Add Labourer</a></li>
-            <li><a href="view_labourer.php"><i class="fa fa-circle-o"></i>All Labourers</a></li>
+            <li><a href="add_labour.php"><i class="fa fa-circle-o"></i>Add Employee</a></li>
+            <li><a href="view_labourer.php"><i class="fa fa-circle-o"></i>All Employees</a></li>
           </ul>
         </li>
 
