@@ -56,12 +56,13 @@
             <i class="glyphicon glyphicon-shopping-cart"></i>
             <span>Customer Information</span>
             <span class="pull-right-container">
-              <span class="label label-primary pull-right">2</span>
+              <span class="label label-primary pull-right">3</span>
             </span>
           </a>
           <ul class="treeview-menu">
             <li><a href="view_customers.php"><i class="fa fa-circle-o"></i>All Customers</a></li>
-            <li><a href="view_customers_with_due1.php"><i class="fa fa-circle-o"></i>Due Accounting</a></li>
+            <li><a href="view_customers_with_due1.php"><i class="fa fa-circle-o"></i>Customer With Due</a></li>
+			<li><a href="dealer_customers_with_due.php"><i class="fa fa-circle-o"></i>Retailer Information</a></li>
           </ul>
         </li>
 		
@@ -90,8 +91,8 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="as_customer.php"><i class="fa fa-circle-o"></i>As A Customer</a></li>
-            <li><a href="as_a_dealer.php"><i class="fa fa-circle-o"></i>As a Saler</a></li>
+            <li><a href="as_customer.php"><i class="fa fa-circle-o"></i>Company Information</a></li>
+            <li><a href="as_a_dealer.php"><i class="fa fa-circle-o"></i>Retailer</a></li>
           </ul>
         </li>
 		

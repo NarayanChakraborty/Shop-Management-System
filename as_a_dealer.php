@@ -7,6 +7,7 @@ header('location: login.php');
 }
 
 ?>
+
 <?php include_once('header.php'); ?>
 <?php include_once('sidebar.php'); ?>
 <?php require_once('config.php'); ?>
@@ -36,30 +37,30 @@ if(isset($_POST['form3']))
 			{
 				throw new Exception('Customer National Id Can not be Empty');
 			}
+			
 			if(empty($_POST['c_address']))
 			{
 				throw new Exception('Customer Address Can not be Empty');
 			}
 
 			
-		
-			
-			
-			$statement=$db("select * from tbl_dealer_two");
-			$statement->execute();
-			 $last_id=$statement->lastInsertId();
-				$statement=$db("select d_amount from tbl_dealer_two where d_id=?");
-			$statement->execute(array($last_id));
-			$result=$statement->fetch();
-			
+	
+			  $statement2 = $db->prepare("SELECT d_id FROM tbl_dealer_two order by d_id desc limit 1");
+			  $statement2->execute();
+              $result2=$statement2->fetch();
+			   $last_id=$result2['d_id'];
+			   
+				  $statement = $db->prepare("SELECT d_amount FROM tbl_dealer_two where d_id=? and d_date=?");
+                      $statement->execute(array($last_id,date('Y-m-d')));	  
+					  $result=$statement->fetch();
 			$amount=$result['d_amount']-$_POST['c_less']; 
 			$due=$amount-$_POST['c_payment'];
 			
-			$statement1=$db->prepare('update tbl_customer set d_name=?,d_mobile=?,d_nid=?,d_address=?,d_cash=?,d_amount=?,d_due=? where d_id=?');
-			$statement1->execute(array($_POST['c_name'],$_POST['c_mobile'],$_POST['c_nid'],$_POST['c_address'],$_POST['c_payment'],$amount,$due,$last_id));
+			$statement3=$db->prepare("update tbl_dealer_two set d_name=?,d_mobile=?,d_nid=?,d_address=?,d_cash=?,d_amount=?,d_due=? where d_id=? and d_date=?");
+			$statement3->execute(array($_POST['c_name'],$_POST['c_mobile'],$_POST['c_nid'],$_POST['c_address'],$_POST['c_payment'],$amount,$due,$last_id,date('Y-m-d')));
 						
 			
-			$success_message1='Customer Information Successfully Updated';
+			
 		}
 		catch(Exception $e)
 		{
@@ -115,7 +116,7 @@ if(isset($_POST['form3']))
                             <div class="table-responsive">
 							
 							
-						<form class="form-horizontal" role="form" data-toggle="validator" method="post"enctype="multipart/form-data" >	
+						<form class="form-horizontal" role="form" data-toggle="validator" method="post" enctype="multipart/form-data" >	
 							  
                                 <table class="table table-striped table-bordered table-hover" id="dataTables-example" >
 
@@ -212,7 +213,7 @@ if(isset($_POST['form3']))
 			  <div class="form-group">
                <label class="col-lg-offset-8 col-lg-2 control-label">Total Amount</label>
 			  <div class=" col-lg-2" >
-			   <input type="number"  min=0  value="" class="grandTotal" name="total1" id="total" placeholder=" " disabled >
+			   <input type="number"  min=0  value="" class="grandTotal" name="total" id="" placeholder=" " disabled>
 			  </div>
 			  
             </div>
@@ -277,7 +278,7 @@ if(isset($_POST['form3']))
                                                       <div class="col-lg-8">
                                                           <input type="number" min=0 name="c_less" value=""  class="form-control" id="" placeholder="Special Offer (Just Amount)" >
                                                       </div>
-                                                 </div>
+                                                 </div><hr>
 												
 												 
 												 <div class="form-group">
@@ -379,7 +380,7 @@ if(isset($_POST['form1']))
 			}
 	
 	$total=0;
-	
+	  
 	
       $rowCount = count($_POST["products"]);
 	 
@@ -406,7 +407,12 @@ if(isset($_POST['form1']))
 						 <td>
 						 <center>
 						 <?php echo
-						 $_POST['amount'][$i]; ?></center></td>
+						 $_POST['amount'][$i]; 
+						 $product_amount=$row2['p_amount']-$_POST['amount'][$i];
+						 $statement3 = $db->prepare("update tbl_products set p_amount=? where p_id=?");
+                      $statement3->execute(array($product_amount,$_POST['products'][$i]));
+                      
+						 ?></center></td>
 						<td>
 						  <center>
 						 <?php 
@@ -431,18 +437,20 @@ if(isset($_POST['form1']))
 		  
 		  
 	  }
+	  	
+						 
 	  ?>
 	  
-	  <tr> <td></td><td></td><td><center>Total Amount:</center></td><td><center><?php echo $total; ?></center> </td></tr>
+	  <tr> <td></td><td></td><td><center>Total Amount:</center></td><td><center><?php echo $total; 
+	    $statement2 = $db->prepare("insert into tbl_dealer_two(d_amount,d_date) values(?,?)");
+                      $statement2->execute(array($total,date('Y-m-d')));
+	  
+	  
+	  ?></center> </td></tr>
 	  
 	  	 <?php
-						$statement5=$db->prepare("insert into tbl_dealer_two(d_amount,c_date) values(?,?)");
-					$statement5->execute(array($total,date('Y-m-d')));
-						 
-						 ?>
-	  
-<?php
- $success_message1="Product is inserted succesfully";
+				
+				$success_message1="Product is inserted succesfully";
     }
 		catch(Exception $e)
 	{
