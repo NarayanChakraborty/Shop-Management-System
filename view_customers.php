@@ -54,8 +54,7 @@ if(isset($_POST['form_payment']))
 					$statement1=$db->prepare('select * from tbl_accounting where a_date=? and p_shop=?');
 					$statement1->execute(array(date('Y-m-d'),$result['p_shop']));
 					$result1=$statement1->fetchColumn();
-				 if($result1>0)
-					{
+				
 						$statement2=$db->prepare('select due_payment from tbl_accounting where a_date=? and p_shop=?');
 					$statement2->execute(array(date('Y-m-d'),$result['p_shop']));
 					$result2=$statement2->fetch();
@@ -64,7 +63,7 @@ if(isset($_POST['form_payment']))
 					    $result3=$result2['due_payment']+$_POST['payment_amount'];
 						$statement3=$db->prepare('update tbl_accounting set due_payment=? where a_date=? and p_shop=?');
 			$statement3->execute(array($result3,date('Y-m-d'),$result['p_shop']));
-					}
+					
 			
 			
 			$success_message2='Payment Amount Successfully Updated';

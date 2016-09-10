@@ -183,6 +183,7 @@ $c_date=date('Y-m-d');
 			<h5>Total Income : <?php echo $row3['sell_today']-$row3['base_today']; ?> </h5>
             <h5>Total Cash : <?php echo $row3['cash_today']; ?> </h5>
 			<h5>Total Due: <?php echo $row3['sell_today']-$row3['cash_today']; ?> </h5>
+			<h5>Total Due Payment: <?php echo $row3['due_payment']; ?> </h5>
 			<h5>Total Balance: <?php echo $row3['cash_today']+$row3['due_payment']-$row3['cost_today']; ?> </h5>
         </section>
 			   
@@ -211,6 +212,7 @@ $c_date=date('Y-m-d');
 			<h5>Total Income : <?php echo $income; ?> </h5>
             <h5>Total Cash : <?php echo $row3['cash_today']; ?> </h5>
 			<h5>Total Due: <?php echo $row3['due_today']; ?> </h5>
+			<h5>Total Due Payment: <?php echo $row3['due_payment']; ?> </h5>
 			<h5>Total Cost: <?php echo $row3['cost_today']; ?> </h5>
 			<?php
 			$balance=$row3['cash_today']-$row3['cost_today']+$row3['due_payment'];?>

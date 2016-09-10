@@ -76,7 +76,7 @@ include('config.php');
 						?>
 											 </td> </tr>
 											 <tr>
-											<td><strong>product Amount     </strong></td><td><?php echo ": ".$row['c_mobile']; ?> </td> </tr>
+											<td><strong>product Amount     </strong></td><td><?php echo ": ".$row['p_amount']; ?> </td> </tr>
                                              <tr> <td> <strong>Total Cost </strong></td><td><?php echo ": ".$row['c_total']; ?></td> </tr>
 											
                                             <tr> <td><strong>Due    </strong></td><td><?php echo ": ".$row['c_due']; ?> </td> </tr>
