@@ -89,12 +89,32 @@ $c_date=date('Y-m-d');
     <section class="content">
         <?php include_once('header_shop.php'); ?>
       <!-- Main row -->
+	  
+	        <div class="row">
+        <!-- Left col -->
+        <section class="col-lg-12 connectedSortable">
+		 <section class="panel">   
+          <!-- Custom tabs (Charts with tabs)-->
+                 <center><h3><u>Retailer Section</u></h3></center>
+                <?php
+				 $statement =$db->prepare("SELECT sum(d_last_payment) as  payment from tbl_dealer_two where d_last_date=?");
+										  $statement->execute(array(date('Y-m-d')));
+										 $result=$statement->fetch();
+				?>
+				<h4>Todays Payment / Balance:<?php echo  $result['payment']; ?> </h4>
+				</section>
+        </section>
+
+      </div>
+	  
+	  
+	  
       <div class="row">
         <!-- Left col -->
 		<section class=" col-lg-12 connectedSortable">
 		
 		 <section class="panel" >  
-		 
+		                       <center><h3><u>Customer Section</u></h3></center>
 		 
 							<div class="panel-body bio-graph-info" style="padding:10px">
 		

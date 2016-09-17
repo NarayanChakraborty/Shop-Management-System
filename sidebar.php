@@ -62,7 +62,7 @@
           <ul class="treeview-menu">
             <li><a href="view_customers.php"><i class="fa fa-circle-o"></i>All Customers</a></li>
             <li><a href="view_customers_with_due1.php"><i class="fa fa-circle-o"></i>Customer With Due</a></li>
-			<li><a href="dealer_customers_with_due.php"><i class="fa fa-circle-o"></i>Retailer Information</a></li>
+			<li><a href="dealer_customers_with_due1.php"><i class="fa fa-circle-o"></i>Retailer Information</a></li>
           </ul>
         </li>
 		
@@ -92,7 +92,7 @@
           </a>
           <ul class="treeview-menu">
             <li><a href="as_customer.php"><i class="fa fa-circle-o"></i>Company Information</a></li>
-            <li><a href="retailer.php"><i class="fa fa-circle-o"></i>Retailer</a></li>
+            <li><a href="retailer1.php"><i class="fa fa-circle-o"></i>Retailer</a></li>
           </ul>
         </li>
 		

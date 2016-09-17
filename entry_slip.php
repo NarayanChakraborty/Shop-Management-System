@@ -29,15 +29,15 @@ include('config.php');
 			
 			<div class="col-md-6 validation-grids widget-shadow" style="padding-top:40px;padding-left:30px;" data-example-id="basic-forms"> 
 			                 
-					<div class="navbar-header navbar-left">
+					<center><div class="navbar-header navbar-left">
 					<h1><a href="index.php">Khalek Electronics</a>
-					<h5 style="margin-left:80px;margin-top:-10px;">Imargency:01713687237</h5>
-					<h5 style="margin-left:80px;margin-top:-10px;">Date:<?php echo date('d-m-Y'); ?></h5>
+					<h5 style="">Imargency:01713687237</h5>
+					<h5 style="">Date:<?php echo date('d-m-Y'); ?></h5>
 					</h1>
 					<br>
 						
 				</div>
-							<div class="form-title" style="margin-top:130px;">
+							<div class="form-title" style="margin-top:60px;">
 							      	<?php 
 											
 											
@@ -92,8 +92,8 @@ include('config.php');
 									  
 								  }
 										   ?>
-							</div><br><br><br>
-							<h5> THANKS FOR TAKING OUR SERVICE</h5><br>
+							</div><br>
+							<h5> THANKS FOR TAKING OUR SERVICE</h5><br></center>
 				
 								
                  		

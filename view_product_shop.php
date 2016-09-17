@@ -8,12 +8,6 @@ header('location: login.php');
 
 ?>
 
-
-
-<?php include_once('header.php'); ?>
-<?php include_once('sidebar.php'); ?>
-
-
 <?php
 if(!isset($_REQUEST['id']))
 {
@@ -25,13 +19,19 @@ else
 }
 ?>
 
+<?php include_once('header.php'); ?>
+<?php include_once('sidebar.php'); ?>
+
+
+
+
     <!-- Main content -->
-    <section class="content">
+   <section class="content">
         <?php include_once('header_shop.php'); ?>
       <!-- Main row -->
       <div class="row">
         <!-- Left col -->
-         <section class="col-lg-12 connectedSortable">
+        <section class="col-lg-12 connectedSortable">
           <!-- Custom tabs (Charts with tabs)-->
                      <section class="panel">                                          
                                           <div class="panel-body bio-graph-info">
@@ -100,8 +100,9 @@ else
                 <thead>
                 <tr>
                   <th>Product Model</th>
+				  <th>Product Serial</th>
                   <th>Product Category</th>
-                  <th>Product Price</th>
+                  <th>Product Sell Price</th>
                   <th>Product Amount</th>
                   <th>Shop Name</th>
 				  <th>Sell</th>
@@ -122,12 +123,13 @@ else
 										    $statement->execute(array($id1));
 										 }
 										  $result = $statement->fetchAll(PDO::FETCH_ASSOC);
-										  foreach ($result as $row) {
+										 foreach ($result as $row) {
                                           ?> 
                 
                
                 <tr>
                    <td><?php echo $row['p_model']; ?></td>
+				   <td><?php echo $row['p_serial']; ?></td>
                   <td><?php 
                                                     
 										  $statement1 = $db->prepare("SELECT cat_name FROM tbl_category where cat_id=?");
@@ -137,8 +139,8 @@ else
 											?></td>
 				   <td><?php echo $row['p_price']; ?></td>
 				    <td><?php echo $row['p_amount']; ?></td>
-					 <td>
-					 							 <?php
+					 <td>								
+					 <?php
                       $statement2 = $db->prepare("SELECT * FROM tbl_shop where shop_id=?");
                       $statement2->execute(array($row['p_shop']));
                       $result2 = $statement2->fetchAll(PDO::FETCH_ASSOC);
@@ -147,16 +149,14 @@ else
 						
 					  }
 						?>
-					 
-					 
-					 </td>
-<td><a class="btn btn-primary" href="sell_product.php?id=<?php echo $row['p_id']; ?>" title="Sell Product"><i class="glyphicon glyphicon-usd"></i></a></td>
+						</td>
+						<td><a class="btn btn-primary" href="sell_product1.php?id=<?php echo $row['p_id']; ?>" title="Sell Product"><i class="glyphicon glyphicon-usd"></i></a></td>
 					                    <td><center>
-                     <div class="btn-group">
+                    <div class="btn-group">
                       <a class="btn btn-primary fancybox" href="#inline<?php echo $row['p_id'];?>"title="View image"><i class="glyphicon glyphicon-eye-open"></i></a>
 
 					 
-					 <div id="inline<?php echo $row['p_id'];?>"style="display:none;width:700px;margin:10px 30px">
+					 <div id="inline<?php echo $row['p_id'];?>"style="display:none;width:800px;margin:10px 30px">
 														<h3 style= "border-bottom: 2px solid #295498; color:#0C86AC;margin-bottom:10px;" >Product Details</h3>
 														<div class="shopper-info">
 														  <h4> <label>Product MOdel :&nbsp;&nbsp;</label>
@@ -170,7 +170,11 @@ else
 												echo $result1['cat_name'];	
 											?></h4>
 													<h4> 
-													<label>Product Price :&nbsp;&nbsp;</label>
+													<label>Product Base Price :&nbsp;&nbsp;</label>
+													<?php echo $row['p_base_price']; ?>
+													</h4>
+													<h4> 
+													<label>Product sell Price :&nbsp;&nbsp;</label>
 													<?php echo $row['p_price']; ?>
 													</h4>
 													<h4> 
@@ -191,7 +195,7 @@ else
 						?>
 													</h4>
 													<h4> 
-													<label>Product Shop :&nbsp;&nbsp;</label>
+													<label>Product Details :&nbsp;&nbsp;</label>
 													<?php echo $row['p_details']; ?>
 													</h4>	
 													

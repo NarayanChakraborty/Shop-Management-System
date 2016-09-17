@@ -18,7 +18,7 @@ include('config.php');
         <?php include_once('header_shop.php'); ?>
       <!-- Main row -->
       <div class="row"style="margin-top:5px">
-        <!-- Left col --> <center style="margin-bottom:60px"><u><h3 >Accounting Information By Product </h3></u></center>
+        <!-- Left col --> <center style="margin-bottom:60px"><u><h3 >Accounting Information By Product <br> For Last 30 Days</h3></u></center>
         <section class="col-lg-8 connectedSortable">
           <!-- Custom tabs (Charts with tabs)-->
 		 
@@ -65,9 +65,9 @@ include('config.php');
                       $statement = $db->prepare("SELECT cat_name FROM tbl_category where cat_id=?");
                       $statement->execute(array($cat_id));
                       $result = $statement->fetch();
-                              
-					 $statement1= $db->prepare("SELECT p_id,p_amount,sum(p_base_price) as total_base_price FROM tbl_category,tbl_products where  tbl_category.cat_id=? and tbl_products.p_category=? ");
-                      $statement1->execute(array($cat_id,$cat_id));
+                              $value=30;
+					 $statement1= $db->prepare("SELECT p_id,p_amount,sum(p_base_price) as total_base_price FROM tbl_category,tbl_products where  tbl_category.cat_id=? and tbl_products.p_category=? and tbl_products.p_date>DATE_SUB(CURDATE(), INTERVAL ? DAY)");
+                      $statement1->execute(array($cat_id,$cat_id,$value));
                       $result1 = $statement1->fetchAll(PDO::FETCH_ASSOC);
                       foreach ($result1 as $row1) {
 						  
@@ -75,8 +75,8 @@ include('config.php');
 						  $initial_amount=$row1['p_amount'];
 						  $total_base_price=$row1['total_base_price'];
 						  
-						        $statement2 = $db->prepare("SELECT sum(p_amount) as sell_amount,sum(p_base_price) as base_price_sold,sum(c_total) as sold_price,sum(c_cash) as cash_amoount FROM tbl_sell where p_id=?");
-                      $statement2->execute(array($row1['p_id']));
+						        $statement2 = $db->prepare("SELECT sum(p_amount) as sell_amount,sum(p_base_price) as base_price_sold,sum(c_total) as sold_price,sum(c_cash) as cash_amoount FROM tbl_sell where p_id=? and c_date>DATE_SUB(CURDATE(), INTERVAL ? DAY)");
+                      $statement2->execute(array($row1['p_id'],$value));
                       $result2 = $statement2->fetchAll(PDO::FETCH_ASSOC);
                       foreach ($result2 as $row2) {
                         ?>

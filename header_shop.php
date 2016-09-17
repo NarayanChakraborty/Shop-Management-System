@@ -17,7 +17,7 @@
 		  
                 ?>      
 		  </h3>
-		  <h4> <?php echo $result['balance']; ?> </h4>
+		  <h4> <?php echo "Tk"." ".$result['balance']; ?> </h4>
 		  <?php
 		  
 		  ?>
@@ -46,7 +46,7 @@
 		  
                 ?>      
 		  </h3>
-		  <h4> <?php echo $result['balance']; ?> </h4>
+		  <h4> <?php echo "Tk"." ".$result['balance']; ?> </h4>
 		  <?php
 		  
 		  ?>
@@ -73,7 +73,7 @@
 		  
                 ?>      
 		  </h3>
-		  <h4> <?php echo $result['balance']; ?> </h4>
+		  <h4> <?php echo "Tk"." ".$result['balance']; ?> </h4>
 		  <?php
 		  
 		  ?>
