@@ -90,7 +90,7 @@ function printPageArea(areaID){
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <img src="images/apu.jpg" class="user-image" alt="User Image">
-              <span class="hidden-xs">SN Chakraborty</span>
+              <span class="hidden-xs">Developer</span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
@@ -98,7 +98,7 @@ function printPageArea(areaID){
                 <img src="images/apu.jpg" class="img-circle" alt="User Image">
 
                 <p>
-                  SN Chakraborty - Web Developer
+                  SN Chakraborty - Web & Android Developer
                   <small>Noakhali Science & Technology University </small>
 				  <small>Contact:01713687237</small>
                 </p>
@@ -113,7 +113,7 @@ function printPageArea(areaID){
               <!-- Menu Footer-->
               <li class="user-footer">
                 <div class="pull-left">
-                  <a href="#" class="btn btn-default btn-flat">change password</a>
+                  <a href="change_password.php" class="btn btn-default btn-flat">change password</a>
                 </div>
                 <div class="pull-right">
                   <a href="logout.php" class="btn btn-default btn-flat">Sign out</a>

@@ -93,7 +93,7 @@ $c_date=date('Y-m-d');
 	        <div class="row">
         <!-- Left col -->
         <section class="col-lg-12 connectedSortable">
-		 <section class="panel">   
+		 <section class="panel" style="padding-left:20px">   
           <!-- Custom tabs (Charts with tabs)-->
                  <center><h3><u>Retailer Section</u></h3></center>
                 <?php
@@ -102,6 +102,13 @@ $c_date=date('Y-m-d');
 										 $result=$statement->fetch();
 				?>
 				<h4>Todays Payment / Balance:<?php echo  $result['payment']; ?> </h4>
+				 <?php
+				 $statement =$db->prepare("SELECT sum(d_cash) as  payment , sum(d_due) as due from tbl_dealer_two");
+										  $statement->execute();
+										 $result=$statement->fetch();
+				?>
+				<h4>Total Payment / Balance:<?php echo  $result['payment']; ?> </h4>
+				<h4>Total Due :<?php echo  $result['due']; ?> </h4>
 				</section>
         </section>
 
@@ -325,7 +332,7 @@ $c_date=date('Y-m-d');
 			  ?>	  
 		 					
 	 <div class="panel panel-default">
-                        <div class="panel-heading">Customer List   <?php 
+                        <div class="panel-heading">Daily Accounting <?php 
 
                  if($value==7)
 				 {

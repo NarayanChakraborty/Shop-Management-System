@@ -48,7 +48,7 @@ if(isset($_POST['form1']))
 			 $result1=$statement1->fetch();
 			 if($result1['p_amount']<=0){
 				 
-			 throw  new Exception('This  product is stock out Now ');
+			 throw  new Exception('This  product is out of stock  Now ');
 	 
 			 }
 				 

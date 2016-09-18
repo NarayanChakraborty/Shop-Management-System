@@ -18,7 +18,7 @@ include('config.php');
         <?php include_once('header_shop.php'); ?>
       <!-- Main row -->
       <div class="row"style="margin-top:5px">
-        <!-- Left col --> <center style="margin-bottom:60px"><u><h3 >Accounting Information By Product <br> For Last 30 Days</h3></u></center>
+        <!-- Left col --> <center style="margin-bottom:60px"><u><h3 >Accounting Information By Product</h3><h5> <br>( For Last 30 Days )</u></h5></center>
         <section class="col-lg-8 connectedSortable">
           <!-- Custom tabs (Charts with tabs)-->
 		 
@@ -83,8 +83,8 @@ include('config.php');
 								<h4>Category :<?php echo $result['cat_name']; ?> </h4>
 			<h5>Available Amount : <?php echo $initial_amount; ?> </h5>
 				<h5>Sold Amount : <?php echo $row2['sell_amount']; ?> </h5>
-			<h5>Sold Product Base Price : <?php echo $row2['base_price_sold']; ?> </h5>
-			<h5>Sold Product Sell Price : <?php echo $row2['sold_price']; ?> </h5>
+			<h5>Sold Product Base Price(Total) : <?php echo $row2['base_price_sold']; ?> </h5>
+			<h5>Sold Product Sell Price(Total) : <?php echo $row2['sold_price']; ?> </h5>
 			<?php $income=$row2['sold_price']-$row2['base_price_sold'];?>
 			<h5>Total Income : <?php echo $income; ?> </h5>
             
