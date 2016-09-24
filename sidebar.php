@@ -41,9 +41,22 @@
           <ul class="treeview-menu">
             <li><a href="add_product.php"><i class="fa fa-circle-o"></i>Add Products</a></li>
             <li><a href="view_product.php"><i class="fa fa-circle-o"></i> View Products</a></li>
+			
             <li><a href="manage_category.php"><i class="fa fa-circle-o"></i> Manage Catgory</a></li>  
           </ul>
         </li>
+		
+	<li class="treeview">
+          <a href="product_transformation.php">
+            <i class="glyphicon glyphicon-user"></i>
+            <span>Product Transformation</span>
+            <span class="pull-right-container">
+            
+            </span>
+          </a>
+     
+        </li>
+		
 	 <li class="treeview">
           <a href="#">
             <i class="glyphicon glyphicon-shopping-cart"></i>

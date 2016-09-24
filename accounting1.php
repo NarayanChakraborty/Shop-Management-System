@@ -90,29 +90,7 @@ $c_date=date('Y-m-d');
         <?php include_once('header_shop.php'); ?>
       <!-- Main row -->
 	  
-	        <div class="row">
-        <!-- Left col -->
-        <section class="col-lg-12 connectedSortable">
-		 <section class="panel" style="padding-left:20px">   
-          <!-- Custom tabs (Charts with tabs)-->
-                 <center><h3><u>Retailer Section</u></h3></center>
-                <?php
-				 $statement =$db->prepare("SELECT sum(d_last_payment) as  payment from tbl_dealer_two where d_last_date=?");
-										  $statement->execute(array(date('Y-m-d')));
-										 $result=$statement->fetch();
-				?>
-				<h4>Todays Payment / Balance:<?php echo  $result['payment']; ?> </h4>
-				 <?php
-				 $statement =$db->prepare("SELECT sum(d_cash) as  payment , sum(d_due) as due from tbl_dealer_two");
-										  $statement->execute();
-										 $result=$statement->fetch();
-				?>
-				<h4>Total Payment / Balance:<?php echo  $result['payment']; ?> </h4>
-				<h4>Total Due :<?php echo  $result['due']; ?> </h4>
-				</section>
-        </section>
-
-      </div>
+	       
 	  
 	  
 	  
@@ -121,7 +99,7 @@ $c_date=date('Y-m-d');
 		<section class=" col-lg-12 connectedSortable">
 		
 		 <section class="panel" >  
-		                       <center><h3><u>Customer Section</u></h3></center>
+		                       <center><h3><u>Customer Section (Today) </u></h3></center>
 		 
 							<div class="panel-body bio-graph-info" style="padding:10px">
 		
@@ -287,15 +265,10 @@ $c_date=date('Y-m-d');
 		   
 		   
 						</section>  
-		</section>
-		
-		<!---------------------------------------------------------------------------------->
-	
-	   <section class="panel" >
-	
-	
+
+	 <section class="col-lg-12 connectedSortable">
 						<div class="panel-body bio-graph-info"style="margin-top:10px" >
-		
+										<center><h3><u>Customer Section(Total)</u></h3></center>
 						                   <form method="POST" >
                                         <div class="form-group">
                                             <h3>Select Accounting For :</h3>
@@ -312,12 +285,9 @@ $c_date=date('Y-m-d');
                                   </form>
 								
 								  </div>
-	 </section>
-	
-	     
-		<section class="panel">  
-		 
-		 
+								  
+								  </section>
+
 			  
 							  <?php 
 			  if(isset($_POST['product']))
@@ -472,21 +442,11 @@ $c_date=date('Y-m-d');
 				
 				
 				
-				
-				
-				
-				
-				
-				
-
-
-										<section class="  col-lg-12 connectedSortable">
-	 
-								        <section class="panel">                                          
-                                          <div class="panel-body bio-graph-info">
-										
-										
-										 <table class="table table-striped table-bordered table-hover" id="dataTables-example" >
+			<div class="panel panel-default">
+                
+            <!-- /.box-header -->
+            <div class="panel-body">
+                 <table class="table table-striped table-bordered table-hover" id="dataTables-example" >
                 <thead>
                 <tr>
                   <th>Total</th>
@@ -562,17 +522,15 @@ $c_date=date('Y-m-d');
                 </tbody>
                
               </table>
-										
-										
-										
-	  
-	                                        </div>
-											</section>
-	                             </section>
-
-
-
-
+									
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>	
+				
+				
+				
+	
 
 
 
@@ -580,9 +538,30 @@ $c_date=date('Y-m-d');
 		
 		</section>
         <!-- right col -->
+   
+	   <div class="row">
+        <!-- Left col -->
+        <section class="col-lg-12 connectedSortable">
+		 <section class="panel" style="padding-left:20px">   
+          <!-- Custom tabs (Charts with tabs)-->
+                 <center><h3><u>Retailer Section</u></h3></center>
+                <?php
+				 $statement =$db->prepare("SELECT sum(d_last_payment) as  payment from tbl_dealer_two where d_last_date=?");
+										  $statement->execute(array(date('Y-m-d')));
+										 $result=$statement->fetch();
+				?>
+				<h4>Todays Payment / Balance:<?php echo  $result['payment']; ?> </h4>
+				 <?php
+				 $statement =$db->prepare("SELECT sum(d_cash) as  payment , sum(d_due) as due from tbl_dealer_two");
+										  $statement->execute();
+										 $result=$statement->fetch();
+				?>
+				<h4>Total Payment / Balance:<?php echo  $result['payment']; ?> </h4>
+				<h4>Total Due :<?php echo  $result['due']; ?> </h4>
+				</section>
+        </section>
+
       </div>
-      <!-- /.row (main row) -->
-	  
 	                         
 
     </section>
