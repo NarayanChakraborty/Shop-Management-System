@@ -40,7 +40,8 @@
           </a>
           <ul class="treeview-menu">
             <li><a href="add_product.php"><i class="fa fa-circle-o"></i>Add Products</a></li>
-            <li><a href="view_product.php"><i class="fa fa-circle-o"></i> View Products</a></li>
+            <li><a href="view_product.php"><i class="fa fa-circle-o"></i> View Products(Randomly)</a></li>
+			<li><a href="view_product_by_category.php"><i class="fa fa-circle-o"></i> View Products (Catgory) </a></li>
 			
             <li><a href="manage_category.php"><i class="fa fa-circle-o"></i> Manage Catgory</a></li>  
           </ul>
