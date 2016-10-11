@@ -1,0 +1,11 @@
+/*
+table.mytable tr:nth-child(n) td {
+    background-color: #C7D9D6;
+}
+table.mytable tr:nth-child(n+1) td {
+    background-color: #C7D432;
+}
+table.mytable tr:nth-child(n+2) td {
+    background-color: #C709D6;
+}
+*/

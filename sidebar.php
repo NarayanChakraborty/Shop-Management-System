@@ -35,13 +35,13 @@
             <i class="glyphicon glyphicon-object-align-bottom"></i>
             <span>Products</span>
             <span class="pull-right-container">
-              <span class="label label-primary pull-right">3</span>
+              <span class="label label-primary pull-right">4</span>
             </span>
           </a>
           <ul class="treeview-menu">
             <li><a href="add_product.php"><i class="fa fa-circle-o"></i>Add Products</a></li>
-            <li><a href="view_product.php"><i class="fa fa-circle-o"></i> View Products(Randomly)</a></li>
-			<li><a href="view_product_by_category.php"><i class="fa fa-circle-o"></i> View Products (Catgory) </a></li>
+            <li><a href="view_product.php"><i class="fa fa-circle-o"></i> View Products</a></li>
+			<li><a href="view_product_by_category.php"><i class="fa fa-circle-o"></i> Products Statistics</a></li>
 			
             <li><a href="manage_category.php"><i class="fa fa-circle-o"></i> Manage Catgory</a></li>  
           </ul>
@@ -49,10 +49,10 @@
 		
 	<li class="treeview">
           <a href="product_transformation.php">
-            <i class="glyphicon glyphicon-user"></i>
+            <i class="glyphicon glyphicon-text-width"></i>
             <span>Product Transformation</span>
             <span class="pull-right-container">
-            
+            <span class="label label-primary pull-right">1</span>
             </span>
           </a>
      
@@ -74,19 +74,21 @@
         </li>
 		
 		
-			<li class="treeview">
-          <a href="#">
-            <i class="glyphicon glyphicon-user"></i>
-            <span>Accounting Information</span>
+		
+		
+		<li class="treeview">
+          <a href="accounting1.php"><i class="glyphicon glyphicon-shopping-cart"></i>
+            <span>Daily Accounting</span>
             <span class="pull-right-container">
-              <span class="label label-primary pull-right">2</span>
+            <span class="label label-primary pull-right">1</span>
             </span>
           </a>
-          <ul class="treeview-menu">
-            <li><a href="accounting1.php"><i class="fa fa-circle-o"></i>Daily Accounting</a></li>
-            <li><a href="accounting_by_product.php"><i class="fa fa-circle-o"></i>Accounting By Product</a></li>
-          </ul>
+     
         </li>
+		
+		
+		
+
 		
 		
 					<li class="treeview">

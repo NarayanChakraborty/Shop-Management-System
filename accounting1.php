@@ -32,7 +32,7 @@ $c_date=date('Y-m-d');
 										  foreach($result3 as $row3)
 										  {
 											  if($row3['p_shop']==1){
-												   $cost_today_one=$_POST['todays_cost_one']+$row3['cost_today'];
+												   $cost_today_one=$_POST['todays_cost_one']+$row3['cost_today']+$_POST['todays_cost_bank']+$_POST['todays_cost_sallary']+$_POST['todays_cost_company'];
 						
 						$statement2=$db->prepare("update tbl_accounting set cost_today=? where a_date=? and p_shop=? ");
 		             $statement2->execute(array($cost_today_one,date('Y-m-d'),1));
@@ -233,25 +233,50 @@ $c_date=date('Y-m-d');
 				 
 				 			
 									
-											<form class="form-horizontal" role="form" data-toggle="validator" method="post">                                                  
-                                                 <div class="form-group">
-                                                      <label class="col-lg-2 control-label"> Cost(Shop One)</label>
-                                                      <div class="col-lg-8">
+											<form class="form-horizontal" role="form" data-toggle="validator" method="post"> 
+                                                	
+                                                <div class="col-lg-6">													
+                                                 <div class="form-group col-lg-12">
+                                                      <label class="col-lg-3 control-label"> Cost(Shop One)</label>
+                                                      <div class="col-lg-7">
                                                           <input type="number" min=0 name="todays_cost_one" value="0" class="form-control"  placeholder="Total Cost of today " >
                                                       </div>
                                                   </div>
-												  <div class="form-group">
-                                                      <label class="col-lg-2 control-label">Cost(Shop Two)</label>
-                                                      <div class="col-lg-8">
+												  <div class="form-group col-lg-12">
+                                                      <label class="col-lg-3 control-label">Cost(Shop Two)</label>
+                                                      <div class="col-lg-7">
                                                           <input type="number" min=0 name="todays_cost_two" value="0" class="form-control"  placeholder="Total Cost of today " >
                                                       </div>
                                                   </div>
-												  <div class="form-group">
-                                                      <label class="col-lg-2 control-label">Cost(Shop Three)</label>
-                                                      <div class="col-lg-8">
+												  <div class="form-group col-lg-12">
+                                                      <label class="col-lg-3 control-label">Cost(Shop Three)</label>
+                                                      <div class="col-lg-7">
                                                           <input type="number" min=0 name="todays_cost_three" value="0" class="form-control"  placeholder="Total Cost of today ">
                                                       </div>
                                                   </div>
+												  </div>
+												  <div class="col-lg-6">
+												   <div class="form-group col-lg-12">
+                                                      <label class="col-lg-3 control-label">Bank</label>
+                                                      <div class="col-lg-7">
+                                                          <input type="number" min=0 name="todays_cost_bank" value="0" class="form-control"  placeholder="Bank Cost of today ">
+                                                      </div>
+                                                  </div>
+												  <div class="form-group col-lg-12">
+                                                      <label class="col-lg-3 control-label">Sallary</label>
+                                                      <div class="col-lg-7">
+                                                          <input type="number" min=0 name="todays_cost_sallary" value="0" class="form-control"  placeholder="Bank Cost of today ">
+                                                      </div>
+                                                  </div> 
+												  <div class="form-group col-lg-12">
+                                                      <label class="col-lg-3 control-label">Payment To Company</label>
+                                                      <div class="col-lg-7">
+                                                          <input type="number" min=0 name="todays_cost_company" value="0" class="form-control"  placeholder="Bank Cost of today ">
+                                                      </div>
+                                                  </div>
+												  </div>
+												
+												 
                                                  
                                                   <div class="form-group">
                                                       <div class="col-lg-offset-8 col-lg-2">
@@ -362,7 +387,7 @@ $c_date=date('Y-m-d');
 		  
 				            <div class="panel-body">
                             <div class="table-responsive">
-                                <table class="table table-striped table-bordered table-hover" id="dataTables-example" >
+                                <table class="table table-striped table-bordered table-hover mytable" id="dataTables-example" >
                 <thead>
                 <tr>
 				  <th>Shop Name</th>
@@ -438,14 +463,16 @@ $c_date=date('Y-m-d');
 
 				   
 				</section>	
+				
+					
+		</section>
 
 				
+			   <div class="row">	
 				
-				
-			<div class="panel panel-default">
-                
+			<section class="col-lg-12 connectedSortable">
             <!-- /.box-header -->
-            <div class="panel-body">
+            <div class="panel" style="margin:-15px 15px  15px 15px;">
                  <table class="table table-striped table-bordered table-hover" id="dataTables-example" >
                 <thead>
                 <tr>
@@ -512,7 +539,7 @@ $c_date=date('Y-m-d');
 					
 					
 					
-					</div></center>
+					</center>
                   </td>
                 </tr>
 				
@@ -522,29 +549,26 @@ $c_date=date('Y-m-d');
                 </tbody>
                
               </table>
-									
+					</div>				
             <!-- /.box-body -->
-          </div>
-          <!-- /.box -->
-        </div>	
+        	
+				</section>
 				
-				
-				
+			</div>	
 	
 
 
 
 				
-		
-		</section>
+	
         <!-- right col -->
    
 	   <div class="row">
         <!-- Left col -->
-        <section class="col-lg-12 connectedSortable">
-		 <section class="panel" style="padding-left:20px">   
+        <section class="col-lg-6 connectedSortable">
+		 <section class="panel" style="padding-left:25px;min-height:200px;">   
           <!-- Custom tabs (Charts with tabs)-->
-                 <center><h3><u>Retailer Section</u></h3></center>
+                 <center><h3><u>Retailer Section-From The Begining</u></h3></center><br>
                 <?php
 				 $statement =$db->prepare("SELECT sum(d_last_payment) as  payment from tbl_dealer_two where d_last_date=?");
 										  $statement->execute(array(date('Y-m-d')));
@@ -556,8 +580,30 @@ $c_date=date('Y-m-d');
 										  $statement->execute();
 										 $result=$statement->fetch();
 				?>
-				<h4>Total Payment / Balance:<?php echo  $result['payment']; ?> </h4>
+				<h4>Total Payment / Balance:<?php 
+				$retailer_balance=$result['payment']; 
+				echo $retailer_balance;
+				?> </h4>
 				<h4>Total Due :<?php echo  $result['due']; ?> </h4>
+				</section>
+        </section>   
+		<section class="col-lg-6 connectedSortable">
+		 <section class="panel" style="padding-left:25px;min-height:200px;">   
+          <!-- Custom tabs (Charts with tabs)-->
+                 <center><h3><u>Total Balance-From The Begining<br>(Retailer+Customer)</u></h3></center><br>
+                <?php
+				      $statement=$db->prepare("select sum(base_today) as base_today,sum(balance_today) as balance_today ,sum(due_payment) as due_payment,sum(cost_today) as cost_today,sum(sell_today) as sell_today, sum(cash_today) as cash_today from tbl_accounting ");
+		   $statement->execute(array());
+		   $result=$statement->fetch();?>
+		     <h4>Total Balance(Customer):<?php 
+				echo  $result['balance_today'];
+				?> </h4>
+		            <h4>Total Balance(Retailer):<?php 
+				echo $retailer_balance; 
+				 
+				?> </h4>
+				    <h4>Total Balance:<?php echo $retailer_balance+$result['balance_today'];
+				  ?> </h4>
 				</section>
         </section>
 
