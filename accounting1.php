@@ -12,10 +12,12 @@ $c_date=date('Y-m-d');
 <?php
 		  try
 		  {
-			  
-		      
+			        
 		         if(isset($_POST['form2']))
 				 {
+					 
+					 $shop_cost=$_POST['todays_cost_one']+$_POST['todays_cost_two']+$_POST['todays_cost_three'];
+					  	 
 					$statement1=$db->prepare('select * from tbl_accounting where a_date=?');
 					$statement1->execute(array(date('Y-m-d')));
 					$result1=$statement1->fetchColumn();
@@ -26,43 +28,70 @@ $c_date=date('Y-m-d');
 						$result=$statement->fetchAll(PDO::FETCH_ASSOC);
 						foreach($result as $row)
 						{
-											$statement3 = $db->prepare("SELECT * FROM tbl_accounting where a_date=? and p_shop=?");
-										  $statement3->execute(array(date('Y-m-d'),$row['shop_id']));
-										  $result3 = $statement3->fetchAll(PDO::FETCH_ASSOC);
-										  foreach($result3 as $row3)
+											$statement11 = $db->prepare("SELECT * FROM tbl_accounting where a_date=? and p_shop=?");
+										  $statement11->execute(array(date('Y-m-d'),$row['shop_id']));
+										  $result11 = $statement11->fetchAll(PDO::FETCH_ASSOC);
+										  foreach($result11 as $row3)
 										  {
-											  if($row3['p_shop']==1){
-												   $cost_today_one=$_POST['todays_cost_one']+$row3['cost_today']+$_POST['todays_cost_bank']+$_POST['todays_cost_sallary']+$_POST['todays_cost_company'];
-						
-						$statement2=$db->prepare("update tbl_accounting set cost_today=? where a_date=? and p_shop=? ");
-		             $statement2->execute(array($cost_today_one,date('Y-m-d'),1));
+										 
+											  if($row['shop_id']==1){
+												  
+																   $cost_today_one=$_POST['todays_cost_one']+$row3['cost_today']+$_POST['todays_cost_bank']+$_POST['todays_cost_sallary']+$_POST['todays_cost_company']+$_POST['pay_loan'];
+															  
+																 $cash=$_POST['take_loan']+$row3['cash_today'];
+																 
+																 
+																  
+																$statement2=$db->prepare("update tbl_accounting set cost_today=?,cash_today=? where a_date=? and p_shop=? ");
+															 $statement2->execute(array($cost_today_one,$cash,date('Y-m-d'),1));
+															 
+															 
+															 $statement7=$db->prepare("select * from tbl_khalek where date=?");
+															 $statement7->execute(array(date('Y-m-d')));
+															 $result7=$statement7->fetch();
+															 $loan_take=$_POST['take_loan']+$result7['loan_take'];
+															 $cost=$shop_cost+$result7['total_cost'];
+					                                         $loan=$_POST['take_loan']+$result7['loan']-$_POST['pay_loan'];
+															 $bank_cost=$_POST['todays_cost_bank']+$result7['bank_cost'];
+															  $salary_cost=$_POST['todays_cost_sallary']+$result7['salary_cost'];
+															   $payment_cost=$_POST['todays_cost_company']+$result7['payment_company'];
+															 $statement6=$db->prepare("update tbl_khalek set total_cost=?,bank_cost=?,salary_cost=?,payment_company=?,loan_take=?,loan=? where date=? ");
+															 $statement6->execute(array($cost,$bank_cost,$salary_cost,$payment_cost,$loan_take,$loan,date('Y-m-d')));		
+												
 											  } 
+										 
 											  if($row3['p_shop']==2){
-												   $cost_today_two=$_POST['todays_cost_two']+$row3['cost_today'];
-						
-						$statement3=$db->prepare("update tbl_accounting set cost_today=? where a_date=? and p_shop=? ");
-		             $statement3->execute(array($cost_today_two,$c_date,2));
+													
+
+													$cost_today_two=$_POST['todays_cost_two']+$row3['cost_today'];
+													
+													$statement3=$db->prepare("update tbl_accounting set cost_today=? where a_date=? and p_shop=? ");
+												 $statement3->execute(array($cost_today_two,$c_date,2));
 											  } 
 											  if($row3['p_shop']==3){
+												  
+												  
 												   $cost_today_three=$_POST['todays_cost_three']+$row3['cost_today'];
 						
 						 $statement4=$db->prepare("update tbl_accounting set cost_today=? where a_date=? and p_shop=? ");
 		             $statement4->execute(array($cost_today_three,$c_date,3));
+					 
+					 
 											  }
 										  }
+										 
 					 
 					 
 					
 							
 						}
+						                              
 				
 					 }
-											
+					
+					 	
 						
-						
-						
-						
-						
+					
 					}
 					else
 					{
@@ -104,6 +133,22 @@ $c_date=date('Y-m-d');
 							<div class="panel-body bio-graph-info" style="padding:10px">
 		
 					<?php 
+					
+									$statement9=$db->prepare('select * from tbl_khalek where date=?');
+											$statement9->execute(array(date('Y-m-d')));
+											$result9=$statement9->fetchColumn();
+											if($result9<=0)
+											{
+												
+												$statement8 = $db->prepare("insert into tbl_khalek(total_cost,bank_cost,salary_cost,payment_company,loan,date) values(?,?,?,?,?,?)");
+										$statement8->execute(array(0,0,0,0,0,date('Y-m-d')));  
+											}
+					
+										
+					
+					
+					
+					
 					                   $statement=$db->prepare("select * from tbl_shop");
 									   $statement->execute();
 									   $result=$statement->fetchAll(PDO::FETCH_ASSOC);
@@ -131,15 +176,15 @@ $c_date=date('Y-m-d');
 																	  if($row1['cash_total']==Null){ $row1['cash_total']=0;}
 																	   $due_total= $row1['sell_total']- $row1['cash_total'];
 																	   
-																	 	$statement5=$db->prepare('select due_payment,cost_today from tbl_accounting where a_date=? and p_shop=?');
+																	 	$statement5=$db->prepare('select due_payment,cost_today,cash_today from tbl_accounting where a_date=? and p_shop=?');
 											$statement5->execute(array(date('Y-m-d'),$row['shop_id']));
 											$result5=$statement5->fetch();  
 																	   
 																	   
-																	   
-																	   $balance=$row1['cash_total']+$result5['due_payment']-$result5['cost_today'];
+																	   $cash_total=$row1['cash_total']+$result5['cash_today'];
+																	   $balance=$cash_total+$result5['due_payment']-$result5['cost_today'];
 																	$statement3 = $db->prepare("update tbl_accounting set base_today=?,sell_today=?,cash_today=?,due_today=?,balance_today=? where p_shop=? and a_date=? ");
-																  $statement3->execute(array($row1['base_total'],$row1['sell_total'],$row1['cash_total'],$due_total,$balance,$row['shop_id'],date('Y-m-d')));
+																  $statement3->execute(array($row1['base_total'],$row1['sell_total'],$cash_total,$due_total,$balance,$row['shop_id'],date('Y-m-d')));
 
 
 											}
@@ -148,6 +193,10 @@ $c_date=date('Y-m-d');
 																	 if($row1['sell_total']==Null){ $row1['sell_total']=0;}
 																	  if($row1['cash_total']==Null){ $row1['cash_total']=0;}
 																	   $due_total= $row1['sell_total']- $row1['cash_total'];
+																	
+																	
+																                           
+																	
 																	
 																	$statement3 = $db->prepare("insert into tbl_accounting(base_today,sell_today,cash_today,due_today,cost_today,balance_today,p_shop,a_date) values(?,?,?,?,?,?,?,?)");
 																  $statement3->execute(array($row1['base_total'],$row1['sell_total'],$row1['cash_total'],$due_total,0,$row1['cash_total'],$row['shop_id'],date('Y-m-d')));                
@@ -187,9 +236,9 @@ $c_date=date('Y-m-d');
 			<h5>Total Sell Price : <?php echo $row3['sell_today']; ?> </h5>
 			<h5>Total Income : <?php echo $row3['sell_today']-$row3['base_today']; ?> </h5>
             <h5>Total Cash : <?php echo $row3['cash_today']; ?> </h5>
-			<h5>Total Due: <?php echo $row3['sell_today']-$row3['cash_today']; ?> </h5>
+			<h5>Total Due: <?php echo $row3['due_today']; ?> </h5>
 			<h5>Total Due Payment: <?php echo $row3['due_payment']; ?> </h5>
-			<h5>Total Balance: <?php echo $row3['cash_today']+$row3['due_payment']-$row3['cost_today']; ?> </h5>
+			<h5>Total Balance: <?php echo $row3['balance_today']; ?> </h5>
         </section>
 			   
 			   <?php
@@ -218,17 +267,29 @@ $c_date=date('Y-m-d');
             <h5>Total Cash : <?php echo $row3['cash_today']; ?> </h5>
 			<h5>Total Due: <?php echo $row3['due_today']; ?> </h5>
 			<h5>Total Due Payment: <?php echo $row3['due_payment']; ?> </h5>
+
 			<h5>Total Cost: <?php echo $row3['cost_today']; ?> </h5>
-			<?php
-			$balance=$row3['cash_today']-$row3['cost_today']+$row3['due_payment'];?>
-			<h5>Total Balance: <?php echo $balance; ?> </h5>
+			<h5>Total Loan Taken :<?php 
+			$statement4=$db->prepare("select * from tbl_khalek where date=?");
+			$statement4->execute(array(date('Y-m-d')));
+			$result4=$statement4->fetch();
+			
+			echo $result4['loan_take'];
+			
+			
+			?>
+			</h5>
+			<h5>Total Loan Remaining : <?php echo $result4['loan']; ?> </h5>
+		
+			<h5>Total Balance: <?php echo $row3['balance_today']; ?> </h5>
      
 			   <?php
 		   }
 		   ?>
 		   
 		         </div>
-				 
+				 <br>
+				 <center><h4><u>Cost Section(Today)</u></h4></center><br>
 				 
 				 
 				 			
@@ -257,13 +318,13 @@ $c_date=date('Y-m-d');
 												  </div>
 												  <div class="col-lg-6">
 												   <div class="form-group col-lg-12">
-                                                      <label class="col-lg-3 control-label">Bank</label>
+                                                      <label class="col-lg-3 control-label">Bank Cost</label>
                                                       <div class="col-lg-7">
                                                           <input type="number" min=0 name="todays_cost_bank" value="0" class="form-control"  placeholder="Bank Cost of today ">
                                                       </div>
                                                   </div>
 												  <div class="form-group col-lg-12">
-                                                      <label class="col-lg-3 control-label">Sallary</label>
+                                                      <label class="col-lg-3 control-label">Sallary Cost</label>
                                                       <div class="col-lg-7">
                                                           <input type="number" min=0 name="todays_cost_sallary" value="0" class="form-control"  placeholder="Bank Cost of today ">
                                                       </div>
@@ -273,13 +334,25 @@ $c_date=date('Y-m-d');
                                                       <div class="col-lg-7">
                                                           <input type="number" min=0 name="todays_cost_company" value="0" class="form-control"  placeholder="Bank Cost of today ">
                                                       </div>
+                                                  </div> 
+												  <div class="form-group col-lg-12">
+                                                      <label class="col-lg-3 control-label">Take Loan(+)</label>
+                                                      <div class="col-lg-7">
+                                                          <input type="number" min=0 name="take_loan" value="0" class="form-control"  placeholder="Bank Cost of today ">
+                                                      </div>
+                                                  </div> 
+												  <div class="form-group col-lg-12">
+                                                      <label class="col-lg-3 control-label">pay Loan(-)</label>
+                                                      <div class="col-lg-7">
+                                                          <input type="number" min=0 name="pay_loan" value="0" class="form-control"  placeholder="Bank Cost of today ">
+                                                      </div>
                                                   </div>
 												  </div>
 												
 												 
                                                  
                                                   <div class="form-group">
-                                                      <div class="col-lg-offset-8 col-lg-2">
+                                                      <div class="col-lg-offset-10 col-lg-2">
 													
                                                           <button type="submit" name="form2" class="btn btn-primary">Update Banlance</button>
                                                         
@@ -602,7 +675,12 @@ $c_date=date('Y-m-d');
 				echo $retailer_balance; 
 				 
 				?> </h4>
-				    <h4>Total Balance:<?php echo $retailer_balance+$result['balance_today'];
+				    <h4>Total Balance:<?php 
+					$statement=$db->prepare("update tbl_khalek set balance=? where date=?");
+		   $statement->execute(array($retailer_balance+$result['balance_today'],date('Y-m-d')));
+					
+					echo $retailer_balance+$result['balance_today'];
+					
 				  ?> </h4>
 				</section>
         </section>
