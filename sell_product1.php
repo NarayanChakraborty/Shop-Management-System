@@ -70,8 +70,8 @@ if(isset($_POST['form1']))
 		   
 		   $last_id=$db->lastInsertId();
 		   
-		    $statement2=$db->prepare("insert into tbl_customer(s_id,c_name,c_due,c_mobile,c_nid,c_address,c_date) values(?,?,?,?,?,?,?)");
-		   $statement2->execute(array($last_id,$_POST['c_name'],$c_due,$_POST['c_mobile'],$_POST['c_nid'],$_POST['c_address'],$c_date));
+		    $statement2=$db->prepare("insert into tbl_customer(customer_id,s_id,c_name,c_due,c_mobile,c_nid,c_address,c_date) values(?,?,?,?,?,?,?,?)");
+		   $statement2->execute(array($_POST['c_id'],$last_id,$_POST['c_name'],$c_due,$_POST['c_mobile'],$_POST['c_nid'],$_POST['c_address'],$c_date));
 				 
 		
 		
@@ -291,6 +291,12 @@ if(isset($_POST['form1']))
                                                  <br>
 												
 												 <center> <h2>Customer Details</h2></center>
+												  <div class="form-group">
+                                                      <label class="col-lg-2 control-label">Customer ID</label>
+                                                      <div class="col-lg-8">
+                                                          <input type="text" min=0 name="c_id" class="form-control" id="" placeholder=" " required>
+                                                      </div>
+                                                  </div><hr>
 												 <div class="form-group">
                                                       <label class="col-lg-2 control-label">Customer Name</label>
                                                       <div class="col-lg-8">

@@ -84,6 +84,15 @@
             </span>
           </a>
      
+        </li>	
+		<li class="treeview">
+          <a href="khalek_status.php"><i class="glyphicon glyphicon-shopping-cart"></i>
+            <span>Cost Statistics</span>
+            <span class="pull-right-container">
+            <span class="label label-primary pull-right">1</span>
+            </span>
+          </a>
+     
         </li>
 		
 		

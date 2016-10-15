@@ -243,7 +243,8 @@ if(isset($_POST['form_customer']))
                                 <table class="table table-striped table-bordered table-hover" id="dataTables-example" >
                 <thead>
                 <tr>
-                  <th>Customer Name</th>
+                  <th>Customer ID</th>
+				  <th>Customer Name</th>
 				   <th>Product Category</th>
 				  <th>Product Model</th>
 				 
@@ -251,7 +252,7 @@ if(isset($_POST['form_customer']))
                   <th>Total Cost </th>
 				  <th>Due Amount</th>
 				  <th>Mobile No</th>
-				  <th>Address</th>
+				 
 				  <th>Action</th>
                 </tr>
                 </thead>
@@ -273,7 +274,8 @@ if(isset($_POST['form_customer']))
                 
                
                 <tr>
-                   <td><?php echo $row['c_name']; ?></td>
+                   <td><?php echo $row['customer_id']; ?></td> 
+				   <td><?php echo $row['c_name']; ?></td>
 				   <?php 
                                                     
 										  $statement1 = $db->prepare("SELECT * from tbl_products where p_id=?");
@@ -341,7 +343,7 @@ if(isset($_POST['form_customer']))
 					 
 					 </td>	 
 					 <td> <?php echo $row['c_mobile'];?></td> 
-					 <td> <?php echo $row['c_address'];?></td>
+					 
 					 
 						
 					                    <td><center>

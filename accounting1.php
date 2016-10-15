@@ -38,12 +38,12 @@ $c_date=date('Y-m-d');
 												  
 																   $cost_today_one=$_POST['todays_cost_one']+$row3['cost_today']+$_POST['todays_cost_bank']+$_POST['todays_cost_sallary']+$_POST['todays_cost_company']+$_POST['pay_loan'];
 															  
-																 $cash=$_POST['take_loan']+$row3['cash_today'];
+																 
 																 
 																 
 																  
-																$statement2=$db->prepare("update tbl_accounting set cost_today=?,cash_today=? where a_date=? and p_shop=? ");
-															 $statement2->execute(array($cost_today_one,$cash,date('Y-m-d'),1));
+																$statement2=$db->prepare("update tbl_accounting set cost_today=? where a_date=? and p_shop=? ");
+															 $statement2->execute(array($cost_today_one,date('Y-m-d'),1));
 															 
 															 
 															 $statement7=$db->prepare("select * from tbl_khalek where date=?");
@@ -179,9 +179,16 @@ $c_date=date('Y-m-d');
 																	 	$statement5=$db->prepare('select due_payment,cost_today,cash_today from tbl_accounting where a_date=? and p_shop=?');
 											$statement5->execute(array(date('Y-m-d'),$row['shop_id']));
 											$result5=$statement5->fetch();  
+																	   $statement9=$db->prepare('select * from tbl_khalek where date=?');
+											$statement9->execute(array(date('Y-m-d')));
+											$result9=$statement9->fetch();  
+																	  if($row['shop_id']==1){
+																		  $cash_total=$row1['cash_total']+$result9['loan_take'];
+																	  }
+																	  else{
+																		    $cash_total=$row1['cash_total'];
+																	  }
 																	   
-																	   
-																	   $cash_total=$row1['cash_total']+$result5['cash_today'];
 																	   $balance=$cash_total+$result5['due_payment']-$result5['cost_today'];
 																	$statement3 = $db->prepare("update tbl_accounting set base_today=?,sell_today=?,cash_today=?,due_today=?,balance_today=? where p_shop=? and a_date=? ");
 																  $statement3->execute(array($row1['base_total'],$row1['sell_total'],$cash_total,$due_total,$balance,$row['shop_id'],date('Y-m-d')));
@@ -238,6 +245,8 @@ $c_date=date('Y-m-d');
             <h5>Total Cash : <?php echo $row3['cash_today']; ?> </h5>
 			<h5>Total Due: <?php echo $row3['due_today']; ?> </h5>
 			<h5>Total Due Payment: <?php echo $row3['due_payment']; ?> </h5>
+			<h5>Total Cost: <?php echo $row3['cost_today']; ?> </h5>
+		
 			<h5>Total Balance: <?php echo $row3['balance_today']; ?> </h5>
         </section>
 			   
